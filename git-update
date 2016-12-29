@@ -1,0 +1,20 @@
+#!/bin/bash
+cp /usr/bin/git-update /usr/src
+cd /usr/src/
+git pull
+cp /usr/src/agd5f/.config	/usr/src/dot_config_adg5f
+cp /usr/src/drm/.config		/usr/src/dot_config_drm
+cp /usr/src/intel/.config	/usr/src/dot_config_intel
+cp /usr/src/linux/.config	/usr/src/dot_config_tip
+git add .
+git commit -m "Git Update `date +%F-%T`"
+git push
+emerge --sync --quiet
+emerge -vDuNt -j5 @world
+emerge -vDt -j5 @live-rebuild @preserved-rebuild
+prelink -af
+eclean-dist --destructive -q
+cd /lib/firmware
+git pull
+cd /usr/src/linux
+git fetch --all
