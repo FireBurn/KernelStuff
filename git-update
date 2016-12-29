@@ -9,6 +9,11 @@ cp /usr/src/linux/.config	/usr/src/dot_config_tip
 git add .
 git commit -m "Git Update `date +%F-%T`"
 git push
+cd /etc/portage
+git pull
+git add .
+git commit -m "Git Update `date +%F-%T`"
+git push
 emerge --sync --quiet
 emerge -vDuNt -j5 @world
 emerge -vDt -j5 @live-rebuild @preserved-rebuild
