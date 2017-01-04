@@ -2096,6 +2096,12 @@ CONFIG_DRM_AMDGPU_USERPTR=y
 # ACP (Audio CoProcessor) Configuration
 #
 # CONFIG_DRM_AMD_ACP is not set
+
+#
+# Display Engine Configuration
+#
+CONFIG_DRM_AMD_DC=y
+# CONFIG_DEBUG_KERNEL_DC is not set
 # CONFIG_DRM_NOUVEAU is not set
 CONFIG_DRM_I915=y
 CONFIG_DRM_I915_ALPHA_SUPPORT=y
