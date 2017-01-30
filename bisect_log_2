@@ -1,0 +1,18 @@
+git bisect start
+# bad: [ed2ed57bbf7019ac1b1fa0a41c7d79e449758809] drm/amdgpu: access stolen VRAM directly on CZ (v2)
+git bisect bad ed2ed57bbf7019ac1b1fa0a41c7d79e449758809
+# good: [c18db302b96d82863d925c64e4a6eb4eb84466e9] drm/amdgpu: extend profiling mode.
+git bisect good c18db302b96d82863d925c64e4a6eb4eb84466e9
+# good: [ac5dccf1ec512ccb49e69c85fd5dd9382617c3d8] drm/amdgpu: refine ci uvd dpm code.
+git bisect good ac5dccf1ec512ccb49e69c85fd5dd9382617c3d8
+# good: [c1f07d50c48519f22576ed99f3659721b7d5df69] drm/ttm: revert "implement LRU add callbacks v2"
+git bisect good c1f07d50c48519f22576ed99f3659721b7d5df69
+# good: [f686908dd72ff47eea1e2e63036ff7ca60157c20] drm/radeon: drop pitcairn dpm quirks
+git bisect good f686908dd72ff47eea1e2e63036ff7ca60157c20
+# good: [c3443aebbbc9e0db465b7dc8871047fc08e6a5a9] drm/amdgpu: handle vfct with multiple vbios images
+git bisect good c3443aebbbc9e0db465b7dc8871047fc08e6a5a9
+# good: [52e94ecf6402338fd51958596441372b54fa7529] drm/amdgpu: fix dpm bug on Kv.
+git bisect good 52e94ecf6402338fd51958596441372b54fa7529
+# good: [77ed7d6f63f838516911f9141b704474a8f8bcb6] drm/amdgpu: access stolen VRAM directly on KV/KB (v2)
+git bisect good 77ed7d6f63f838516911f9141b704474a8f8bcb6
+# first bad commit: [ed2ed57bbf7019ac1b1fa0a41c7d79e449758809] drm/amdgpu: access stolen VRAM directly on CZ (v2)
