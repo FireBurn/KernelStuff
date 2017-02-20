@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.10.0-rc4 Kernel Configuration
+# Linux/x86 4.10.0 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -1567,6 +1567,7 @@ CONFIG_POWER_SUPPLY=y
 # CONFIG_BATTERY_DS2781 is not set
 # CONFIG_BATTERY_DS2782 is not set
 # CONFIG_BATTERY_SBS is not set
+# CONFIG_CHARGER_SBS is not set
 # CONFIG_BATTERY_BQ27XXX is not set
 # CONFIG_BATTERY_MAX17040 is not set
 # CONFIG_BATTERY_MAX17042 is not set
@@ -1681,6 +1682,7 @@ CONFIG_SENSORS_CORETEMP=y
 # CONFIG_SENSORS_SCH56XX_COMMON is not set
 # CONFIG_SENSORS_SCH5627 is not set
 # CONFIG_SENSORS_SCH5636 is not set
+# CONFIG_SENSORS_STTS751 is not set
 # CONFIG_SENSORS_SMM665 is not set
 # CONFIG_SENSORS_ADC128D818 is not set
 # CONFIG_SENSORS_ADS1015 is not set
@@ -3249,7 +3251,6 @@ CONFIG_SCHED_INFO=y
 # CONFIG_SCHEDSTATS is not set
 # CONFIG_SCHED_STACK_END_CHECK is not set
 # CONFIG_DEBUG_TIMEKEEPING is not set
-CONFIG_TIMER_STATS=y
 
 #
 # Lock Debugging (spinlocks, mutexes, etc...)
