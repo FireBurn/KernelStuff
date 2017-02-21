@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -f /etc/portage/make.conf\~
 cp /usr/bin/git-update /usr/src
 cd /usr/src/
 git pull
