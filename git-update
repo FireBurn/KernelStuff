@@ -24,3 +24,5 @@ cd /lib/firmware
 git pull
 cd /usr/src/linux
 git fetch --all
+git push github --all
+git push github --tags

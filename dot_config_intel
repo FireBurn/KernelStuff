@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.10.0-rc8 Kernel Configuration
+# Linux/x86 4.10.0 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -2123,6 +2123,7 @@ CONFIG_DRM_I915_USERPTR=y
 # CONFIG_DRM_I915_DEBUG is not set
 # CONFIG_DRM_I915_SW_FENCE_DEBUG_OBJECTS is not set
 # CONFIG_DRM_I915_SELFTEST is not set
+# CONFIG_DRM_I915_LOW_LEVEL_TRACEPOINTS is not set
 # CONFIG_DRM_VGEM is not set
 # CONFIG_DRM_VMWGFX is not set
 # CONFIG_DRM_GMA500 is not set
@@ -2144,6 +2145,7 @@ CONFIG_DRM_BRIDGE=y
 #
 # CONFIG_DRM_ANALOGIX_ANX78XX is not set
 # CONFIG_DRM_HISI_HIBMC is not set
+# CONFIG_DRM_TINYDRM is not set
 # CONFIG_DRM_LEGACY is not set
 # CONFIG_DRM_LIB_RANDOM is not set
 
