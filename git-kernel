@@ -1,0 +1,26 @@
+#!/bin/bash
+cd /lib/modules
+rm * -rf
+cd /usr/src/linux
+git fetch --all
+git reset --merge linus/master
+make -j10
+make modules_install
+cp arch/x86/boot/bzImage /boot/bzImage-tip.efi
+cd /usr/src/drm
+git reset --merge airlied/drm-next
+make -j10
+make modules_install
+cp arch/x86/boot/bzImage /boot/bzImage-drm.efi
+cd /usr/src/intel
+git reset --merge intel/drm-intel-nightly
+make -j10
+make modules_install
+cp arch/x86/boot/bzImage /boot/bzImage-intel.efi
+cd /usr/src/agd5f
+git reset --merge agd5f/drm-next-4.12-wip
+make -j10
+make modules_install
+cp arch/x86/boot/bzImage /boot/bzImage-tip.efi
+git push github --all --force
+git push github --tags

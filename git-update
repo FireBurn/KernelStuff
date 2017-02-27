@@ -1,6 +1,7 @@
 #!/bin/bash
 rm -f /etc/portage/make.conf\~
 cp /usr/bin/git-update /usr/src
+cp /usr/bin/git-kernel /usr/src
 cd /usr/src/
 git pull
 cp /usr/src/agd5f/.config	/usr/src/dot_config_adg5f
@@ -17,20 +18,7 @@ git commit -m "Git Update `date +%F-%T`"
 git push
 cd /lib/firmware
 git pull
-cd /usr/src/linux
-git fetch --all
-git reset --merge linus/master
-make -j5 &
-cd /usr/src/drm
-git reset --merge airlied/drm-next
-make -j5 &
-cd /usr/src/intel
-git reset --merge intel/drm-intel-nightly
-make -j5
-cd /usr/src/agd5f
-git reset --merge agd5f/drm-next-4.12-wip
-git push github --all --force
-git push github --tags
+git-kernel &
 cd /home/fireburn/mesa
 sudo -u fireburn git fetch --all
 sudo -u fireburn git pull
