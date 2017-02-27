@@ -21,6 +21,6 @@ cd /usr/src/agd5f
 git reset --merge agd5f/drm-next-4.12-wip
 make -j10
 make modules_install
-cp arch/x86/boot/bzImage /boot/bzImage-tip.efi
+cp arch/x86/boot/bzImage /boot/bzImage-agd5f.efi
 git push github --all --force
 git push github --tags
