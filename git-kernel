@@ -1,6 +1,5 @@
 #!/bin/bash
-cd /lib/modules
-rm * -rf
+rm -rf /lib/modules/*
 cd /usr/src/linux
 git fetch --all
 git reset --merge linus/master
