@@ -1,6 +1,8 @@
 #!/bin/bash
 
-function kernelMerge {
+function updateKernel {
+  DIR=$1; IMG=$2; BRANCH=$3
+  cd /usr/src/${DIR}
   git reset --merge ${BRANCH}
   rc=$?
   if [[ $rc != 0 ]]; then
@@ -8,12 +10,6 @@ function kernelMerge {
     git apply ../01-enable-additional-cpu-optimizations.patch
     git apply ../02-xattr-user-prefix.patch
   fi
-}
-
-function updateKernel {
-  DIR=$1; IMG=$2; BRANCH=$3
-  cd /usr/src/${DIR}
-  kernelMerge
   make -j10
   make modules_install
   cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
