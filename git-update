@@ -55,7 +55,6 @@ git push github --tags
 
 cd /home/fireburn/Mesa
 sudo -u fireburn git fetch --all
-sudo -u fireburn git pull
 sudo -u fireburn git push github --all --force
 
 emerge --sync --quiet
