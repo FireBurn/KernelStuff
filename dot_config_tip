@@ -2062,6 +2062,7 @@ CONFIG_USB_VIDEO_CLASS_INPUT_EVDEV=y
 #
 # Camera sensor devices
 #
+# CONFIG_VIDEO_OV2640 is not set
 # CONFIG_VIDEO_OV2659 is not set
 # CONFIG_VIDEO_OV7640 is not set
 # CONFIG_VIDEO_OV7670 is not set
@@ -2658,6 +2659,7 @@ CONFIG_UCSI=y
 #
 # USB Power Delivery and Type-C drivers
 #
+CONFIG_TYPEC=y
 # CONFIG_USB_LED_TRIG is not set
 # CONFIG_USB_ULPI_BUS is not set
 # CONFIG_UWB is not set
@@ -2846,7 +2848,43 @@ CONFIG_SYNC_FILE=y
 # Microsoft Hyper-V guest support
 #
 # CONFIG_HYPERV_TSCPAGE is not set
-# CONFIG_STAGING is not set
+CONFIG_STAGING=y
+# CONFIG_PRISM2_USB is not set
+# CONFIG_COMEDI is not set
+# CONFIG_RTL8192U is not set
+# CONFIG_RTLLIB is not set
+# CONFIG_R8712U is not set
+# CONFIG_R8188EU is not set
+# CONFIG_RTS5208 is not set
+# CONFIG_VT6655 is not set
+# CONFIG_VT6656 is not set
+# CONFIG_FB_SM750 is not set
+# CONFIG_FB_XGI is not set
+
+#
+# Speakup console speech
+#
+# CONFIG_SPEAKUP is not set
+# CONFIG_STAGING_MEDIA is not set
+
+#
+# Android
+#
+# CONFIG_LTE_GDM724X is not set
+# CONFIG_LNET is not set
+# CONFIG_DGNC is not set
+# CONFIG_GS_FPGABOOT is not set
+# CONFIG_CRYPTO_SKEIN is not set
+# CONFIG_UNISYSSPAR is not set
+# CONFIG_MOST is not set
+# CONFIG_GREYBUS is not set
+
+#
+# USB Power Delivery and Type-C drivers
+#
+CONFIG_TYPEC_TCPM=y
+CONFIG_TYPEC_TCPCI=y
+CONFIG_TYPEC_FUSB302=y
 CONFIG_X86_PLATFORM_DEVICES=y
 # CONFIG_ACER_WMI is not set
 # CONFIG_ACERHDF is not set
@@ -2998,7 +3036,9 @@ CONFIG_RAS=y
 #
 # CONFIG_ANDROID is not set
 # CONFIG_LIBNVDIMM is not set
+CONFIG_DAX=y
 # CONFIG_DEV_DAX is not set
+CONFIG_NR_DEV_DAX=32768
 # CONFIG_NVMEM is not set
 # CONFIG_STM is not set
 # CONFIG_INTEL_TH is not set
