@@ -741,6 +741,16 @@ CONFIG_PCI_LABEL=y
 # PCI host controller drivers
 #
 # CONFIG_VMD is not set
+
+#
+# PCI Endpoint
+#
+# CONFIG_PCI_ENDPOINT is not set
+
+#
+# PCI switch controller drivers
+#
+# CONFIG_PCI_SW_SWITCHTEC is not set
 # CONFIG_ISA_BUS is not set
 CONFIG_ISA_DMA_API=y
 CONFIG_AMD_NB=y
@@ -1065,6 +1075,7 @@ CONFIG_BLK_DEV_NVME=y
 # CONFIG_DS1682 is not set
 # CONFIG_USB_SWITCH_FSA9480 is not set
 # CONFIG_SRAM is not set
+# CONFIG_PCI_ENDPOINT_TEST is not set
 # CONFIG_C2PORT is not set
 
 #
@@ -2997,6 +3008,10 @@ CONFIG_IRQ_REMAP=y
 
 #
 # Broadcom SoC drivers
+#
+
+#
+# i.MX SoC drivers
 #
 # CONFIG_SUNXI_SRAM is not set
 # CONFIG_SOC_TI is not set
