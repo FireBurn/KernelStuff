@@ -3078,7 +3078,6 @@ CONFIG_DAX=y
 # FSI support
 #
 # CONFIG_FSI is not set
-# CONFIG_TEE is not set
 
 #
 # Firmware Drivers
