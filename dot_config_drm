@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.12.0-rc1 Kernel Configuration
+# Linux/x86 4.12.0-rc3 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -2263,6 +2263,7 @@ CONFIG_DRM_I915_USERPTR=y
 # CONFIG_DRM_I915_WERROR is not set
 # CONFIG_DRM_I915_DEBUG is not set
 # CONFIG_DRM_I915_SW_FENCE_DEBUG_OBJECTS is not set
+# CONFIG_DRM_I915_SW_FENCE_CHECK_DAG is not set
 # CONFIG_DRM_I915_SELFTEST is not set
 # CONFIG_DRM_I915_LOW_LEVEL_TRACEPOINTS is not set
 # CONFIG_DRM_I915_DEBUG_VBLANK_EVADE is not set
@@ -3118,7 +3119,6 @@ CONFIG_DAX=y
 # FSI support
 #
 # CONFIG_FSI is not set
-# CONFIG_TEE is not set
 
 #
 # Firmware Drivers
