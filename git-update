@@ -60,5 +60,5 @@ sudo -u fireburn git push github --all --force
 emerge --sync --quiet
 emerge -vDuNt -j5 @world
 emerge -vDt -j5 @live-rebuild @preserved-rebuild
-prelink -af
+#prelink -af
 eclean-dist --destructive -q
