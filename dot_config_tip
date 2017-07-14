@@ -2805,6 +2805,7 @@ CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
 CONFIG_RTC_SYSTOHC=y
 CONFIG_RTC_SYSTOHC_DEVICE="rtc0"
 # CONFIG_RTC_DEBUG is not set
+CONFIG_RTC_NVMEM=y
 
 #
 # RTC interfaces
@@ -2876,6 +2877,7 @@ CONFIG_RTC_DRV_CMOS=y
 #
 # on-CPU RTC drivers
 #
+# CONFIG_RTC_DRV_FTRTC010 is not set
 
 #
 # HID Sensor RTC drivers
@@ -3090,7 +3092,7 @@ CONFIG_RAS=y
 # CONFIG_ANDROID is not set
 # CONFIG_LIBNVDIMM is not set
 # CONFIG_DAX is not set
-# CONFIG_NVMEM is not set
+CONFIG_NVMEM=y
 # CONFIG_STM is not set
 # CONFIG_INTEL_TH is not set
 
