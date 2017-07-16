@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.12.0 Kernel Configuration
+# Linux/x86 4.13.0-rc1 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -3430,6 +3430,7 @@ CONFIG_SCHED_INFO=y
 # CONFIG_LOCK_TORTURE_TEST is not set
 # CONFIG_WW_MUTEX_SELFTEST is not set
 CONFIG_STACKTRACE=y
+# CONFIG_WARN_ALL_UNSEEDED_RANDOM is not set
 # CONFIG_DEBUG_KOBJECT is not set
 # CONFIG_DEBUG_BUGVERBOSE is not set
 # CONFIG_DEBUG_LIST is not set
@@ -3523,6 +3524,7 @@ CONFIG_BLK_DEV_IO_TRACE=y
 # CONFIG_MEMTEST is not set
 # CONFIG_TEST_STATIC_KEYS is not set
 # CONFIG_BUG_ON_DATA_CORRUPTION is not set
+# CONFIG_TEST_KMOD is not set
 # CONFIG_SAMPLES is not set
 CONFIG_HAVE_ARCH_KGDB=y
 # CONFIG_KGDB is not set
