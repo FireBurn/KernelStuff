@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.13.0-rc3 Kernel Configuration
+# Linux/x86 4.13.0-rc5 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -2404,6 +2404,7 @@ CONFIG_SND_SEQUENCER=y
 CONFIG_SND_SEQUENCER_OSS=y
 CONFIG_SND_SEQ_HRTIMER_DEFAULT=y
 CONFIG_SND_SEQ_MIDI_EVENT=y
+# CONFIG_SND_SEQ_MIDI is not set
 # CONFIG_SND_OPL3_LIB_SEQ is not set
 # CONFIG_SND_OPL4_LIB_SEQ is not set
 # CONFIG_SND_DRIVERS is not set
@@ -3404,6 +3405,7 @@ CONFIG_ARCH_HAS_KCOV=y
 # Debug Lockups and Hangs
 #
 # CONFIG_SOFTLOCKUP_DETECTOR is not set
+CONFIG_HARDLOCKUP_CHECK_TIMESTAMP=y
 # CONFIG_HARDLOCKUP_DETECTOR is not set
 # CONFIG_DETECT_HUNG_TASK is not set
 # CONFIG_WQ_WATCHDOG is not set
