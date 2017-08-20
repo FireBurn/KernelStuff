@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.13.0-rc2 Kernel Configuration
+# Linux/x86 4.13.0-rc5 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -1373,6 +1373,7 @@ CONFIG_ALX=y
 # CONFIG_HIPPI is not set
 # CONFIG_NET_SB1000 is not set
 # CONFIG_MDIO_DEVICE is not set
+# CONFIG_MDIO_BUS is not set
 # CONFIG_PHYLIB is not set
 # CONFIG_PPP is not set
 # CONFIG_SLIP is not set
@@ -3066,7 +3067,6 @@ CONFIG_IRQ_REMAP=y
 #
 # CONFIG_SUNXI_SRAM is not set
 # CONFIG_SOC_TI is not set
-# CONFIG_SOC_ZTE is not set
 # CONFIG_PM_DEVFREQ is not set
 # CONFIG_EXTCON is not set
 # CONFIG_MEMORY is not set
