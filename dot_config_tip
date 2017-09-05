@@ -2937,6 +2937,7 @@ CONFIG_STAGING=y
 # CONFIG_RTLLIB is not set
 # CONFIG_R8712U is not set
 # CONFIG_R8188EU is not set
+# CONFIG_R8822BE is not set
 # CONFIG_RTS5208 is not set
 # CONFIG_VT6655 is not set
 # CONFIG_VT6656 is not set
@@ -3120,10 +3121,6 @@ CONFIG_RAS=y
 CONFIG_NVMEM=y
 # CONFIG_STM is not set
 # CONFIG_INTEL_TH is not set
-
-#
-# FPGA Configuration Support
-#
 # CONFIG_FPGA is not set
 
 #
