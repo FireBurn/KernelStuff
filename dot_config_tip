@@ -1314,7 +1314,7 @@ CONFIG_NET_CORE=y
 # CONFIG_NETCONSOLE is not set
 # CONFIG_NETPOLL is not set
 # CONFIG_NET_POLL_CONTROLLER is not set
-# CONFIG_TUN is not set
+CONFIG_TUN=y
 # CONFIG_TUN_VNET_CROSS_LE is not set
 # CONFIG_VETH is not set
 # CONFIG_NLMON is not set
@@ -3079,11 +3079,19 @@ CONFIG_IRQ_REMAP=y
 #
 
 #
+# Amlogic SoC drivers
+#
+
+#
 # Broadcom SoC drivers
 #
 
 #
 # i.MX SoC drivers
+#
+
+#
+# Qualcomm SoC drivers
 #
 # CONFIG_SUNXI_SRAM is not set
 # CONFIG_SOC_TI is not set
