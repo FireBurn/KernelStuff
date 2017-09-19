@@ -2236,6 +2236,13 @@ CONFIG_DRM_AMDGPU_USERPTR=y
 # ACP (Audio CoProcessor) Configuration
 #
 # CONFIG_DRM_AMD_ACP is not set
+
+#
+# AMD Library routines
+#
+CONFIG_CHASH=y
+# CONFIG_CHASH_STATS is not set
+# CONFIG_CHASH_SELFTEST is not set
 # CONFIG_DRM_NOUVEAU is not set
 CONFIG_DRM_I915=y
 CONFIG_DRM_I915_ALPHA_SUPPORT=y
