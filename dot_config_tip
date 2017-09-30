@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.13.0 Kernel Configuration
+# Linux/x86 4.14.0-rc2 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -1019,7 +1019,6 @@ CONFIG_BT_6LOWPAN=y
 CONFIG_BT_LEDS=y
 # CONFIG_BT_SELFTEST is not set
 # CONFIG_BT_DEBUGFS is not set
-# CONFIG_BT_LEGACY_IOCTL is not set
 
 #
 # Bluetooth device drivers
