@@ -5,12 +5,11 @@ function updateKernel {
   cd /usr/src/${DIR}
   git reset --merge ${BRANCH}
   rc=$?
-  if [[ $rc != 0 ]]; then
+  #if [[ $rc != 0 ]]; then
     git reset --hard ${BRANCH}
     git apply ../01-enable-additional-cpu-optimizations.patch
     git apply ../02-xattr-user-prefix.patch
-    git apply ../03-ath10k-fix.patch
-  fi
+  #fi
   make -j10
   make modules_install
   cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
@@ -59,6 +58,8 @@ git push github --tags
 cd /home/fireburn/Mesa
 sudo -u fireburn git fetch --all
 sudo -u fireburn git push github --all --force
+
+exit
 
 emerge --sync --quiet
 emerge -vDuNt -j5 @world
