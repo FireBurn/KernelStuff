@@ -1199,15 +1199,15 @@ CONFIG_BLK_DEV_NVME=y
 # Texas Instruments shared transport line discipline
 #
 # CONFIG_SENSORS_LIS3_I2C is not set
-
-#
-# Altera FPGA firmware download module
-#
 # CONFIG_ALTERA_STAPL is not set
 CONFIG_INTEL_MEI=y
 CONFIG_INTEL_MEI_ME=y
 # CONFIG_INTEL_MEI_TXE is not set
 # CONFIG_VMWARE_VMCI is not set
+
+#
+# Intel MIC & related support
+#
 
 #
 # Intel MIC Bus Driver
@@ -1694,6 +1694,7 @@ CONFIG_I2C_SCMI=y
 #
 # Enable PHYLIB and NETWORK_PHY_TIMESTAMPING to see the additional clocks.
 #
+# CONFIG_PINCTRL is not set
 # CONFIG_GPIOLIB is not set
 # CONFIG_W1 is not set
 # CONFIG_POWER_AVS is not set
@@ -2021,10 +2022,8 @@ CONFIG_MFD_RTSX_PCI=y
 # CONFIG_TPS6507X is not set
 # CONFIG_MFD_TPS65086 is not set
 # CONFIG_MFD_TPS65090 is not set
-# CONFIG_MFD_TPS65217 is not set
 # CONFIG_MFD_TPS68470 is not set
 # CONFIG_MFD_TI_LP873X is not set
-# CONFIG_MFD_TPS65218 is not set
 # CONFIG_MFD_TPS6586X is not set
 # CONFIG_MFD_TPS65912_I2C is not set
 # CONFIG_MFD_TPS80031 is not set
