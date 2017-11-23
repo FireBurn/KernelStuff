@@ -1098,7 +1098,7 @@ CONFIG_DEVTMPFS_MOUNT=y
 CONFIG_PREVENT_FIRMWARE_BUILD=y
 CONFIG_FW_LOADER=y
 CONFIG_FIRMWARE_IN_KERNEL=y
-CONFIG_EXTRA_FIRMWARE="intel-ucode/06-5e-03 i915/skl_dmc_ver1_26.bin i915/skl_guc_ver6_1.bin i915/skl_huc_ver01_07_1398.bin amdgpu/tonga_ce.bin amdgpu/tonga_mc.bin amdgpu/tonga_me.bin amdgpu/tonga_mec2.bin amdgpu/tonga_mec.bin amdgpu/tonga_pfp.bin amdgpu/tonga_rlc.bin amdgpu/tonga_sdma1.bin amdgpu/tonga_sdma.bin amdgpu/tonga_smc.bin amdgpu/tonga_uvd.bin amdgpu/tonga_vce.bin qca/nvm_usb_00000302.bin qca/rampatch_usb_00000302.bin ath10k/QCA6174/hw3.0/board-2.bin ath10k/QCA6174/hw3.0/firmware-6.bin ctefx.bin ctspeq.bin"
+CONFIG_EXTRA_FIRMWARE="intel-ucode/06-5e-03 i915/skl_dmc_ver1_26.bin i915/skl_guc_ver9_33.bin i915/skl_huc_ver01_07_1398.bin amdgpu/tonga_ce.bin amdgpu/tonga_mc.bin amdgpu/tonga_me.bin amdgpu/tonga_mec2.bin amdgpu/tonga_mec.bin amdgpu/tonga_pfp.bin amdgpu/tonga_rlc.bin amdgpu/tonga_sdma1.bin amdgpu/tonga_sdma.bin amdgpu/tonga_smc.bin amdgpu/tonga_uvd.bin amdgpu/tonga_vce.bin qca/nvm_usb_00000302.bin qca/rampatch_usb_00000302.bin ath10k/QCA6174/hw3.0/board-2.bin ath10k/QCA6174/hw3.0/firmware-6.bin ctefx.bin ctspeq.bin"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 # CONFIG_FW_LOADER_USER_HELPER_FALLBACK is not set
 CONFIG_WANT_DEV_COREDUMP=y
@@ -2893,6 +2893,7 @@ CONFIG_RTC_INTF_DEV=y
 # CONFIG_RTC_DRV_X1205 is not set
 # CONFIG_RTC_DRV_PCF8523 is not set
 # CONFIG_RTC_DRV_PCF85063 is not set
+# CONFIG_RTC_DRV_PCF85363 is not set
 # CONFIG_RTC_DRV_PCF8563 is not set
 # CONFIG_RTC_DRV_PCF8583 is not set
 # CONFIG_RTC_DRV_M41T80 is not set
@@ -3854,7 +3855,6 @@ CONFIG_GENERIC_NET_UTILS=y
 CONFIG_GENERIC_FIND_FIRST_BIT=y
 CONFIG_GENERIC_PCI_IOMAP=y
 CONFIG_GENERIC_IOMAP=y
-CONFIG_GENERIC_IO=y
 CONFIG_ARCH_USE_CMPXCHG_LOCKREF=y
 CONFIG_ARCH_HAS_FAST_MULTIPLIER=y
 CONFIG_CRC_CCITT=y
