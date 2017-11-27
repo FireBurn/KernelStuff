@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.14.0 Kernel Configuration
+# Linux/x86 4.15.0-rc1 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -750,7 +750,6 @@ CONFIG_PCI_QUIRKS=y
 # CONFIG_PCI_DEBUG is not set
 CONFIG_PCI_REALLOC_ENABLE_AUTO=y
 # CONFIG_PCI_STUB is not set
-CONFIG_HT_IRQ=y
 CONFIG_PCI_ATS=y
 CONFIG_PCI_LOCKLESS_CONFIG=y
 CONFIG_PCI_IOV=y
@@ -3144,6 +3143,7 @@ CONFIG_IRQ_REMAP=y
 # IRQ chip support
 #
 CONFIG_ARM_GIC_MAX_NR=1
+# CONFIG_ARM_GIC_V3_ITS is not set
 # CONFIG_IPACK_BUS is not set
 # CONFIG_RESET_CONTROLLER is not set
 # CONFIG_FMC is not set
