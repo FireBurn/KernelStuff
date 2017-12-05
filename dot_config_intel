@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.14.0-rc5 Kernel Configuration
+# Linux/x86 4.14.0-rc7 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -2277,6 +2277,7 @@ CONFIG_DRM_I915_USERPTR=y
 #
 # CONFIG_DRM_I915_WERROR is not set
 # CONFIG_DRM_I915_DEBUG is not set
+# CONFIG_DRM_I915_TRACE_GEM is not set
 # CONFIG_DRM_I915_SW_FENCE_DEBUG_OBJECTS is not set
 # CONFIG_DRM_I915_SW_FENCE_CHECK_DAG is not set
 # CONFIG_DRM_I915_SELFTEST is not set
