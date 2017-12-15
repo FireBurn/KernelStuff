@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.15.0-rc1 Kernel Configuration
+# Linux/x86 4.15.0-rc3 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -400,9 +400,11 @@ CONFIG_BLK_MQ_PCI=y
 #
 CONFIG_IOSCHED_NOOP=y
 # CONFIG_IOSCHED_DEADLINE is not set
-# CONFIG_IOSCHED_CFQ is not set
-CONFIG_DEFAULT_NOOP=y
-CONFIG_DEFAULT_IOSCHED="noop"
+CONFIG_IOSCHED_CFQ=y
+CONFIG_CFQ_GROUP_IOSCHED=y
+CONFIG_DEFAULT_CFQ=y
+# CONFIG_DEFAULT_NOOP is not set
+CONFIG_DEFAULT_IOSCHED="cfq"
 # CONFIG_MQ_IOSCHED_DEADLINE is not set
 # CONFIG_MQ_IOSCHED_KYBER is not set
 # CONFIG_IOSCHED_BFQ is not set
@@ -613,7 +615,7 @@ CONFIG_HOTPLUG_CPU=y
 # CONFIG_LEGACY_VSYSCALL_EMULATE is not set
 CONFIG_LEGACY_VSYSCALL_NONE=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd ignore_loglevel acpi.debug_layer=0xffffffff acpi.debug_level=0x2"
+CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd ignore_loglevel psmouse.synaptics_intertouch=1"
 # CONFIG_CMDLINE_OVERRIDE is not set
 CONFIG_MODIFY_LDT_SYSCALL=y
 CONFIG_HAVE_LIVEPATCH=y
@@ -1106,7 +1108,7 @@ CONFIG_DEVTMPFS_MOUNT=y
 CONFIG_PREVENT_FIRMWARE_BUILD=y
 CONFIG_FW_LOADER=y
 CONFIG_FIRMWARE_IN_KERNEL=y
-CONFIG_EXTRA_FIRMWARE="intel-ucode/06-5e-03 i915/skl_dmc_ver1_27.bin i915/skl_guc_ver9_33.bin i915/skl_huc_ver01_07_1398.bin amdgpu/tonga_ce.bin amdgpu/tonga_mc.bin amdgpu/tonga_me.bin amdgpu/tonga_mec2.bin amdgpu/tonga_mec.bin amdgpu/tonga_pfp.bin amdgpu/tonga_rlc.bin amdgpu/tonga_sdma1.bin amdgpu/tonga_sdma.bin amdgpu/tonga_smc.bin amdgpu/tonga_uvd.bin amdgpu/tonga_vce.bin qca/nvm_usb_00000302.bin qca/rampatch_usb_00000302.bin ath10k/QCA6174/hw3.0/board-2.bin ath10k/QCA6174/hw3.0/firmware-6.bin ctefx.bin ctspeq.bin"
+CONFIG_EXTRA_FIRMWARE="intel-ucode/06-5e-03 i915/skl_dmc_ver1_26.bin i915/skl_guc_ver9_33.bin i915/skl_huc_ver01_07_1398.bin amdgpu/tonga_ce.bin amdgpu/tonga_mc.bin amdgpu/tonga_me.bin amdgpu/tonga_mec2.bin amdgpu/tonga_mec.bin amdgpu/tonga_pfp.bin amdgpu/tonga_rlc.bin amdgpu/tonga_sdma1.bin amdgpu/tonga_sdma.bin amdgpu/tonga_smc.bin amdgpu/tonga_uvd.bin amdgpu/tonga_vce.bin qca/nvm_usb_00000302.bin qca/rampatch_usb_00000302.bin ath10k/QCA6174/hw3.0/board-2.bin ath10k/QCA6174/hw3.0/firmware-6.bin ctefx.bin ctspeq.bin"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 # CONFIG_FW_LOADER_USER_HELPER_FALLBACK is not set
 CONFIG_WANT_DEV_COREDUMP=y
@@ -1521,7 +1523,7 @@ CONFIG_MOUSE_PS2=y
 # CONFIG_MOUSE_PS2_BYD is not set
 # CONFIG_MOUSE_PS2_LOGIPS2PP is not set
 CONFIG_MOUSE_PS2_SYNAPTICS=y
-# CONFIG_MOUSE_PS2_SYNAPTICS_SMBUS is not set
+CONFIG_MOUSE_PS2_SYNAPTICS_SMBUS=y
 # CONFIG_MOUSE_PS2_CYPRESS is not set
 # CONFIG_MOUSE_PS2_LIFEBOOK is not set
 # CONFIG_MOUSE_PS2_TRACKPOINT is not set
@@ -1529,19 +1531,31 @@ CONFIG_MOUSE_PS2_SYNAPTICS=y
 # CONFIG_MOUSE_PS2_SENTELIC is not set
 # CONFIG_MOUSE_PS2_TOUCHKIT is not set
 # CONFIG_MOUSE_PS2_FOCALTECH is not set
+CONFIG_MOUSE_PS2_SMBUS=y
 # CONFIG_MOUSE_SERIAL is not set
 # CONFIG_MOUSE_APPLETOUCH is not set
 # CONFIG_MOUSE_BCM5974 is not set
 # CONFIG_MOUSE_CYAPA is not set
 # CONFIG_MOUSE_ELAN_I2C is not set
 # CONFIG_MOUSE_VSXXXAA is not set
-# CONFIG_MOUSE_SYNAPTICS_I2C is not set
-# CONFIG_MOUSE_SYNAPTICS_USB is not set
+CONFIG_MOUSE_SYNAPTICS_I2C=y
+CONFIG_MOUSE_SYNAPTICS_USB=y
 # CONFIG_INPUT_JOYSTICK is not set
 # CONFIG_INPUT_TABLET is not set
 # CONFIG_INPUT_TOUCHSCREEN is not set
 # CONFIG_INPUT_MISC is not set
-# CONFIG_RMI4_CORE is not set
+CONFIG_RMI4_CORE=y
+CONFIG_RMI4_I2C=y
+CONFIG_RMI4_SMB=y
+CONFIG_RMI4_F03=y
+CONFIG_RMI4_F03_SERIO=y
+CONFIG_RMI4_2D_SENSOR=y
+CONFIG_RMI4_F11=y
+CONFIG_RMI4_F12=y
+CONFIG_RMI4_F30=y
+CONFIG_RMI4_F34=y
+CONFIG_RMI4_F54=y
+CONFIG_RMI4_F55=y
 
 #
 # Hardware I/O ports
@@ -2638,7 +2652,7 @@ CONFIG_SONY_FF=y
 # CONFIG_HID_SPEEDLINK is not set
 # CONFIG_HID_STEELSERIES is not set
 # CONFIG_HID_SUNPLUS is not set
-# CONFIG_HID_RMI is not set
+CONFIG_HID_RMI=y
 # CONFIG_HID_GREENASIA is not set
 # CONFIG_HID_SMARTJOYPLUS is not set
 # CONFIG_HID_TIVO is not set
@@ -2664,7 +2678,7 @@ CONFIG_USB_HID=y
 #
 # I2C HID support
 #
-# CONFIG_I2C_HID is not set
+CONFIG_I2C_HID=y
 
 #
 # Intel ISH HID support
@@ -2793,10 +2807,6 @@ CONFIG_USB_STORAGE=y
 # CONFIG_NOP_USB_XCEIV is not set
 # CONFIG_USB_ISP1301 is not set
 # CONFIG_USB_GADGET is not set
-
-#
-# USB Power Delivery and Type-C drivers
-#
 CONFIG_TYPEC=y
 CONFIG_TYPEC_TCPM=y
 CONFIG_TYPEC_FUSB302=y
