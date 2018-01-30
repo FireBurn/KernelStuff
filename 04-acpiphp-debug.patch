@@ -1,0 +1,133 @@
+From 1ba7c491f6d0f29eec8e70175be224e579c734bb Mon Sep 17 00:00:00 2001
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+Date: Mon, 29 Jan 2018 22:56:21 +0200
+Subject: [PATCH] HACK: ACPIphp debugging + fix
+
+---
+ drivers/pci/hotplug/acpiphp_glue.c | 44 +++++++++++++++++++++++++++++++++-----
+ 1 file changed, 39 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/pci/hotplug/acpiphp_glue.c b/drivers/pci/hotplug/acpiphp_glue.c
+index 5db6f1839dad..d8a79d719b40 100644
+--- a/drivers/pci/hotplug/acpiphp_glue.c
++++ b/drivers/pci/hotplug/acpiphp_glue.c
+@@ -459,13 +459,17 @@ static void enable_slot(struct acpiphp_slot *slot)
+ 	int max, pass;
+ 	LIST_HEAD(add_list);
+ 
++	dev_info(&bus->dev, "enable slot start\n");
++
+ 	acpiphp_rescan_slot(slot);
+ 	max = acpiphp_max_busnr(bus);
+ 	for (pass = 0; pass < 2; pass++) {
+ 		for_each_pci_bridge(dev, bus) {
++			dev_info(&dev->dev, "each bridge, pass %d\n", pass);
+ 			if (PCI_SLOT(dev->devfn) != slot->device)
+ 				continue;
+ 
++			dev_info(&dev->dev, "scanning bridge, pass %d\n", pass);
+ 			max = pci_scan_bridge(bus, dev, max, pass);
+ 			if (pass && dev->subordinate) {
+ 				check_hotplug_bridge(slot, dev);
+@@ -499,6 +503,8 @@ static void enable_slot(struct acpiphp_slot *slot)
+ 			continue;
+ 		}
+ 	}
++
++	dev_info(&bus->dev, "enable slot finished\n");
+ }
+ 
+ /**
+@@ -558,12 +564,17 @@ static unsigned int get_slot_status(struct acpiphp_slot *slot)
+ 
+ 	list_for_each_entry(func, &slot->funcs, sibling) {
+ 		if (func->flags & FUNC_HAS_STA) {
++			acpi_handle handle = func_to_handle(func);
+ 			acpi_status status;
+ 
+-			status = acpi_evaluate_integer(func_to_handle(func),
+-						       "_STA", NULL, &sta);
+-			if (ACPI_SUCCESS(status) && sta)
++			status = acpi_evaluate_integer(handle, "_STA", NULL, &sta);
++
++
++			if (ACPI_SUCCESS(status) && sta) {
++				acpi_handle_info(handle, "_STA returned %llx\n", sta);
+ 				break;
++			}
++			acpi_handle_info(handle, "_STA failed\n");
+ 		} else {
+ 			u32 dvid;
+ 
+@@ -571,6 +582,7 @@ static unsigned int get_slot_status(struct acpiphp_slot *slot)
+ 						  PCI_DEVFN(slot->device,
+ 							    func->function),
+ 						  PCI_VENDOR_ID, &dvid);
++			dev_info(&slot->bus->dev, "%#x dvid %#x\n", PCI_DEVFN(slot->device, func->function), dvid);
+ 			if (dvid != 0xffffffff) {
+ 				sta = ACPI_STA_ALL;
+ 				break;
+@@ -578,6 +590,21 @@ static unsigned int get_slot_status(struct acpiphp_slot *slot)
+ 		}
+ 	}
+ 
++	if (!sta) {
++		u32 dvid;
++
++		pr_info("get_slot_status() reading function 0 dvid\n");
++
++		pci_bus_read_config_dword(slot->bus, PCI_DEVFN(slot->device, 0),
++					  PCI_VENDOR_ID, &dvid);
++		dev_info(&slot->bus->dev, "got %#x dvid %#x\n",
++			PCI_DEVFN(slot->device, func->function), dvid);
++		if (dvid != 0xffffffff)
++			sta = ACPI_STA_ALL;
++	}
++
++	pr_info("get_slot_status() returns: %#llx\n", sta);
++
+ 	return (unsigned int)sta;
+ }
+ 
+@@ -643,14 +670,17 @@ static void acpiphp_check_bridge(struct acpiphp_bridge *bridge)
+ 	if (bridge->is_going_away)
+ 		return;
+ 
+-	if (bridge->pci_dev)
++	if (bridge->pci_dev) {
+ 		pm_runtime_get_sync(&bridge->pci_dev->dev);
++		dev_info(&bridge->pci_dev->dev, "ACPIphp scanning bridge\n");
++	}
+ 
+ 	list_for_each_entry(slot, &bridge->slots, node) {
+ 		struct pci_bus *bus = slot->bus;
+ 		struct pci_dev *dev, *tmp;
+ 
+ 		if (slot_no_hotplug(slot)) {
++			pr_info("ACPIphp no hotplug for slot\n");
+ 			; /* do nothing */
+ 		} else if (device_status_valid(get_slot_status(slot))) {
+ 			/* remove stale devices if any */
+@@ -660,14 +690,18 @@ static void acpiphp_check_bridge(struct acpiphp_bridge *bridge)
+ 					trim_stale_devices(dev);
+ 
+ 			/* configure all functions */
++			pr_info("ACPIphp enabling slot\n");
+ 			enable_slot(slot);
+ 		} else {
++			pr_info("ACPIphp disabling slot\n");
+ 			disable_slot(slot);
+ 		}
+ 	}
+ 
+-	if (bridge->pci_dev)
++	if (bridge->pci_dev) {
++		dev_info(&bridge->pci_dev->dev, "ACPIphp bridge scanned\n");
+ 		pm_runtime_put(&bridge->pci_dev->dev);
++	}
+ }
+ 
+ /*
+-- 
+2.14.3
+
