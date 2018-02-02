@@ -11,6 +11,7 @@ function updateKernel {
     git apply ../02-xattr-user-prefix.patch
     git apply ../03-es-mlc1.patch
     git apply ../04-acpiphp-debug.patch
+    git apply ../05-remove-warn.patch
   fi
   make -j10
   make modules_install

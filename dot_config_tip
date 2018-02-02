@@ -986,7 +986,6 @@ CONFIG_HAVE_NET_DSA=y
 # CONFIG_VLAN_8021Q is not set
 # CONFIG_DECNET is not set
 # CONFIG_LLC2 is not set
-# CONFIG_IPX is not set
 # CONFIG_ATALK is not set
 # CONFIG_X25 is not set
 # CONFIG_LAPB is not set
@@ -1113,7 +1112,6 @@ CONFIG_DEVTMPFS_MOUNT=y
 # CONFIG_STANDALONE is not set
 CONFIG_PREVENT_FIRMWARE_BUILD=y
 CONFIG_FW_LOADER=y
-CONFIG_FIRMWARE_IN_KERNEL=y
 CONFIG_EXTRA_FIRMWARE="i915/skl_dmc_ver1_26.bin i915/skl_guc_ver9_33.bin i915/skl_huc_ver01_07_1398.bin amdgpu/tonga_ce.bin amdgpu/tonga_mc.bin amdgpu/tonga_me.bin amdgpu/tonga_mec2.bin amdgpu/tonga_mec.bin amdgpu/tonga_pfp.bin amdgpu/tonga_rlc.bin amdgpu/tonga_sdma1.bin amdgpu/tonga_sdma.bin amdgpu/tonga_smc.bin amdgpu/tonga_uvd.bin amdgpu/tonga_vce.bin qca/nvm_usb_00000302.bin qca/rampatch_usb_00000302.bin ath10k/QCA6174/hw3.0/board-2.bin ath10k/QCA6174/hw3.0/firmware-6.bin ctefx.bin ctspeq.bin regulatory.db"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 # CONFIG_FW_LOADER_USER_HELPER_FALLBACK is not set
@@ -2720,6 +2718,7 @@ CONFIG_USB_OTG=y
 #
 # CONFIG_USB_C67X00_HCD is not set
 CONFIG_USB_XHCI_HCD=y
+# CONFIG_USB_XHCI_DBGCAP is not set
 CONFIG_USB_XHCI_PCI=y
 CONFIG_USB_XHCI_PLATFORM=y
 # CONFIG_USB_EHCI_HCD is not set
@@ -2998,6 +2997,8 @@ CONFIG_SYNC_FILE=y
 # CONFIG_HYPERV_TSCPAGE is not set
 CONFIG_STAGING=y
 # CONFIG_IRDA is not set
+# CONFIG_IPX is not set
+# CONFIG_NCP_FS is not set
 # CONFIG_PRISM2_USB is not set
 # CONFIG_COMEDI is not set
 # CONFIG_RTL8192U is not set
@@ -3138,6 +3139,7 @@ CONFIG_IRQ_REMAP=y
 # Rpmsg drivers
 #
 # CONFIG_RPMSG_VIRTIO is not set
+# CONFIG_SOUNDWIRE is not set
 
 #
 # SOC (System On Chip) specific Drivers
@@ -3210,11 +3212,10 @@ CONFIG_NVMEM=y
 # CONFIG_STM is not set
 # CONFIG_INTEL_TH is not set
 # CONFIG_FPGA is not set
-
-#
-# FSI support
-#
 # CONFIG_FSI is not set
+# CONFIG_UNISYS_VISORBUS is not set
+# CONFIG_SIOX is not set
+# CONFIG_SLIMBUS is not set
 
 #
 # Firmware Drivers
@@ -3386,7 +3387,6 @@ CONFIG_CIFS_ACL=y
 CONFIG_CIFS_DFS_UPCALL=y
 CONFIG_CIFS_SMB311=y
 CONFIG_CIFS_FSCACHE=y
-# CONFIG_NCP_FS is not set
 # CONFIG_CODA_FS is not set
 # CONFIG_AFS_FS is not set
 CONFIG_NLS=y
