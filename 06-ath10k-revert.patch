@@ -1,0 +1,53 @@
+commit 95f211b87b23a2586ea5cb01f61e8f7945b7804e
+Author: Mike Lothian <mike@fireburn.co.uk>
+Date:   Mon Feb 5 22:16:41 2018 +0000
+
+    Revert "ath10k: add sanity check to ie_len before parsing fw/board ie"
+    
+    This reverts commit 9ed4f91628737c820af6a1815b65bc06bd31518f.
+
+diff --git a/drivers/net/wireless/ath/ath10k/core.c b/drivers/net/wireless/ath/ath10k/core.c
+index b0fdc1023619..e89a7846dddb 100644
+--- a/drivers/net/wireless/ath/ath10k/core.c
++++ b/drivers/net/wireless/ath/ath10k/core.c
+@@ -1276,10 +1276,7 @@ static int ath10k_core_fetch_board_data_api_n(struct ath10k *ar,
+ 		len -= sizeof(*hdr);
+ 		data = hdr->data;
+ 
+-		/* jump over the padding */
+-		ie_len = ALIGN(ie_len, 4);
+-
+-		if (len < ie_len) {
++		if (len < ALIGN(ie_len, 4)) {
+ 			ath10k_err(ar, "invalid length for board ie_id %d ie_len %zu len %zu\n",
+ 				   ie_id, ie_len, len);
+ 			ret = -EINVAL;
+@@ -1318,6 +1315,8 @@ static int ath10k_core_fetch_board_data_api_n(struct ath10k *ar,
+ 			goto out;
+ 		}
+ 
++		/* jump over the padding */
++		ie_len = ALIGN(ie_len, 4);
+ 		len -= ie_len;
+ 		data += ie_len;
+ 	}
+@@ -1448,9 +1447,6 @@ int ath10k_core_fetch_firmware_api_n(struct ath10k *ar, const char *name,
+ 		len -= sizeof(*hdr);
+ 		data += sizeof(*hdr);
+ 
+-		/* jump over the padding */
+-		ie_len = ALIGN(ie_len, 4);
+-
+ 		if (len < ie_len) {
+ 			ath10k_err(ar, "invalid length for FW IE %d (%zu < %zu)\n",
+ 				   ie_id, len, ie_len);
+@@ -1556,6 +1552,9 @@ int ath10k_core_fetch_firmware_api_n(struct ath10k *ar, const char *name,
+ 			break;
+ 		}
+ 
++		/* jump over the padding */
++		ie_len = ALIGN(ie_len, 4);
++
+ 		len -= ie_len;
+ 		data += ie_len;
+ 	}
