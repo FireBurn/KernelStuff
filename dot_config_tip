@@ -625,7 +625,7 @@ CONFIG_HOTPLUG_CPU=y
 # CONFIG_LEGACY_VSYSCALL_EMULATE is not set
 CONFIG_LEGACY_VSYSCALL_NONE=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd ignore_loglevel psmouse.synaptics_intertouch=1"
+CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd cgroup_no_v1=all ignore_loglevel psmouse.synaptics_intertouch=1"
 # CONFIG_CMDLINE_OVERRIDE is not set
 CONFIG_MODIFY_LDT_SYSCALL=y
 CONFIG_HAVE_LIVEPATCH=y
@@ -2998,12 +2998,7 @@ CONFIG_SYNC_FILE=y
 # CONFIG_UIO is not set
 # CONFIG_VFIO is not set
 # CONFIG_VIRT_DRIVERS is not set
-
-#
-# Virtio drivers
-#
-# CONFIG_VIRTIO_PCI is not set
-# CONFIG_VIRTIO_MMIO is not set
+# CONFIG_VIRTIO_MENU is not set
 
 #
 # Microsoft Hyper-V guest support
