@@ -1,0 +1,654 @@
+From patchwork Sun Feb 11 09:38:28 2018
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [1/5] workqueue: Allow retrieval of current task's work struct
+From: Lukas Wunner <lukas@wunner.de>
+X-Patchwork-Id: 203869
+Message-Id: <2d8f603074131eb87e588d2b803a71765bd3a2fd.1518338788.git.lukas@wunner.de>
+To: Tejun Heo <tj@kernel.org>, Lai Jiangshan <jiangshanlai@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
+Cc: Ismo Toijala <ismo.toijala@gmail.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Liviu Dudau <Liviu.Dudau@arm.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Peter Wu <peter@lekensteyn.nl>
+Date: Sun, 11 Feb 2018 10:38:28 +0100
+
+Introduce a helper to retrieve the current task's work struct if it is
+a workqueue worker.
+
+This allows us to fix a long-standing deadlock in several DRM drivers
+wherein the ->runtime_suspend callback waits for a specific worker to
+finish and that worker in turn calls a function which waits for runtime
+suspend to finish.  That function is invoked from multiple call sites
+and waiting for runtime suspend to finish is the correct thing to do
+except if it's executing in the context of the worker.
+
+Cc: Tejun Heo <tj@kernel.org>
+Cc: Lai Jiangshan <jiangshanlai@gmail.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Lukas Wunner <lukas@wunner.de>
+---
+ include/linux/workqueue.h |  1 +
+ kernel/workqueue.c        | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+)
+
+diff --git a/include/linux/workqueue.h b/include/linux/workqueue.h
+index 4a54ef96aff5..bc0cda180c8b 100644
+--- a/include/linux/workqueue.h
++++ b/include/linux/workqueue.h
+@@ -465,6 +465,7 @@ extern bool cancel_delayed_work_sync(struct delayed_work *dwork);
+ 
+ extern void workqueue_set_max_active(struct workqueue_struct *wq,
+ 				     int max_active);
++extern struct work_struct *current_work(void);
+ extern bool current_is_workqueue_rescuer(void);
+ extern bool workqueue_congested(int cpu, struct workqueue_struct *wq);
+ extern unsigned int work_busy(struct work_struct *work);
+diff --git a/kernel/workqueue.c b/kernel/workqueue.c
+index 017044c26233..bb9a519cbf50 100644
+--- a/kernel/workqueue.c
++++ b/kernel/workqueue.c
+@@ -4179,6 +4179,22 @@ void workqueue_set_max_active(struct workqueue_struct *wq, int max_active)
+ }
+ EXPORT_SYMBOL_GPL(workqueue_set_max_active);
+ 
++/**
++ * current_work - retrieve %current task's work struct
++ *
++ * Determine if %current task is a workqueue worker and what it's working on.
++ * Useful to find out the context that the %current task is running in.
++ *
++ * Return: work struct if %current task is a workqueue worker, %NULL otherwise.
++ */
++struct work_struct *current_work(void)
++{
++	struct worker *worker = current_wq_worker();
++
++	return worker ? worker->current_work : NULL;
++}
++EXPORT_SYMBOL(current_work);
++
+ /**
+  * current_is_workqueue_rescuer - is %current workqueue rescuer?
+  *
+
+From patchwork Sun Feb 11 09:38:28 2018
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [2/5] drm: Allow determining if current task is output poll worker
+From: Lukas Wunner <lukas@wunner.de>
+X-Patchwork-Id: 203875
+Message-Id: <7831d4f21dde8cd0b1659e393854598995dfb249.1518338788.git.lukas@wunner.de>
+To: Tejun Heo <tj@kernel.org>, Lai Jiangshan <jiangshanlai@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
+Cc: Ismo Toijala <ismo.toijala@gmail.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Liviu Dudau <Liviu.Dudau@arm.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Peter Wu <peter@lekensteyn.nl>
+Date: Sun, 11 Feb 2018 10:38:28 +0100
+
+Introduce a helper to determine if the current task is an output poll
+worker.
+
+This allows us to fix a long-standing deadlock in several DRM drivers
+wherein the ->runtime_suspend callback waits for the output poll worker
+to finish and the worker in turn calls a ->detect callback which waits
+for runtime suspend to finish.  The ->detect callback is invoked from
+multiple call sites and waiting for runtime suspend to finish is the
+correct thing to do except if it's executing in the context of the
+worker.
+
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Lukas Wunner <lukas@wunner.de>
+---
+ drivers/gpu/drm/drm_probe_helper.c | 14 ++++++++++++++
+ include/drm/drm_crtc_helper.h      |  1 +
+ 2 files changed, 15 insertions(+)
+
+diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_probe_helper.c
+index 555fbe54d6e2..019881d15ce1 100644
+--- a/drivers/gpu/drm/drm_probe_helper.c
++++ b/drivers/gpu/drm/drm_probe_helper.c
+@@ -653,6 +653,20 @@ static void output_poll_execute(struct work_struct *work)
+ 		schedule_delayed_work(delayed_work, DRM_OUTPUT_POLL_PERIOD);
+ }
+ 
++/**
++ * drm_kms_helper_is_poll_worker - is %current task an output poll worker?
++ *
++ * Determine if %current task is an output poll worker.  This can be used
++ * to select distinct code paths for output polling versus other contexts.
++ */
++bool drm_kms_helper_is_poll_worker(void)
++{
++	struct work_struct *work = current_work();
++
++	return work && work->func == output_poll_execute;
++}
++EXPORT_SYMBOL(drm_kms_helper_is_poll_worker);
++
+ /**
+  * drm_kms_helper_poll_disable - disable output polling
+  * @dev: drm_device
+diff --git a/include/drm/drm_crtc_helper.h b/include/drm/drm_crtc_helper.h
+index 76e237bd989b..6914633037a5 100644
+--- a/include/drm/drm_crtc_helper.h
++++ b/include/drm/drm_crtc_helper.h
+@@ -77,5 +77,6 @@ void drm_kms_helper_hotplug_event(struct drm_device *dev);
+ 
+ void drm_kms_helper_poll_disable(struct drm_device *dev);
+ void drm_kms_helper_poll_enable(struct drm_device *dev);
++bool drm_kms_helper_is_poll_worker(void);
+ 
+ #endif
+
+From patchwork Sun Feb 11 09:38:28 2018
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [3/5] drm/nouveau: Fix deadlock on runtime suspend
+From: Lukas Wunner <lukas@wunner.de>
+X-Patchwork-Id: 203868
+Message-Id: <b7d2cbb609a80f59ccabfdf479b9d5907c603ea1.1518338789.git.lukas@wunner.de>
+To: Tejun Heo <tj@kernel.org>, Lai Jiangshan <jiangshanlai@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
+Cc: Ismo Toijala <ismo.toijala@gmail.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Liviu Dudau <Liviu.Dudau@arm.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Peter Wu <peter@lekensteyn.nl>
+Date: Sun, 11 Feb 2018 10:38:28 +0100
+
+nouveau's ->runtime_suspend hook calls drm_kms_helper_poll_disable(),
+which waits for the output poll worker to finish if it's running.
+
+The output poll worker meanwhile calls pm_runtime_get_sync() in
+nouveau_connector_detect() which waits for the ongoing suspend to finish,
+causing a deadlock.
+
+Fix by not acquiring a runtime PM ref if nouveau_connector_detect() is
+called in the output poll worker's context.  This is safe because
+the poll worker is only enabled while runtime active and we know that
+->runtime_suspend waits for it to finish.
+
+Other contexts calling nouveau_connector_detect() do require a runtime
+PM ref, these comprise:
+
+  status_store() drm sysfs interface
+  ->fill_modes drm callback
+  drm_fb_helper_probe_connector_modes()
+  drm_mode_getconnector()
+  nouveau_connector_hotplug()
+  nouveau_display_hpd_work()
+  nv17_tv_set_property()
+
+Stack trace for posterity:
+
+  INFO: task kworker/0:1:58 blocked for more than 120 seconds.
+  Workqueue: events output_poll_execute [drm_kms_helper]
+  Call Trace:
+   schedule+0x28/0x80
+   rpm_resume+0x107/0x6e0
+   __pm_runtime_resume+0x47/0x70
+   nouveau_connector_detect+0x7e/0x4a0 [nouveau]
+   nouveau_connector_detect_lvds+0x132/0x180 [nouveau]
+   drm_helper_probe_detect_ctx+0x85/0xd0 [drm_kms_helper]
+   output_poll_execute+0x11e/0x1c0 [drm_kms_helper]
+   process_one_work+0x184/0x380
+   worker_thread+0x2e/0x390
+
+  INFO: task kworker/0:2:252 blocked for more than 120 seconds.
+  Workqueue: pm pm_runtime_work
+  Call Trace:
+   schedule+0x28/0x80
+   schedule_timeout+0x1e3/0x370
+   wait_for_completion+0x123/0x190
+   flush_work+0x142/0x1c0
+   nouveau_pmops_runtime_suspend+0x7e/0xd0 [nouveau]
+   pci_pm_runtime_suspend+0x5c/0x180
+   vga_switcheroo_runtime_suspend+0x1e/0xa0
+   __rpm_callback+0xc1/0x200
+   rpm_callback+0x1f/0x70
+   rpm_suspend+0x13c/0x640
+   pm_runtime_work+0x6e/0x90
+   process_one_work+0x184/0x380
+   worker_thread+0x2e/0x390
+
+Bugzilla: https://bugs.archlinux.org/task/53497
+Bugzilla: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=870523
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=70388#c33
+Fixes: 5addcf0a5f0f ("nouveau: add runtime PM support (v0.9)")
+Cc: stable@vger.kernel.org # v3.12+: 1234567890ab: workqueue: Allow retrieval of current task's work struct
+Cc: stable@vger.kernel.org # v3.12+: 1234567890ab: drm: Allow determining if current task is output poll worker
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Signed-off-by: Lukas Wunner <lukas@wunner.de>
+---
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 69d6e61a01ec..6ed9cb053dfa 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -570,9 +570,15 @@ nouveau_connector_detect(struct drm_connector *connector, bool force)
+ 		nv_connector->edid = NULL;
+ 	}
+ 
+-	ret = pm_runtime_get_sync(connector->dev->dev);
+-	if (ret < 0 && ret != -EACCES)
+-		return conn_status;
++	/* Outputs are only polled while runtime active, so acquiring a
++	 * runtime PM ref here is unnecessary (and would deadlock upon
++	 * runtime suspend because it waits for polling to finish).
++	 */
++	if (!drm_kms_helper_is_poll_worker()) {
++		ret = pm_runtime_get_sync(connector->dev->dev);
++		if (ret < 0 && ret != -EACCES)
++			return conn_status;
++	}
+ 
+ 	nv_encoder = nouveau_connector_ddc_detect(connector);
+ 	if (nv_encoder && (i2c = nv_encoder->i2c) != NULL) {
+@@ -647,8 +653,10 @@ nouveau_connector_detect(struct drm_connector *connector, bool force)
+ 
+  out:
+ 
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
+ 
+ 	return conn_status;
+ }
+
+From patchwork Sun Feb 11 09:38:28 2018
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [4/5] drm/radeon: Fix deadlock on runtime suspend
+From: Lukas Wunner <lukas@wunner.de>
+X-Patchwork-Id: 203872
+Message-Id: <64ea02c44f91dda19bc563902b97bbc699040392.1518338789.git.lukas@wunner.de>
+To: Tejun Heo <tj@kernel.org>, Lai Jiangshan <jiangshanlai@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
+Cc: Ismo Toijala <ismo.toijala@gmail.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Liviu Dudau <Liviu.Dudau@arm.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Peter Wu <peter@lekensteyn.nl>
+Date: Sun, 11 Feb 2018 10:38:28 +0100
+
+radeon's ->runtime_suspend hook calls drm_kms_helper_poll_disable(),
+which waits for the output poll worker to finish if it's running.
+
+The output poll worker meanwhile calls pm_runtime_get_sync() in
+radeon's ->detect hooks, which waits for the ongoing suspend to finish,
+causing a deadlock.
+
+Fix by not acquiring a runtime PM ref if the ->detect hooks are called
+in the output poll worker's context.  This is safe because the poll
+worker is only enabled while runtime active and we know that
+->runtime_suspend waits for it to finish.
+
+Stack trace for posterity:
+
+  INFO: task kworker/0:3:31847 blocked for more than 120 seconds
+  Workqueue: events output_poll_execute [drm_kms_helper]
+  Call Trace:
+   schedule+0x3c/0x90
+   rpm_resume+0x1e2/0x690
+   __pm_runtime_resume+0x3f/0x60
+   radeon_lvds_detect+0x39/0xf0 [radeon]
+   output_poll_execute+0xda/0x1e0 [drm_kms_helper]
+   process_one_work+0x14b/0x440
+   worker_thread+0x48/0x4a0
+
+  INFO: task kworker/2:0:10493 blocked for more than 120 seconds.
+  Workqueue: pm pm_runtime_work
+  Call Trace:
+   schedule+0x3c/0x90
+   schedule_timeout+0x1b3/0x240
+   wait_for_common+0xc2/0x180
+   wait_for_completion+0x1d/0x20
+   flush_work+0xfc/0x1a0
+   __cancel_work_timer+0xa5/0x1d0
+   cancel_delayed_work_sync+0x13/0x20
+   drm_kms_helper_poll_disable+0x1f/0x30 [drm_kms_helper]
+   radeon_pmops_runtime_suspend+0x3d/0xa0 [radeon]
+   pci_pm_runtime_suspend+0x61/0x1a0
+   vga_switcheroo_runtime_suspend+0x21/0x70
+   __rpm_callback+0x32/0x70
+   rpm_callback+0x24/0x80
+   rpm_suspend+0x12b/0x640
+   pm_runtime_work+0x6f/0xb0
+   process_one_work+0x14b/0x440
+   worker_thread+0x48/0x4a0
+
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=94147
+Fixes: 10ebc0bc0934 ("drm/radeon: add runtime PM support (v2)")
+Cc: stable@vger.kernel.org # v3.13+: 1234567890ab: workqueue: Allow retrieval of current task's work struct
+Cc: stable@vger.kernel.org # v3.13+: 1234567890ab: drm: Allow determining if current task is output poll worker
+Cc: Ismo Toijala <ismo.toijala@gmail.com>
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Signed-off-by: Lukas Wunner <lukas@wunner.de>
+---
+ drivers/gpu/drm/radeon/radeon_connectors.c | 74 ++++++++++++++++++++----------
+ 1 file changed, 49 insertions(+), 25 deletions(-)
+
+diff --git a/drivers/gpu/drm/radeon/radeon_connectors.c b/drivers/gpu/drm/radeon/radeon_connectors.c
+index 5012f5e47a1e..2e2ca3c6b47d 100644
+--- a/drivers/gpu/drm/radeon/radeon_connectors.c
++++ b/drivers/gpu/drm/radeon/radeon_connectors.c
+@@ -899,9 +899,11 @@ radeon_lvds_detect(struct drm_connector *connector, bool force)
+ 	enum drm_connector_status ret = connector_status_disconnected;
+ 	int r;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	if (encoder) {
+ 		struct radeon_encoder *radeon_encoder = to_radeon_encoder(encoder);
+@@ -924,8 +926,12 @@ radeon_lvds_detect(struct drm_connector *connector, bool force)
+ 	/* check acpi lid status ??? */
+ 
+ 	radeon_connector_update_scratch_regs(connector, ret);
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
++
+ 	return ret;
+ }
+ 
+@@ -1039,9 +1045,11 @@ radeon_vga_detect(struct drm_connector *connector, bool force)
+ 	enum drm_connector_status ret = connector_status_disconnected;
+ 	int r;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	encoder = radeon_best_single_encoder(connector);
+ 	if (!encoder)
+@@ -1108,8 +1116,10 @@ radeon_vga_detect(struct drm_connector *connector, bool force)
+ 	radeon_connector_update_scratch_regs(connector, ret);
+ 
+ out:
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
+ 
+ 	return ret;
+ }
+@@ -1173,9 +1183,11 @@ radeon_tv_detect(struct drm_connector *connector, bool force)
+ 	if (!radeon_connector->dac_load_detect)
+ 		return ret;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	encoder = radeon_best_single_encoder(connector);
+ 	if (!encoder)
+@@ -1187,8 +1199,12 @@ radeon_tv_detect(struct drm_connector *connector, bool force)
+ 	if (ret == connector_status_connected)
+ 		ret = radeon_connector_analog_encoder_conflict_solve(connector, encoder, ret, false);
+ 	radeon_connector_update_scratch_regs(connector, ret);
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
++
+ 	return ret;
+ }
+ 
+@@ -1251,9 +1267,11 @@ radeon_dvi_detect(struct drm_connector *connector, bool force)
+ 	enum drm_connector_status ret = connector_status_disconnected;
+ 	bool dret = false, broken_edid = false;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	if (radeon_connector->detected_hpd_without_ddc) {
+ 		force = true;
+@@ -1436,8 +1454,10 @@ radeon_dvi_detect(struct drm_connector *connector, bool force)
+ 	}
+ 
+ exit:
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
+ 
+ 	return ret;
+ }
+@@ -1688,9 +1708,11 @@ radeon_dp_detect(struct drm_connector *connector, bool force)
+ 	if (radeon_dig_connector->is_mst)
+ 		return connector_status_disconnected;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	if (!force && radeon_check_hpd_status_unchanged(connector)) {
+ 		ret = connector->status;
+@@ -1777,8 +1799,10 @@ radeon_dp_detect(struct drm_connector *connector, bool force)
+ 	}
+ 
+ out:
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
+ 
+ 	return ret;
+ }
+
+From patchwork Sun Feb 11 09:38:28 2018
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [5/5] drm/amdgpu: Fix deadlock on runtime suspend
+From: Lukas Wunner <lukas@wunner.de>
+X-Patchwork-Id: 203876
+Message-Id: <4c9bf72aacae1eef062bd134cd112e0770a7f121.1518338789.git.lukas@wunner.de>
+To: Tejun Heo <tj@kernel.org>, Lai Jiangshan <jiangshanlai@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
+Cc: Ismo Toijala <ismo.toijala@gmail.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Liviu Dudau <Liviu.Dudau@arm.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Peter Wu <peter@lekensteyn.nl>
+Date: Sun, 11 Feb 2018 10:38:28 +0100
+
+amdgpu's ->runtime_suspend hook calls drm_kms_helper_poll_disable(),
+which waits for the output poll worker to finish if it's running.
+
+The output poll worker meanwhile calls pm_runtime_get_sync() in
+amdgpu's ->detect hooks, which waits for the ongoing suspend to finish,
+causing a deadlock.
+
+Fix by not acquiring a runtime PM ref if the ->detect hooks are called
+in the output poll worker's context.  This is safe because the poll
+worker is only enabled while runtime active and we know that
+->runtime_suspend waits for it to finish.
+
+Fixes: d38ceaf99ed0 ("drm/amdgpu: add core driver (v4)")
+Cc: stable@vger.kernel.org # v4.2+: 1234567890ab: workqueue: Allow retrieval of current task's work struct
+Cc: stable@vger.kernel.org # v4.2+: 1234567890ab: drm: Allow determining if current task is output poll worker
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Lukas Wunner <lukas@wunner.de>
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c | 58 +++++++++++++++++---------
+ 1 file changed, 38 insertions(+), 20 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
+index 8ca3783f2deb..74d2efaec52f 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
+@@ -736,9 +736,11 @@ amdgpu_connector_lvds_detect(struct drm_connector *connector, bool force)
+ 	enum drm_connector_status ret = connector_status_disconnected;
+ 	int r;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	if (encoder) {
+ 		struct amdgpu_encoder *amdgpu_encoder = to_amdgpu_encoder(encoder);
+@@ -757,8 +759,12 @@ amdgpu_connector_lvds_detect(struct drm_connector *connector, bool force)
+ 	/* check acpi lid status ??? */
+ 
+ 	amdgpu_connector_update_scratch_regs(connector, ret);
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
++
+ 	return ret;
+ }
+ 
+@@ -868,9 +874,11 @@ amdgpu_connector_vga_detect(struct drm_connector *connector, bool force)
+ 	enum drm_connector_status ret = connector_status_disconnected;
+ 	int r;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	encoder = amdgpu_connector_best_single_encoder(connector);
+ 	if (!encoder)
+@@ -924,8 +932,10 @@ amdgpu_connector_vga_detect(struct drm_connector *connector, bool force)
+ 	amdgpu_connector_update_scratch_regs(connector, ret);
+ 
+ out:
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
+ 
+ 	return ret;
+ }
+@@ -988,9 +998,11 @@ amdgpu_connector_dvi_detect(struct drm_connector *connector, bool force)
+ 	enum drm_connector_status ret = connector_status_disconnected;
+ 	bool dret = false, broken_edid = false;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	if (!force && amdgpu_connector_check_hpd_status_unchanged(connector)) {
+ 		ret = connector->status;
+@@ -1115,8 +1127,10 @@ amdgpu_connector_dvi_detect(struct drm_connector *connector, bool force)
+ 	amdgpu_connector_update_scratch_regs(connector, ret);
+ 
+ exit:
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
+ 
+ 	return ret;
+ }
+@@ -1359,9 +1373,11 @@ amdgpu_connector_dp_detect(struct drm_connector *connector, bool force)
+ 	struct drm_encoder *encoder = amdgpu_connector_best_single_encoder(connector);
+ 	int r;
+ 
+-	r = pm_runtime_get_sync(connector->dev->dev);
+-	if (r < 0)
+-		return connector_status_disconnected;
++	if (!drm_kms_helper_is_poll_worker()) {
++		r = pm_runtime_get_sync(connector->dev->dev);
++		if (r < 0)
++			return connector_status_disconnected;
++	}
+ 
+ 	if (!force && amdgpu_connector_check_hpd_status_unchanged(connector)) {
+ 		ret = connector->status;
+@@ -1429,8 +1445,10 @@ amdgpu_connector_dp_detect(struct drm_connector *connector, bool force)
+ 
+ 	amdgpu_connector_update_scratch_regs(connector, ret);
+ out:
+-	pm_runtime_mark_last_busy(connector->dev->dev);
+-	pm_runtime_put_autosuspend(connector->dev->dev);
++	if (!drm_kms_helper_is_poll_worker()) {
++		pm_runtime_mark_last_busy(connector->dev->dev);
++		pm_runtime_put_autosuspend(connector->dev->dev);
++	}
+ 
+ 	return ret;
+ }
