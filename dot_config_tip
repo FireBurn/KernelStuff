@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.16.0-rc1 Kernel Configuration
+# Linux/x86 4.16.0-rc2 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -1209,7 +1209,7 @@ CONFIG_BLK_DEV_NVME=y
 # CONFIG_USB_SWITCH_FSA9480 is not set
 # CONFIG_SRAM is not set
 # CONFIG_PCI_ENDPOINT_TEST is not set
-# CONFIG_MISC_RTSX is not set
+CONFIG_MISC_RTSX=y
 # CONFIG_C2PORT is not set
 
 #
@@ -1276,7 +1276,7 @@ CONFIG_INTEL_MEI_ME=y
 # CONFIG_CXL_AFU_DRIVER_OPS is not set
 # CONFIG_CXL_LIB is not set
 # CONFIG_OCXL_BASE is not set
-# CONFIG_MISC_RTSX_PCI is not set
+CONFIG_MISC_RTSX_PCI=y
 # CONFIG_MISC_RTSX_USB is not set
 CONFIG_HAVE_IDE=y
 # CONFIG_IDE is not set
