@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.16.0-rc5 Kernel Configuration
+# Linux/x86 4.16.0-rc6 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -2691,7 +2691,7 @@ CONFIG_USB_STORAGE=y
 # CONFIG_USB_STORAGE_KARMA is not set
 # CONFIG_USB_STORAGE_CYPRESS_ATACB is not set
 # CONFIG_USB_STORAGE_ENE_UB6250 is not set
-# CONFIG_USB_UAS is not set
+CONFIG_USB_UAS=y
 
 #
 # USB Imaging devices
