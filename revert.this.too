@@ -1,0 +1,38 @@
+commit 59dd47728625e6f8e77f888d00596c9fb7057540
+Author: Christian König <christian.koenig@amd.com>
+Date:   Tue Feb 20 19:51:02 2018 +0100
+
+    drm/amdgpu: further mitigate workaround for i915
+    
+    Disable the workaround on imported BOs as well.
+    
+    Signed-off-by: Christian König <christian.koenig@amd.com>
+    Reviewed-by: Alex Deucher <alexdeucher@amd.com>
+    Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_prime.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_prime.c
+index 8ce74a1d9966..fb66b45548d3 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_prime.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_prime.c
+@@ -107,12 +107,18 @@ amdgpu_gem_prime_import_sg_table(struct drm_device *dev,
+ 	ww_mutex_lock(&resv->lock, NULL);
+ 	ret = amdgpu_bo_create(adev, attach->dmabuf->size, PAGE_SIZE, false,
+ 			       AMDGPU_GEM_DOMAIN_GTT, 0, sg, resv, &bo);
+-	ww_mutex_unlock(&resv->lock);
+ 	if (ret)
+-		return ERR_PTR(ret);
++		goto error;
++
++	if (attach->dmabuf->ops != &amdgpu_dmabuf_ops)
++		bo->prime_shared_count = 1;
+ 
+-	bo->prime_shared_count = 1;
++	ww_mutex_unlock(&resv->lock);
+ 	return &bo->gem_base;
++
++error:
++	ww_mutex_unlock(&resv->lock);
++	return ERR_PTR(ret);
+ }
+ 
+ static int amdgpu_gem_map_attach(struct dma_buf *dma_buf,
