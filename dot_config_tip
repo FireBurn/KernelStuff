@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.16.0-rc6 Kernel Configuration
+# Linux/x86 4.16.0 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -2271,6 +2271,7 @@ CONFIG_DRM_PANEL_BRIDGE=y
 # Display Interface Bridges
 #
 # CONFIG_DRM_ANALOGIX_ANX78XX is not set
+CONFIG_HSA_AMD=y
 # CONFIG_DRM_HISI_HIBMC is not set
 # CONFIG_DRM_TINYDRM is not set
 # CONFIG_DRM_LEGACY is not set
@@ -3434,6 +3435,7 @@ CONFIG_SCHED_INFO=y
 #
 # Lock Debugging (spinlocks, mutexes, etc...)
 #
+CONFIG_LOCK_DEBUGGING_SUPPORT=y
 # CONFIG_WW_MUTEX_SELFTEST is not set
 CONFIG_STACKTRACE=y
 # CONFIG_WARN_ALL_UNSEEDED_RANDOM is not set
