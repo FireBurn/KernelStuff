@@ -228,7 +228,6 @@ CONFIG_BPF_JIT_ALWAYS_ON=y
 CONFIG_ARCH_HAS_MEMBARRIER_SYNC_CORE=y
 # CONFIG_EMBEDDED is not set
 CONFIG_HAVE_PERF_EVENTS=y
-# CONFIG_PC104 is not set
 
 #
 # Kernel Performance Events And Counters
@@ -2502,12 +2501,14 @@ CONFIG_HID_GENERIC=y
 # CONFIG_HID_CYPRESS is not set
 # CONFIG_HID_DRAGONRISE is not set
 # CONFIG_HID_EMS_FF is not set
+# CONFIG_HID_ELAN is not set
 # CONFIG_HID_ELECOM is not set
 # CONFIG_HID_ELO is not set
 # CONFIG_HID_EZKEY is not set
 # CONFIG_HID_GEMBIRD is not set
 # CONFIG_HID_GFRM is not set
 # CONFIG_HID_HOLTEK is not set
+# CONFIG_HID_GOOGLE_HAMMER is not set
 # CONFIG_HID_GT683R is not set
 # CONFIG_HID_KEYTOUCH is not set
 # CONFIG_HID_KYE is not set
