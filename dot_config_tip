@@ -2706,8 +2706,15 @@ CONFIG_TYPEC_FUSB302=y
 CONFIG_TYPEC_UCSI=y
 CONFIG_UCSI_ACPI=y
 # CONFIG_TYPEC_TPS6598X is not set
+
+#
+# USB Type-C Multiplexer/DeMultiplexer Switch support
+#
+# CONFIG_TYPEC_MUX_PI3USB30532 is not set
+CONFIG_USB_ROLES_INTEL_XHCI=y
 # CONFIG_USB_LED_TRIG is not set
 # CONFIG_USB_ULPI_BUS is not set
+CONFIG_USB_ROLE_SWITCH=y
 # CONFIG_UWB is not set
 # CONFIG_MMC is not set
 # CONFIG_MEMSTICK is not set
@@ -2875,7 +2882,6 @@ CONFIG_SYNC_FILE=y
 # Microsoft Hyper-V guest support
 #
 CONFIG_STAGING=y
-# CONFIG_IRDA is not set
 # CONFIG_IPX is not set
 # CONFIG_NCP_FS is not set
 # CONFIG_PRISM2_USB is not set
@@ -3086,10 +3092,13 @@ CONFIG_BTT=y
 CONFIG_DAX=y
 # CONFIG_DEV_DAX is not set
 CONFIG_NVMEM=y
+
+#
+# HW tracing support
+#
 # CONFIG_STM is not set
 # CONFIG_INTEL_TH is not set
 # CONFIG_FPGA is not set
-# CONFIG_FSI is not set
 # CONFIG_UNISYS_VISORBUS is not set
 # CONFIG_SIOX is not set
 # CONFIG_SLIMBUS is not set
@@ -3532,6 +3541,7 @@ CONFIG_CRYPTO_ECHAINIV=y
 # Block modes
 #
 CONFIG_CRYPTO_CBC=y
+# CONFIG_CRYPTO_CFB is not set
 CONFIG_CRYPTO_CTR=y
 CONFIG_CRYPTO_CTS=y
 CONFIG_CRYPTO_ECB=y
@@ -3614,6 +3624,8 @@ CONFIG_CRYPTO_DES3_EDE_X86_64=y
 # CONFIG_CRYPTO_SERPENT_SSE2_X86_64 is not set
 # CONFIG_CRYPTO_SERPENT_AVX_X86_64 is not set
 # CONFIG_CRYPTO_SERPENT_AVX2_X86_64 is not set
+# CONFIG_CRYPTO_SM4 is not set
+# CONFIG_CRYPTO_SPECK is not set
 # CONFIG_CRYPTO_TEA is not set
 # CONFIG_CRYPTO_TWOFISH is not set
 # CONFIG_CRYPTO_TWOFISH_X86_64 is not set
