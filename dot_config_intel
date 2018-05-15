@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.17.0-rc3 Kernel Configuration
+# Linux/x86 4.17.0-rc5 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -2221,6 +2221,7 @@ CONFIG_DRM_I915_COMPRESS_ERROR=y
 CONFIG_DRM_I915_USERPTR=y
 # CONFIG_DRM_I915_GVT is not set
 # CONFIG_DRM_VGEM is not set
+# CONFIG_DRM_VKMS is not set
 # CONFIG_DRM_VMWGFX is not set
 # CONFIG_DRM_GMA500 is not set
 # CONFIG_DRM_UDL is not set
