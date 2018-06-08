@@ -775,6 +775,7 @@ CONFIG_PCI_QUIRKS=y
 # CONFIG_PCI_DEBUG is not set
 CONFIG_PCI_REALLOC_ENABLE_AUTO=y
 # CONFIG_PCI_STUB is not set
+# CONFIG_PCI_PF_STUB is not set
 CONFIG_PCI_ATS=y
 CONFIG_PCI_LOCKLESS_CONFIG=y
 CONFIG_PCI_IOV=y
@@ -794,7 +795,7 @@ CONFIG_HOTPLUG_PCI_ACPI=y
 #
 # DesignWare PCI Core Support
 #
-# CONFIG_PCIE_DW_PLAT is not set
+# CONFIG_PCIE_DW_PLAT_HOST is not set
 
 #
 # PCI host controller drivers
@@ -2171,6 +2172,7 @@ CONFIG_VIDEOBUF2_VMALLOC=y
 #
 # CONFIG_VIDEO_THS7303 is not set
 # CONFIG_VIDEO_M52790 is not set
+# CONFIG_VIDEO_I2C is not set
 
 #
 # Sensors used on soc_camera driver
@@ -3250,7 +3252,6 @@ CONFIG_ISO9660_FS=y
 CONFIG_JOLIET=y
 CONFIG_ZISOFS=y
 CONFIG_UDF_FS=y
-CONFIG_UDF_NLS=y
 
 #
 # DOS/FAT/NT Filesystems
