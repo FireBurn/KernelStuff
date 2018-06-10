@@ -57,7 +57,6 @@ git push
 cd /home/fireburn/Mesa
 sudo -u fireburn git fetch --all
 sudo -u fireburn git push github --all --force
-sudo -u fireburn git push github --tags
 sudo -u fireburn git push gitlab --all --force
 sudo -u fireburn git push gitlab --tags
 
