@@ -55,7 +55,7 @@ git commit -m "Git Update `date +%F-%T`"
 git push
 
 cd /home/fireburn/Mesa
-sudo -u fireburn git fetch --all
+sudo -u fireburn git fetch --all --prune
 sudo -u fireburn git push github --all --force
 sudo -u fireburn git push gitlab --all --force
 sudo -u fireburn git push gitlab --tags
