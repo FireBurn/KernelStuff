@@ -28,7 +28,7 @@ git pull
 rm -rf /lib/modules/*
 
 cd /usr/src/linux
-git fetch --all
+git fetch --all --prune
 
 updateKernel linux tip   linus/master
 updateKernel drm   drm   airlied/drm-next
