@@ -37,6 +37,8 @@ updateKernel agd5f agd5f agd5f/drm-next-4.20-wip
 
 git push github --all --force
 git push github --tags
+git push gitlab --all --force
+git push gitlab --tags
 
 cp /usr/src/agd5f/.config       /usr/src/dot_config_adg5f
 cp /usr/src/drm/.config         /usr/src/dot_config_drm
