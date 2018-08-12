@@ -9,6 +9,7 @@ function updateKernel {
     git reset --hard ${BRANCH}
     git apply ../01-enable-additional-cpu-optimizations.patch
     git apply ../02-xattr-user-prefix.patch
+    git am ../ttm.mbox
   fi
   make -j10
   make modules_install
