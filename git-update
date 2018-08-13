@@ -131,6 +131,6 @@ sudo -u fireburn git push gitlab --all --force
 sudo -u fireburn git push gitlab --tags
 
 emerge --sync --quiet
-emerge -vDuNt -j5 @world --exclude chromium
+emerge -vDuNt -j5 @world
 emerge -vDt -j5 @live-rebuild @preserved-rebuild
 eclean-dist --destructive -q
