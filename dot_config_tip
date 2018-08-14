@@ -1,10 +1,10 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.18.0-rc6 Kernel Configuration
+# Linux/x86 4.18.0 Kernel Configuration
 #
 
 #
-# Compiler: gcc (Gentoo 8.2.0) 8.2.0
+# Compiler: gcc (Gentoo 8.2.0-r2 p1.2) 8.2.0
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -1857,6 +1857,7 @@ CONFIG_SENSORS_CORETEMP=y
 # CONFIG_SENSORS_NCT6775 is not set
 # CONFIG_SENSORS_NCT7802 is not set
 # CONFIG_SENSORS_NCT7904 is not set
+# CONFIG_SENSORS_NPCM7XX is not set
 # CONFIG_SENSORS_PCF8591 is not set
 # CONFIG_PMBUS is not set
 # CONFIG_SENSORS_SHT21 is not set
@@ -3339,15 +3340,14 @@ CONFIG_NETWORK_FILESYSTEMS=y
 # CONFIG_NFSD is not set
 # CONFIG_CEPH_FS is not set
 CONFIG_CIFS=y
-# CONFIG_CIFS_STATS is not set
-# CONFIG_CIFS_WEAK_PW_HASH is not set
+# CONFIG_CIFS_STATS2 is not set
+# CONFIG_CIFS_ALLOW_INSECURE_LEGACY is not set
 # CONFIG_CIFS_UPCALL is not set
 CONFIG_CIFS_XATTR=y
 CONFIG_CIFS_POSIX=y
 CONFIG_CIFS_ACL=y
 # CONFIG_CIFS_DEBUG is not set
 CONFIG_CIFS_DFS_UPCALL=y
-CONFIG_CIFS_SMB311=y
 CONFIG_CIFS_FSCACHE=y
 # CONFIG_CODA_FS is not set
 # CONFIG_AFS_FS is not set
