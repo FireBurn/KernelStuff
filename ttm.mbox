@@ -1,15 +1,15 @@
-From patchwork Fri Aug 10 11:55:55 2018
+From patchwork Mon Aug 13 09:58:47 2018
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [v2,1/5] drm/ttm: add helper structures for bulk moves on lru list
+Subject: [v3,1/5] drm/ttm: add helper structures for bulk moves on lru list
 From: Huang Rui <ray.huang@amd.com>
-X-Patchwork-Id: 243884
-Message-Id: <1533902159-14232-2-git-send-email-ray.huang@amd.com>
+X-Patchwork-Id: 244205
+Message-Id: <1534154331-11810-2-git-send-email-ray.huang@amd.com>
 To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>
 Cc: Huang Rui <ray.huang@amd.com>,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Fri, 10 Aug 2018 19:55:55 +0800
+Date: Mon, 13 Aug 2018 17:58:47 +0800
 
 From: Christian König <christian.koenig@amd.com>
 
@@ -18,6 +18,9 @@ The list in between will be bulk moved on lru list.
 
 Signed-off-by: Christian König <christian.koenig@amd.com>
 Signed-off-by: Huang Rui <ray.huang@amd.com>
+Tested-by: Mike Lothian <mike@fireburn.co.uk>
+Acked-by: Chunming Zhou <david1.zhou@amd.com>
+Reviewed-by: Junwei Zhang <Jerry.Zhang@amd.com>
 ---
  include/drm/ttm/ttm_bo_driver.h | 28 ++++++++++++++++++++++++++++
  1 file changed, 28 insertions(+)
@@ -62,19 +65,19 @@ index 3234cc3..e4fee8e 100644
   *
   * @old: Pointer to the result and original value.
 
-From patchwork Fri Aug 10 11:55:56 2018
+From patchwork Mon Aug 13 09:58:48 2018
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [v2,
+Subject: [v3,
  2/5] drm/ttm: revise ttm_bo_move_to_lru_tail to support bulk moves
 From: Huang Rui <ray.huang@amd.com>
-X-Patchwork-Id: 243885
-Message-Id: <1533902159-14232-3-git-send-email-ray.huang@amd.com>
+X-Patchwork-Id: 244207
+Message-Id: <1534154331-11810-3-git-send-email-ray.huang@amd.com>
 To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>
 Cc: Huang Rui <ray.huang@amd.com>,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Fri, 10 Aug 2018 19:55:56 +0800
+Date: Mon, 13 Aug 2018 17:58:48 +0800
 
 From: Christian König <christian.koenig@amd.com>
 
@@ -84,6 +87,7 @@ moving together.
 
 Signed-off-by: Christian König <christian.koenig@amd.com>
 Signed-off-by: Huang Rui <ray.huang@amd.com>
+Tested-by: Mike Lothian <mike@fireburn.co.uk>
 ---
  drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c |  8 ++++----
  drivers/gpu/drm/ttm/ttm_bo.c           | 26 +++++++++++++++++++++++++-
@@ -190,18 +194,18 @@ index a01ba20..0d4eb81 100644
  /**
   * ttm_bo_lock_delayed_workqueue
 
-From patchwork Fri Aug 10 11:55:57 2018
+From patchwork Mon Aug 13 09:58:49 2018
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [v2,3/5] drm/ttm: add bulk move function on LRU
+Subject: [v3,3/5] drm/ttm: add bulk move function on LRU
 From: Huang Rui <ray.huang@amd.com>
-X-Patchwork-Id: 243888
-Message-Id: <1533902159-14232-4-git-send-email-ray.huang@amd.com>
+X-Patchwork-Id: 244208
+Message-Id: <1534154331-11810-4-git-send-email-ray.huang@amd.com>
 To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>
 Cc: Huang Rui <ray.huang@amd.com>,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Fri, 10 Aug 2018 19:55:57 +0800
+Date: Mon, 13 Aug 2018 17:58:49 +0800
 
 This function allow us to bulk move a group of BOs to the tail of their LRU.
 The positions of group of BOs are stored on the (first, last) bulk_move_pos
@@ -209,6 +213,7 @@ structure.
 
 Signed-off-by: Christian König <christian.koenig@amd.com>
 Signed-off-by: Huang Rui <ray.huang@amd.com>
+Tested-by: Mike Lothian <mike@fireburn.co.uk>
 ---
  drivers/gpu/drm/ttm/ttm_bo.c | 52 ++++++++++++++++++++++++++++++++++++++++++++
  include/drm/ttm/ttm_bo_api.h | 10 +++++++++
@@ -299,19 +304,19 @@ index 0d4eb81..8c19470 100644
   *
   * Prevent the delayed workqueue from running.
 
-From patchwork Fri Aug 10 11:55:58 2018
+From patchwork Mon Aug 13 09:58:50 2018
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [v2,
- 4/5] drm/amdgpu: use bulk moves for efficient VM LRU handling (v2)
+Subject: [v3,
+ 4/5] drm/amdgpu: use bulk moves for efficient VM LRU handling (v3)
 From: Huang Rui <ray.huang@amd.com>
-X-Patchwork-Id: 243890
-Message-Id: <1533902159-14232-5-git-send-email-ray.huang@amd.com>
+X-Patchwork-Id: 244211
+Message-Id: <1534154331-11810-5-git-send-email-ray.huang@amd.com>
 To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>
 Cc: Huang Rui <ray.huang@amd.com>,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Fri, 10 Aug 2018 19:55:58 +0800
+Date: Mon, 13 Aug 2018 17:58:50 +0800
 
 I continue to work for bulk moving that based on the proposal by Christian.
 
@@ -360,37 +365,38 @@ workaround.
 
 v2: move all BOs include idle, relocated, and moved list to the end of LRU and
 put them together.
+v3: remove unused parameter and use list_for_each_entry instead of the one with
+save entry.
 
 Signed-off-by: Christian König <christian.koenig@amd.com>
 Signed-off-by: Huang Rui <ray.huang@amd.com>
+Tested-by: Mike Lothian <mike@fireburn.co.uk>
 ---
- drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c | 75 ++++++++++++++++++++++++++--------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c | 73 ++++++++++++++++++++++++++--------
  drivers/gpu/drm/amd/amdgpu/amdgpu_vm.h |  4 ++
- 2 files changed, 63 insertions(+), 16 deletions(-)
+ 2 files changed, 61 insertions(+), 16 deletions(-)
 
 diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
-index 9c84770..81fb1ac 100644
+index 9c84770..ee1af53 100644
 --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
 +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
-@@ -268,6 +268,55 @@ void amdgpu_vm_get_pd_bo(struct amdgpu_vm *vm,
+@@ -268,6 +268,53 @@ void amdgpu_vm_get_pd_bo(struct amdgpu_vm *vm,
  }
  
  /**
 + * amdgpu_vm_move_to_lru_tail - move one list of BOs to end of LRU
 + *
-+ * @adev: amdgpu device pointer
 + * @vm: vm providing the BOs
 + * @list: the list that stored BOs
 + *
 + * Move one list of BOs to the end of LRU and update the positions.
 + */
 +static void
-+amdgpu_vm_move_to_lru_tail_by_list(struct amdgpu_device *adev,
-+				   struct amdgpu_vm *vm, struct list_head *list)
++amdgpu_vm_move_to_lru_tail_by_list(struct amdgpu_vm *vm, struct list_head *list)
 +{
-+	struct amdgpu_vm_bo_base *bo_base, *tmp;
++	struct amdgpu_vm_bo_base *bo_base;
 +
-+	list_for_each_entry_safe(bo_base, tmp, list, vm_status) {
++	list_for_each_entry(bo_base, list, vm_status) {
 +		struct amdgpu_bo *bo = bo_base->bo;
 +
 +		if (!bo->parent)
@@ -418,9 +424,9 @@ index 9c84770..81fb1ac 100644
 +	struct ttm_bo_global *glob = adev->mman.bdev.glob;
 +
 +	spin_lock(&glob->lru_lock);
-+	amdgpu_vm_move_to_lru_tail_by_list(adev, vm, &vm->idle);
-+	amdgpu_vm_move_to_lru_tail_by_list(adev, vm, &vm->relocated);
-+	amdgpu_vm_move_to_lru_tail_by_list(adev, vm, &vm->moved);
++	amdgpu_vm_move_to_lru_tail_by_list(vm, &vm->idle);
++	amdgpu_vm_move_to_lru_tail_by_list(vm, &vm->relocated);
++	amdgpu_vm_move_to_lru_tail_by_list(vm, &vm->moved);
 +	spin_unlock(&glob->lru_lock);
 +}
 +
@@ -428,7 +434,7 @@ index 9c84770..81fb1ac 100644
   * amdgpu_vm_validate_pt_bos - validate the page table BOs
   *
   * @adev: amdgpu device pointer
-@@ -286,6 +335,7 @@ int amdgpu_vm_validate_pt_bos(struct amdgpu_device *adev, struct amdgpu_vm *vm,
+@@ -286,6 +333,7 @@ int amdgpu_vm_validate_pt_bos(struct amdgpu_device *adev, struct amdgpu_vm *vm,
  {
  	struct ttm_bo_global *glob = adev->mman.bdev.glob;
  	struct amdgpu_vm_bo_base *bo_base, *tmp;
@@ -436,7 +442,7 @@ index 9c84770..81fb1ac 100644
  	int r = 0;
  
  	list_for_each_entry_safe(bo_base, tmp, &vm->evicted, vm_status) {
-@@ -295,14 +345,9 @@ int amdgpu_vm_validate_pt_bos(struct amdgpu_device *adev, struct amdgpu_vm *vm,
+@@ -295,14 +343,9 @@ int amdgpu_vm_validate_pt_bos(struct amdgpu_device *adev, struct amdgpu_vm *vm,
  			r = validate(param, bo);
  			if (r)
  				break;
@@ -452,7 +458,7 @@ index 9c84770..81fb1ac 100644
  		if (bo->tbo.type != ttm_bo_type_kernel) {
  			spin_lock(&vm->moved_lock);
  			list_move(&bo_base->vm_status, &vm->moved);
-@@ -312,18 +357,16 @@ int amdgpu_vm_validate_pt_bos(struct amdgpu_device *adev, struct amdgpu_vm *vm,
+@@ -312,18 +355,16 @@ int amdgpu_vm_validate_pt_bos(struct amdgpu_device *adev, struct amdgpu_vm *vm,
  		}
  	}
  
@@ -502,31 +508,32 @@ index 67a15d4..92725ac 100644
  
  struct amdgpu_vm_manager {
 
-From patchwork Fri Aug 10 11:55:59 2018
+From patchwork Mon Aug 13 09:58:51 2018
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Subject: [v2,5/5] drm/amdgpu: move PD/PT bos on LRU again
+Subject: [v3,5/5] drm/amdgpu: move PD/PT bos on LRU again
 From: Huang Rui <ray.huang@amd.com>
-X-Patchwork-Id: 243892
-Message-Id: <1533902159-14232-6-git-send-email-ray.huang@amd.com>
+X-Patchwork-Id: 244213
+Message-Id: <1534154331-11810-6-git-send-email-ray.huang@amd.com>
 To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>
 Cc: Huang Rui <ray.huang@amd.com>
-Date: Fri, 10 Aug 2018 19:55:59 +0800
+Date: Mon, 13 Aug 2018 17:58:51 +0800
 
 The new bulk moving functionality is ready, the overhead of moving PD/PT bos to
 LRU is fixed. So move them on LRU again.
 
 Signed-off-by: Huang Rui <ray.huang@amd.com>
+Tested-by: Mike Lothian <mike@fireburn.co.uk>
 ---
  drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
-index 81fb1ac..9f44514 100644
+index ee1af53..872ae5b 100644
 --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
 +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_vm.c
-@@ -1127,7 +1127,7 @@ int amdgpu_vm_update_directories(struct amdgpu_device *adev,
+@@ -1125,7 +1125,7 @@ int amdgpu_vm_update_directories(struct amdgpu_device *adev,
  					   struct amdgpu_vm_bo_base,
  					   vm_status);
  		bo_base->moved = false;
