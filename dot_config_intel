@@ -2249,6 +2249,7 @@ CONFIG_DRM_AMDGPU_USERPTR=y
 # Display Engine Configuration
 #
 CONFIG_DRM_AMD_DC=y
+CONFIG_DRM_AMD_DC_DCN1_0=y
 # CONFIG_DEBUG_KERNEL_DC is not set
 
 #
