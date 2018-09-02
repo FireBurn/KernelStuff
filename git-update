@@ -10,7 +10,7 @@ function updateKernel {
     git apply ../01-enable-additional-cpu-optimizations.patch
     git apply ../02-xattr-user-prefix.patch
   fi
-  git am ../ttm.mbox
+  #git am ../ttm.mbox
   make -j10
   make modules_install
   cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
