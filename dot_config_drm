@@ -3007,6 +3007,7 @@ CONFIG_RTC_DRV_CMOS=y
 #
 CONFIG_SYNC_FILE=y
 # CONFIG_SW_SYNC is not set
+# CONFIG_UDMABUF is not set
 # CONFIG_AUXDISPLAY is not set
 # CONFIG_UIO is not set
 # CONFIG_VFIO is not set
