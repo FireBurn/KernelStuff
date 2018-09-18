@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.19.0-rc3 Kernel Configuration
+# Linux/x86 4.19.0-rc4 Kernel Configuration
 #
 
 #
@@ -3053,6 +3053,7 @@ CONFIG_STAGING=y
 #
 # CONFIG_STAGING_GASKET_FRAMEWORK is not set
 # CONFIG_XIL_AXIS_FIFO is not set
+# CONFIG_EROFS_FS is not set
 CONFIG_X86_PLATFORM_DEVICES=y
 # CONFIG_ACER_WMI is not set
 # CONFIG_ACER_WIRELESS is not set
