@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.20.0-rc1 Kernel Configuration
+# Linux/x86 4.20.0-rc3 Kernel Configuration
 #
 
 #
@@ -1855,6 +1855,7 @@ CONFIG_I2C_I801=y
 # CONFIG_I2C_ISMT is not set
 # CONFIG_I2C_PIIX4 is not set
 # CONFIG_I2C_NFORCE2 is not set
+# CONFIG_I2C_NVIDIA_GPU is not set
 # CONFIG_I2C_SIS5595 is not set
 # CONFIG_I2C_SIS630 is not set
 # CONFIG_I2C_SIS96X is not set
@@ -2944,6 +2945,7 @@ CONFIG_TYPEC_TCPCI=y
 # CONFIG_TYPEC_RT1711H is not set
 CONFIG_TYPEC_FUSB302=y
 CONFIG_TYPEC_UCSI=y
+# CONFIG_UCSI_CCG is not set
 CONFIG_UCSI_ACPI=y
 # CONFIG_TYPEC_TPS6598X is not set
 
