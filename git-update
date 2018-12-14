@@ -30,15 +30,15 @@ rm -rf /lib/modules/*
 cd /usr/src/linux
 git fetch --all --prune
 
-updateKernel linux tip   linus/master
-updateKernel drm   drm   airlied/drm-next
-updateKernel intel intel intel/drm-tip
-updateKernel agd5f agd5f agd5f/drm-next-4.21-wip
-
 git push github --all --force
 git push github --tags
 git push gitlab --all --force
 git push gitlab --tags
+
+updateKernel linux tip   linus/master
+updateKernel drm   drm   airlied/drm-next
+updateKernel intel intel intel/drm-tip
+updateKernel agd5f agd5f agd5f/drm-next-4.21-wip
 
 cp /usr/src/agd5f/.config       /usr/src/dot_config_adg5f
 cp /usr/src/drm/.config         /usr/src/dot_config_drm
@@ -58,6 +58,7 @@ git push
 
 cd /home/fireburn/Mesa
 sudo -u fireburn git fetch --all --prune
+sudo -u fireburn git pull
 sudo -u fireburn git tag -d R300_DRIVER_0
 sudo -u fireburn git tag -d before_upgrade_03_01_05
 sudo -u fireburn git tag -d blended_fountain
