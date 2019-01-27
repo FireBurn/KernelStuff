@@ -130,7 +130,10 @@ sudo -u fireburn git push github --tags
 sudo -u fireburn git push gitlab --all --force
 sudo -u fireburn git push gitlab --tags
 
+cd /usr/portage
 emerge --sync --quiet
+git push gitlab --all --force
+git push github --all --force
 emerge -vDuNt -j5 @world
 emerge -vDt -j5 @live-rebuild @preserved-rebuild
 emerge --depclean -a
