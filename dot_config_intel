@@ -3381,6 +3381,7 @@ CONFIG_NVMEM=y
 # CONFIG_UNISYS_VISORBUS is not set
 # CONFIG_SIOX is not set
 # CONFIG_SLIMBUS is not set
+# CONFIG_INTERCONNECT is not set
 
 #
 # File systems
