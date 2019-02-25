@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.0.0-rc7 Kernel Configuration
+# Linux/x86 5.0.0-rc8 Kernel Configuration
 #
 
 #
@@ -1400,6 +1400,7 @@ CONFIG_EEPROM_EE1004=y
 CONFIG_INTEL_MEI=y
 CONFIG_INTEL_MEI_ME=y
 # CONFIG_INTEL_MEI_TXE is not set
+CONFIG_INTEL_MEI_HDCP=y
 # CONFIG_VMWARE_VMCI is not set
 
 #
