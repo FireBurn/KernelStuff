@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.0.0 Kernel Configuration
+# Linux/x86 5.1.0-rc1 Kernel Configuration
 #
 
 #
@@ -2483,6 +2483,7 @@ CONFIG_DRM_PANEL_BRIDGE=y
 # Display Interface Bridges
 #
 # CONFIG_DRM_ANALOGIX_ANX78XX is not set
+# CONFIG_DRM_ETNAVIV is not set
 # CONFIG_DRM_HISI_HIBMC is not set
 # CONFIG_DRM_TINYDRM is not set
 # CONFIG_DRM_LEGACY is not set
