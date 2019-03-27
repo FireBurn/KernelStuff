@@ -1519,6 +1519,7 @@ CONFIG_NET_CORE=y
 # CONFIG_IPVLAN is not set
 # CONFIG_VXLAN is not set
 # CONFIG_GENEVE is not set
+# CONFIG_GTP is not set
 # CONFIG_MACSEC is not set
 # CONFIG_NETCONSOLE is not set
 CONFIG_TUN=y
