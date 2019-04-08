@@ -1,10 +1,10 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.1.0-rc3 Kernel Configuration
+# Linux/x86 5.1.0-rc4 Kernel Configuration
 #
 
 #
-# Compiler: gcc (Gentoo 8.3.0 p1.0) 8.3.0
+# Compiler: gcc (Gentoo 8.3.0-r1 p1.1) 8.3.0
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=80300
@@ -1814,7 +1814,6 @@ CONFIG_HW_RANDOM_INTEL=y
 # CONFIG_HW_RANDOM_AMD is not set
 # CONFIG_HW_RANDOM_VIA is not set
 CONFIG_NVRAM=y
-# CONFIG_R3964 is not set
 # CONFIG_APPLICOM is not set
 # CONFIG_MWAVE is not set
 # CONFIG_RAW_DRIVER is not set
