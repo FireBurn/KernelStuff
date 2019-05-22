@@ -1,0 +1,26 @@
+commit b2a6c40fafec7c4a1d99dd21a45bfdf4727df2ae
+Author: Mike Lothian <mike@fireburn.co.uk>
+Date:   Wed May 22 01:51:55 2019 +0100
+
+    Revert "x86/build: Move _etext to actual end of .text"
+    
+    This reverts commit 392bef709659abea614abfe53cf228e7a59876a4.
+
+diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
+index 0850b5149345..4d1517022a14 100644
+--- a/arch/x86/kernel/vmlinux.lds.S
++++ b/arch/x86/kernel/vmlinux.lds.S
+@@ -141,10 +141,10 @@ SECTIONS
+ 		*(.text.__x86.indirect_thunk)
+ 		__indirect_thunk_end = .;
+ #endif
+-	} :text = 0x9090
+ 
+-	/* End of text section */
+-	_etext = .;
++		/* End of text section */
++		_etext = .;
++	} :text = 0x9090
+ 
+ 	NOTES :text :note
+ 
