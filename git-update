@@ -39,7 +39,7 @@ git push gitlab --tags
 updateKernel linux tip   linus/master
 updateKernel drm   drm   airlied/drm-next
 updateKernel intel intel intel/drm-tip
-updateKernel agd5f agd5f agd5f/drm-next-5.2-wip
+updateKernel agd5f agd5f agd5f/drm-next-5.3-wip
 
 cp /usr/src/agd5f/.config       /usr/src/dot_config_adg5f
 cp /usr/src/drm/.config         /usr/src/dot_config_drm
