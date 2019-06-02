@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Gentoo 9.1.0 p1.0) 9.1.0
+# Compiler: gcc (Gentoo 9.1.0-r1 p1.1) 9.1.0
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=90100
@@ -2497,6 +2497,8 @@ CONFIG_DRM_FBDEV_OVERALLOC=100
 # CONFIG_DRM_FBDEV_LEAK_PHYS_SMEM is not set
 # CONFIG_DRM_LOAD_EDID_FIRMWARE is not set
 CONFIG_DRM_DP_CEC=y
+CONFIG_DRM_TTM=y
+CONFIG_DRM_SCHED=y
 
 #
 # I2C encoder or helper chips
@@ -2513,13 +2515,28 @@ CONFIG_DRM_DP_CEC=y
 # end of ARM devices
 
 # CONFIG_DRM_RADEON is not set
-# CONFIG_DRM_AMDGPU is not set
+CONFIG_DRM_AMDGPU=y
+# CONFIG_DRM_AMDGPU_SI is not set
+# CONFIG_DRM_AMDGPU_CIK is not set
+CONFIG_DRM_AMDGPU_USERPTR=y
+# CONFIG_DRM_AMDGPU_GART_DEBUGFS is not set
 
 #
 # ACP (Audio CoProcessor) Configuration
 #
+# CONFIG_DRM_AMD_ACP is not set
 # end of ACP (Audio CoProcessor) Configuration
 
+#
+# Display Engine Configuration
+#
+CONFIG_DRM_AMD_DC=y
+CONFIG_DRM_AMD_DC_DCN1_0=y
+CONFIG_DRM_AMD_DC_DCN1_01=y
+# CONFIG_DEBUG_KERNEL_DC is not set
+# end of Display Engine Configuration
+
+# CONFIG_HSA_AMD is not set
 # CONFIG_DRM_NOUVEAU is not set
 CONFIG_DRM_I915=y
 CONFIG_DRM_I915_ALPHA_SUPPORT=y
