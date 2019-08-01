@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.3.0-rc1 Kernel Configuration
+# Linux/x86 5.3.0-rc2 Kernel Configuration
 #
 
 #
@@ -91,7 +91,7 @@ CONFIG_HIGH_RES_TIMERS=y
 
 # CONFIG_PREEMPT_NONE is not set
 CONFIG_PREEMPT_VOLUNTARY=y
-# CONFIG_PREEMPT_LL is not set
+# CONFIG_PREEMPT is not set
 
 #
 # CPU/Task time and stats accounting
@@ -584,7 +584,6 @@ CONFIG_FIRMWARE_MEMMAP=y
 CONFIG_DMIID=y
 # CONFIG_DMI_SYSFS is not set
 CONFIG_DMI_SCAN_MACHINE_NON_EFI_FALLBACK=y
-# CONFIG_ISCSI_IBFT_FIND is not set
 # CONFIG_FW_CFG_SYSFS is not set
 # CONFIG_GOOGLE_FIRMWARE is not set
 
