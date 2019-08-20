@@ -3220,6 +3220,7 @@ CONFIG_RTC_DRV_CMOS=y
 CONFIG_SYNC_FILE=y
 # CONFIG_SW_SYNC is not set
 # CONFIG_UDMABUF is not set
+# CONFIG_DMABUF_SELFTESTS is not set
 # end of DMABUF options
 
 # CONFIG_AUXDISPLAY is not set
