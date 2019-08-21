@@ -1,0 +1,30 @@
+From 1d9ccc969fe9b7f0fa287c52f4de5de659a013a9 Mon Sep 17 00:00:00 2001
+From: Dmytro Laktyushkin <Dmytro.Laktyushkin@amd.com>
+Date: Thu, 15 Aug 2019 12:35:39 -0400
+Subject: [PATCH] drm/amd/display: fix calc_pll_max_vco_construct
+
+This was broken by a previous change switching to cached fw_info.
+Fixed by inverting a valid bool check.
+
+Signed-off-by: Dmytro Laktyushkin <Dmytro.Laktyushkin@amd.com>
+Reviewed-by: Leo Li <sunpeng.li@amd.com>
+---
+ drivers/gpu/drm/amd/display/dc/dce/dce_clock_source.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/amd/display/dc/dce/dce_clock_source.c b/drivers/gpu/drm/amd/display/dc/dce/dce_clock_source.c
+index 990481b35682..e8b213f4807a 100644
+--- a/drivers/gpu/drm/amd/display/dc/dce/dce_clock_source.c
++++ b/drivers/gpu/drm/amd/display/dc/dce/dce_clock_source.c
+@@ -1239,7 +1239,7 @@ static bool calc_pll_max_vco_construct(
+ 			init_data->bp == NULL)
+ 		return false;
+ 
+-	if (init_data->bp->fw_info_valid)
++	if (!init_data->bp->fw_info_valid)
+ 		return false;
+ 
+ 	calc_pll_cs->ctx = init_data->ctx;
+-- 
+2.22.0
+
