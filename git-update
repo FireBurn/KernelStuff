@@ -9,7 +9,6 @@ function updateKernel {
     git reset --hard ${BRANCH}
     git apply ../01-enable-additional-cpu-optimizations.patch
     git apply ../02-xattr-user-prefix.patch
-    git apply ../03-force-bfd.patch
   fi
   make -j10
   make modules_install
