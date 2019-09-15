@@ -1,0 +1,39 @@
+diff --git a/Makefile b/Makefile
+index 23cdf1f41364..e0fa6fc10f40 100644
+--- a/Makefile
++++ b/Makefile
+@@ -400,8 +400,8 @@ HOST_LFS_CFLAGS := $(shell getconf LFS_CFLAGS 2>/dev/null)
+ HOST_LFS_LDFLAGS := $(shell getconf LFS_LDFLAGS 2>/dev/null)
+ HOST_LFS_LIBS := $(shell getconf LFS_LIBS 2>/dev/null)
+ 
+-HOSTCC       = gcc
+-HOSTCXX      = g++
++HOSTCC       = clang
++HOSTCXX      = clang++
+ KBUILD_HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 \
+ 		-fomit-frame-pointer -std=gnu89 $(HOST_LFS_CFLAGS) \
+ 		$(HOSTCFLAGS)
+@@ -410,15 +410,15 @@ KBUILD_HOSTLDFLAGS  := $(HOST_LFS_LDFLAGS) $(HOSTLDFLAGS)
+ KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
+ 
+ # Make variables (CC, etc...)
+-AS		= $(CROSS_COMPILE)as
+-LD		= $(CROSS_COMPILE)ld
+-CC		= $(CROSS_COMPILE)gcc
++AS		= $(CROSS_COMPILE)llvm-as
++LD		= $(CROSS_COMPILE)ld.lld
++CC		= $(CROSS_COMPILE)clang
+ CPP		= $(CC) -E
+-AR		= $(CROSS_COMPILE)ar
+-NM		= $(CROSS_COMPILE)nm
+-STRIP		= $(CROSS_COMPILE)strip
+-OBJCOPY		= $(CROSS_COMPILE)objcopy
+-OBJDUMP		= $(CROSS_COMPILE)objdump
++AR		= $(CROSS_COMPILE)llvm-ar
++NM		= $(CROSS_COMPILE)llvm-nm
++STRIP		= $(CROSS_COMPILE)llvm-strip
++OBJCOPY		= $(CROSS_COMPILE)llvm-objcopy
++OBJDUMP		= $(CROSS_COMPILE)llvm-objdump
+ PAHOLE		= pahole
+ LEX		= flex
+ YACC		= bison
