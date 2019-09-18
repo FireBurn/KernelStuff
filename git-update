@@ -10,7 +10,7 @@ function updateKernel {
     git apply ../01-enable-additional-cpu-optimizations.patch
     git apply ../02-xattr-user-prefix.patch
   fi
-  make -j10
+  make -j20
   make modules_install
   cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
 }
@@ -134,7 +134,7 @@ cd /usr/portage
 emerge --sync --quiet
 git push gitlab --all --force
 git push github --all --force
-emerge -vDuNt -j5 @world
-emerge -vDt -j5 @live-rebuild @preserved-rebuild
+emerge -vDuNt -j10 @world
+emerge -vDt -j10 @live-rebuild @preserved-rebuild
 emerge --depclean -a
 eclean-dist --destructive -q
