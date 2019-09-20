@@ -2168,7 +2168,6 @@ CONFIG_MFD_CORE=y
 # CONFIG_MFD_BCM590XX is not set
 # CONFIG_MFD_BD9571MWV is not set
 # CONFIG_MFD_AXP20X_I2C is not set
-# CONFIG_MFD_CROS_EC is not set
 # CONFIG_MFD_MADERA is not set
 # CONFIG_PMIC_DA903X is not set
 # CONFIG_MFD_DA9052_I2C is not set
@@ -2551,8 +2550,7 @@ CONFIG_DRM_PANEL_BRIDGE=y
 # end of Display Interface Bridges
 
 # CONFIG_DRM_ETNAVIV is not set
-# CONFIG_DRM_HISI_HIBMC is not set
-# CONFIG_DRM_TINYDRM is not set
+# CONFIG_DRM_GM12U320 is not set
 # CONFIG_DRM_VBOXVIDEO is not set
 # CONFIG_DRM_LEGACY is not set
 CONFIG_DRM_PANEL_ORIENTATION_QUIRKS=y
@@ -3224,6 +3222,7 @@ CONFIG_RTC_DRV_CMOS=y
 CONFIG_SYNC_FILE=y
 # CONFIG_SW_SYNC is not set
 # CONFIG_UDMABUF is not set
+# CONFIG_DMABUF_SELFTESTS is not set
 # end of DMABUF options
 
 # CONFIG_AUXDISPLAY is not set
@@ -3360,6 +3359,7 @@ CONFIG_INTEL_WMI_THUNDERBOLT=y
 # end of Intel Speed Select Technology interface support
 
 CONFIG_PMC_ATOM=y
+# CONFIG_MFD_CROS_EC is not set
 # CONFIG_CHROME_PLATFORMS is not set
 # CONFIG_MELLANOX_PLATFORM is not set
 CONFIG_CLKDEV_LOOKUP=y
