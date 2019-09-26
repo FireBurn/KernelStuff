@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Gentoo 9.2.0 p1) 9.2.0
+# Compiler: gcc (Gentoo 9.2.0-r1 p2) 9.2.0
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=90200
@@ -2484,6 +2484,7 @@ CONFIG_DRM_AMDGPU=y
 CONFIG_DRM_AMD_DC=y
 CONFIG_DRM_AMD_DC_DCN1_0=y
 # CONFIG_DRM_AMD_DC_DCN2_0 is not set
+CONFIG_DRM_AMD_DC_HDCP=y
 # CONFIG_DEBUG_KERNEL_DC is not set
 # end of Display Engine Configuration
 
@@ -2546,7 +2547,6 @@ CONFIG_DRM_PANEL_BRIDGE=y
 # end of Display Interface Bridges
 
 # CONFIG_DRM_ETNAVIV is not set
-# CONFIG_DRM_HISI_HIBMC is not set
 # CONFIG_DRM_GM12U320 is not set
 # CONFIG_DRM_VBOXVIDEO is not set
 # CONFIG_DRM_LEGACY is not set
@@ -3218,6 +3218,7 @@ CONFIG_RTC_DRV_CMOS=y
 CONFIG_SYNC_FILE=y
 # CONFIG_SW_SYNC is not set
 # CONFIG_UDMABUF is not set
+# CONFIG_DMABUF_SELFTESTS is not set
 # end of DMABUF options
 
 # CONFIG_AUXDISPLAY is not set

@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Gentoo 9.2.0 p1) 9.2.0
+# Compiler: gcc (Gentoo 9.2.0-r1 p2) 9.2.0
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=90200
