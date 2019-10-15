@@ -9,6 +9,11 @@ function updateKernel {
     git reset --hard ${BRANCH}
     git apply ../01-enable-additional-cpu-optimizations.patch
     git apply ../02-xattr-user-prefix.patch
+    if [[ "$dir" == "agd5f" ]]; then
+      git apply ../03-clang.patch
+    else
+      git apply ../04-bfd.patch
+    fi
   fi
   make -j20
   make modules_install
