@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: clang version 10.0.0 (/var/tmp/portage/sys-devel/clang-10.0.0.9999/work/x/y/clang-10.0.0.9999 8b9cd183623d420a80eaa1d4b75fb6ae9217ae31)
+# Compiler: clang version 10.0.0 (/var/tmp/portage/sys-devel/clang-10.0.0.9999/work/x/y/clang-10.0.0.9999 86c4707c4b8e0cd8045548d1a7fd35e37d7ccf71)
 #
 CONFIG_GCC_VERSION=0
 CONFIG_CC_IS_CLANG=y
