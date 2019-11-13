@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Gentoo 9.2.0-r1 p2) 9.2.0
+# Compiler: gcc (Gentoo 9.2.0-r2 p3) 9.2.0
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=90200
@@ -2558,7 +2558,6 @@ CONFIG_DRM_PANEL_BRIDGE=y
 #
 # Display Interface Bridges
 #
-# CONFIG_DRM_ANALOGIX_ANX6345 is not set
 # CONFIG_DRM_ANALOGIX_ANX78XX is not set
 # end of Display Interface Bridges
 
