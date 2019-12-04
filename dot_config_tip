@@ -1203,7 +1203,6 @@ CONFIG_PCIEPORTBUS=y
 CONFIG_HOTPLUG_PCI_PCIE=y
 # CONFIG_PCIEAER is not set
 CONFIG_PCIEASPM=y
-# CONFIG_PCIEASPM_DEBUG is not set
 CONFIG_PCIEASPM_DEFAULT=y
 # CONFIG_PCIEASPM_POWERSAVE is not set
 # CONFIG_PCIEASPM_POWER_SUPERSAVE is not set
@@ -1233,12 +1232,6 @@ CONFIG_HOTPLUG_PCI_ACPI=y
 #
 # PCI controller drivers
 #
-
-#
-# Cadence PCIe controllers support
-#
-# end of Cadence PCIe controllers support
-
 # CONFIG_VMD is not set
 
 #
@@ -1247,6 +1240,11 @@ CONFIG_HOTPLUG_PCI_ACPI=y
 # CONFIG_PCIE_DW_PLAT_HOST is not set
 # CONFIG_PCI_MESON is not set
 # end of DesignWare PCI Core Support
+
+#
+# Cadence PCIe controllers support
+#
+# end of Cadence PCIe controllers support
 # end of PCI controller drivers
 
 #
