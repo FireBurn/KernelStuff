@@ -3174,6 +3174,7 @@ CONFIG_SYNC_FILE=y
 # CONFIG_SW_SYNC is not set
 # CONFIG_UDMABUF is not set
 # CONFIG_DMABUF_SELFTESTS is not set
+# CONFIG_DMABUF_HEAPS is not set
 # end of DMABUF options
 
 # CONFIG_AUXDISPLAY is not set
