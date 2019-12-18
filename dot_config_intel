@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.5.0-rc1 Kernel Configuration
+# Linux/x86 5.5.0-rc2 Kernel Configuration
 #
 
 #
@@ -2075,7 +2075,6 @@ CONFIG_THERMAL_HWMON=y
 CONFIG_THERMAL_DEFAULT_GOV_STEP_WISE=y
 # CONFIG_THERMAL_DEFAULT_GOV_FAIR_SHARE is not set
 # CONFIG_THERMAL_DEFAULT_GOV_USER_SPACE is not set
-# CONFIG_THERMAL_DEFAULT_GOV_POWER_ALLOCATOR is not set
 # CONFIG_THERMAL_GOV_FAIR_SHARE is not set
 CONFIG_THERMAL_GOV_STEP_WISE=y
 # CONFIG_THERMAL_GOV_BANG_BANG is not set
@@ -2432,8 +2431,7 @@ CONFIG_DRM_AMDGPU_USERPTR=y
 # Display Engine Configuration
 #
 CONFIG_DRM_AMD_DC=y
-CONFIG_DRM_AMD_DC_DCN1_0=y
-# CONFIG_DRM_AMD_DC_DCN2_0 is not set
+CONFIG_DRM_AMD_DC_DCN=y
 CONFIG_DRM_AMD_DC_HDCP=y
 # CONFIG_DEBUG_KERNEL_DC is not set
 # end of Display Engine Configuration
