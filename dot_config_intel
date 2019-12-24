@@ -1,10 +1,10 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.5.0-rc2 Kernel Configuration
+# Linux/x86 5.5.0-rc3 Kernel Configuration
 #
 
 #
-# Compiler: gcc (Gentoo 9.2.0-r2 p3) 9.2.0
+# Compiler: gcc (Gentoo 9.2.0-r3 p4) 9.2.0
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=90200
@@ -298,12 +298,41 @@ CONFIG_IOSF_MBI=y
 CONFIG_SCHED_OMIT_FRAME_POINTER=y
 # CONFIG_HYPERVISOR_GUEST is not set
 # CONFIG_MK8 is not set
+# CONFIG_MK8SSE3 is not set
+# CONFIG_MK10 is not set
+# CONFIG_MBARCELONA is not set
+# CONFIG_MBOBCAT is not set
+# CONFIG_MJAGUAR is not set
+# CONFIG_MBULLDOZER is not set
+# CONFIG_MPILEDRIVER is not set
+# CONFIG_MSTEAMROLLER is not set
+# CONFIG_MEXCAVATOR is not set
+# CONFIG_MZEN is not set
+# CONFIG_MZEN2 is not set
 # CONFIG_MPSC is not set
-# CONFIG_MCORE2 is not set
 # CONFIG_MATOM is not set
-CONFIG_GENERIC_CPU=y
+# CONFIG_MCORE2 is not set
+# CONFIG_MNEHALEM is not set
+# CONFIG_MWESTMERE is not set
+# CONFIG_MSILVERMONT is not set
+# CONFIG_MGOLDMONT is not set
+# CONFIG_MGOLDMONTPLUS is not set
+# CONFIG_MSANDYBRIDGE is not set
+# CONFIG_MIVYBRIDGE is not set
+# CONFIG_MHASWELL is not set
+# CONFIG_MBROADWELL is not set
+# CONFIG_MSKYLAKE is not set
+# CONFIG_MSKYLAKEX is not set
+# CONFIG_MCANNONLAKE is not set
+# CONFIG_MICELAKE is not set
+# CONFIG_MCASCADELAKE is not set
+# CONFIG_GENERIC_CPU is not set
+CONFIG_MNATIVE=y
 CONFIG_X86_INTERNODE_CACHE_SHIFT=6
 CONFIG_X86_L1_CACHE_SHIFT=6
+CONFIG_X86_INTEL_USERCOPY=y
+CONFIG_X86_USE_PPRO_CHECKSUM=y
+CONFIG_X86_P6_NOP=y
 CONFIG_X86_TSC=y
 CONFIG_X86_CMPXCHG64=y
 CONFIG_X86_CMOV=y
@@ -3682,7 +3711,6 @@ CONFIG_IO_WQ=y
 # Security options
 #
 CONFIG_KEYS=y
-CONFIG_KEYS_COMPAT=y
 # CONFIG_KEYS_REQUEST_CACHE is not set
 # CONFIG_PERSISTENT_KEYRINGS is not set
 # CONFIG_BIG_KEYS is not set
@@ -4189,19 +4217,6 @@ CONFIG_TRACE_CLOCK=y
 CONFIG_TRACING_SUPPORT=y
 # CONFIG_FTRACE is not set
 # CONFIG_PROVIDE_OHCI1394_DMA_INIT is not set
-# CONFIG_KUNIT is not set
-# CONFIG_NOTIFIER_ERROR_INJECTION is not set
-# CONFIG_FAULT_INJECTION is not set
-# end of Kernel hacking
-
-#
-# Kernel Testing and Coverage
-#
-CONFIG_ARCH_HAS_KCOV=y
-CONFIG_CC_HAS_SANCOV_TRACE_PC=y
-# CONFIG_KCOV is not set
-# CONFIG_RUNTIME_TESTING_MENU is not set
-# CONFIG_MEMTEST is not set
 # CONFIG_SAMPLES is not set
 CONFIG_ARCH_HAS_DEVMEM_IS_ALLOWED=y
 # CONFIG_STRICT_DEVMEM is not set
@@ -4235,4 +4250,17 @@ CONFIG_IO_DELAY_NONE=y
 # CONFIG_UNWINDER_FRAME_POINTER is not set
 CONFIG_UNWINDER_GUESS=y
 # end of x86 Debugging
+
+#
+# Kernel Testing and Coverage
+#
+# CONFIG_KUNIT is not set
+# CONFIG_NOTIFIER_ERROR_INJECTION is not set
+# CONFIG_FAULT_INJECTION is not set
+CONFIG_ARCH_HAS_KCOV=y
+CONFIG_CC_HAS_SANCOV_TRACE_PC=y
+# CONFIG_KCOV is not set
+# CONFIG_RUNTIME_TESTING_MENU is not set
+# CONFIG_MEMTEST is not set
 # end of Kernel Testing and Coverage
+# end of Kernel hacking
