@@ -7,9 +7,13 @@ function updateKernel {
   rc=$?
   if [[ $rc != 0 ]]; then
     git reset --hard ${BRANCH}
-    git apply ../01-enable-additional-cpu-optimizations.patch
-    git apply ../02-xattr-user-prefix.patch
+    git apply ../01-enable-O3.patch
+    git apply ../02-enable-additional-cpu-optimizations.patch
+    git apply ../03-xattr-user-prefix.patch
     git apply ../04-bfd.patch
+    git apply ../05-fsync-01.patch
+    git apply ../05-fsync-02.patch
+    git apply ../05-fsync-03.patch
   fi
   make -j20
   make modules_install
