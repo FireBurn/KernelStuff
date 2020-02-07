@@ -1906,7 +1906,6 @@ CONFIG_I2C_SCMI=y
 # External I2C/SMBus adapter drivers
 #
 # CONFIG_I2C_DIOLAN_U2C is not set
-# CONFIG_I2C_PARPORT_LIGHT is not set
 # CONFIG_I2C_ROBOTFUZZ_OSIF is not set
 # CONFIG_I2C_TAOS_EVM is not set
 # CONFIG_I2C_TINY_USB is not set
