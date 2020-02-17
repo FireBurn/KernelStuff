@@ -139,7 +139,7 @@ cd /usr/portage
 emerge --sync --quiet
 git push gitlab --all --force
 git push github --all --force
-emerge -vDuNt -j10 @world --exclude chromium
+emerge -vDuNt -j10 @world
 emerge -vDt -j10 @live-rebuild @preserved-rebuild
 emerge --depclean -a
 eclean-dist --destructive -q
