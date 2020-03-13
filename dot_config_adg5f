@@ -1,13 +1,13 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.6.0-rc2 Kernel Configuration
+# Linux/x86 5.6.0-rc5 Kernel Configuration
 #
 
 #
-# Compiler: gcc (Gentoo 9.2.0-r4 p5) 9.2.0
+# Compiler: gcc (Gentoo 9.3.0 p1) 9.3.0
 #
 CONFIG_CC_IS_GCC=y
-CONFIG_GCC_VERSION=90200
+CONFIG_GCC_VERSION=90300
 CONFIG_CLANG_VERSION=0
 CONFIG_CC_CAN_LINK=y
 CONFIG_CC_HAS_ASM_GOTO=y
@@ -3213,6 +3213,7 @@ CONFIG_RTC_DRV_CMOS=y
 CONFIG_SYNC_FILE=y
 # CONFIG_SW_SYNC is not set
 # CONFIG_UDMABUF is not set
+# CONFIG_DMABUF_MOVE_NOTIFY is not set
 # CONFIG_DMABUF_SELFTESTS is not set
 # CONFIG_DMABUF_HEAPS is not set
 # end of DMABUF options
