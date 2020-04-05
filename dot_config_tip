@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Gentoo 9.3.0 p1) 9.3.0
+# Compiler: gcc (Gentoo 9.3.0 p2) 9.3.0
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=90300
@@ -3598,7 +3598,7 @@ CONFIG_UDF_FS=y
 # end of CD-ROM/DVD Filesystems
 
 #
-# DOS/FAT/NT Filesystems
+# DOS/FAT/EXFAT/NT Filesystems
 #
 CONFIG_FAT_FS=y
 # CONFIG_MSDOS_FS is not set
@@ -3606,8 +3606,10 @@ CONFIG_VFAT_FS=y
 CONFIG_FAT_DEFAULT_CODEPAGE=437
 CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"
 CONFIG_FAT_DEFAULT_UTF8=y
+CONFIG_EXFAT_FS=y
+CONFIG_EXFAT_DEFAULT_IOCHARSET="utf8"
 # CONFIG_NTFS_FS is not set
-# end of DOS/FAT/NT Filesystems
+# end of DOS/FAT/EXFAT/NT Filesystems
 
 #
 # Pseudo filesystems
