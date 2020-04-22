@@ -3242,7 +3242,8 @@ CONFIG_SYNC_FILE=y
 # CONFIG_VFIO is not set
 # CONFIG_VIRT_DRIVERS is not set
 # CONFIG_VIRTIO_MENU is not set
-# CONFIG_VDPA_MENU is not set
+# CONFIG_VDPA is not set
+CONFIG_VHOST_DPN=y
 # CONFIG_VHOST_MENU is not set
 
 #
