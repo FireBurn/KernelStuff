@@ -9,6 +9,7 @@ function updateKernel {
     git reset --hard ${BRANCH}
     git apply ../01-enable-O3.patch
     git apply ../02-enable-additional-cpu-optimizations.patch
+    git apply ../02-enable-additional-cpu-optimizations-5.7.patch
     git apply ../03-xattr-user-prefix.patch
     git apply ../03-xattr-user-prefix-r2.patch
     git apply ../04-bfd.patch
