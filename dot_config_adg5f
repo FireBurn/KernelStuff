@@ -617,11 +617,13 @@ CONFIG_EFI_RUNTIME_WRAPPERS=y
 # CONFIG_EFI_BOOTLOADER_CONTROL is not set
 # CONFIG_EFI_CAPSULE_LOADER is not set
 # CONFIG_EFI_TEST is not set
-# CONFIG_APPLE_PROPERTIES is not set
+CONFIG_APPLE_PROPERTIES=y
 # CONFIG_RESET_ATTACK_MITIGATION is not set
 # CONFIG_EFI_RCI2_TABLE is not set
 # CONFIG_EFI_DISABLE_PCI_DMA is not set
 # end of EFI (Extensible Firmware Interface) Support
+
+CONFIG_EFI_DEV_PATH_PARSER=y
 
 #
 # Tegra firmware driver
@@ -1728,6 +1730,7 @@ CONFIG_ATH10K_PCI=y
 # CONFIG_WAN is not set
 # CONFIG_VMXNET3 is not set
 # CONFIG_FUJITSU_ES is not set
+# CONFIG_USB4_NET is not set
 # CONFIG_NETDEVSIM is not set
 # CONFIG_NET_FAILOVER is not set
 # CONFIG_ISDN is not set
@@ -3553,7 +3556,7 @@ CONFIG_IRQ_REMAP=y
 # end of Performance monitor support
 
 # CONFIG_RAS is not set
-# CONFIG_USB4 is not set
+CONFIG_USB4=y
 
 #
 # Android
@@ -3563,7 +3566,8 @@ CONFIG_IRQ_REMAP=y
 
 # CONFIG_LIBNVDIMM is not set
 # CONFIG_DAX is not set
-# CONFIG_NVMEM is not set
+CONFIG_NVMEM=y
+CONFIG_NVMEM_SYSFS=y
 
 #
 # HW tracing support
