@@ -14,6 +14,7 @@ function updateKernel {
     git apply ../05-fsync-01.patch
     git apply ../05-fsync-02.patch
     git apply ../05-fsync-03.patch
+    git apply ../07-iommu-fix.patch
   fi
   make -j20
   make modules_install
