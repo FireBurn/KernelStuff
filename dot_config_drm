@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.8.0-rc2 Kernel Configuration
+# Linux/x86 5.8.0-rc6 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Gentoo 10.2.0 p1) 10.2.0"
 CONFIG_CC_IS_GCC=y
@@ -624,6 +624,8 @@ CONFIG_EFI_GENERIC_STUB_INITRD_CMDLINE_LOADER=y
 # CONFIG_EFI_DISABLE_PCI_DMA is not set
 # end of EFI (Extensible Firmware Interface) Support
 
+# CONFIG_EFI_CUSTOM_SSDT_OVERLAYS is not set
+
 #
 # Tegra firmware driver
 #
@@ -911,6 +913,8 @@ CONFIG_XFRM_USER=y
 # CONFIG_XFRM_SUB_POLICY is not set
 # CONFIG_XFRM_MIGRATE is not set
 # CONFIG_XFRM_STATISTICS is not set
+CONFIG_XFRM_AH=y
+CONFIG_XFRM_ESP=y
 CONFIG_XFRM_IPCOMP=y
 CONFIG_NET_KEY=y
 # CONFIG_NET_KEY_MIGRATE is not set
@@ -4529,6 +4533,7 @@ CONFIG_ARCH_HAS_DEBUG_VIRTUAL=y
 CONFIG_HAVE_ARCH_KASAN=y
 CONFIG_HAVE_ARCH_KASAN_VMALLOC=y
 CONFIG_CC_HAS_KASAN_GENERIC=y
+CONFIG_CC_HAS_WORKING_NOSANITIZE_ADDRESS=y
 # CONFIG_KASAN is not set
 CONFIG_KASAN_STACK=1
 # end of Memory Debugging
