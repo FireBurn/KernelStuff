@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.10.0-rc1 Kernel Configuration
+# Linux/x86 5.10.0-rc2 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Gentoo 10.2.0-r2 p3) 10.2.0"
 CONFIG_CC_IS_GCC=y
@@ -1519,15 +1519,6 @@ CONFIG_INTEL_MEI_ME=y
 # CONFIG_INTEL_MEI_TXE is not set
 CONFIG_INTEL_MEI_HDCP=y
 # CONFIG_VMWARE_VMCI is not set
-
-#
-# Intel MIC & related support
-#
-# CONFIG_INTEL_MIC_BUS is not set
-# CONFIG_SCIF_BUS is not set
-# CONFIG_VOP_BUS is not set
-# end of Intel MIC & related support
-
 # CONFIG_GENWQE is not set
 # CONFIG_ECHO is not set
 # CONFIG_MISC_ALCOR_PCI is not set
