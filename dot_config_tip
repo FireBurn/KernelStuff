@@ -3880,7 +3880,6 @@ CONFIG_IRQ_REMAP=y
 #
 # IRQ chip support
 #
-# CONFIG_MST_IRQ is not set
 # end of IRQ chip support
 
 # CONFIG_IPACK_BUS is not set
