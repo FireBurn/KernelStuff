@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.10.0-rc2 Kernel Configuration
+# Linux/x86 5.10.0-rc3 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Gentoo 10.2.0-r3 p4) 10.2.0"
 CONFIG_CC_IS_GCC=y
@@ -2869,7 +2869,6 @@ CONFIG_DRM_AMDGPU_USERPTR=y
 #
 CONFIG_DRM_AMD_DC=y
 CONFIG_DRM_AMD_DC_DCN=y
-# CONFIG_DRM_AMD_DC_DCN3_0 is not set
 CONFIG_DRM_AMD_DC_HDCP=y
 # CONFIG_DRM_AMD_DC_SI is not set
 # end of Display Engine Configuration
@@ -3853,7 +3852,6 @@ CONFIG_IRQ_REMAP=y
 #
 # IRQ chip support
 #
-# CONFIG_MST_IRQ is not set
 # end of IRQ chip support
 
 # CONFIG_IPACK_BUS is not set
