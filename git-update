@@ -11,10 +11,7 @@ function updateKernel {
     git apply ../02-enable-additional-cpu-optimizations-5.8.patch
     git apply ../03-xattr-user-prefix-r2.patch
     git apply ../04-bfd-r2.patch
-    git apply ../05-fsync-01.patch
-    git apply ../05-fsync-02.patch
-    git apply ../05-fsync-03.patch
-    git apply ../07-iommu-fix.patch
+    git apply ../05-fsync.patch
   fi
   make -j20
   make modules_install
