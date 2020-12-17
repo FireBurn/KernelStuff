@@ -2316,7 +2316,6 @@ CONFIG_LPC_SCH=y
 # CONFIG_MFD_RC5T583 is not set
 # CONFIG_MFD_SEC_CORE is not set
 # CONFIG_MFD_SI476X_CORE is not set
-# CONFIG_MFD_SL28CPLD is not set
 # CONFIG_MFD_SM501 is not set
 # CONFIG_MFD_SKY81452 is not set
 # CONFIG_ABX500_CORE is not set
@@ -3326,6 +3325,12 @@ CONFIG_USB_HID=y
 #
 # CONFIG_INTEL_ISH_HID is not set
 # end of Intel ISH HID support
+
+#
+# AMD SFH HID Support
+#
+# CONFIG_AMD_SFH_HID is not set
+# end of AMD SFH HID Support
 # end of HID support
 
 CONFIG_USB_OHCI_LITTLE_ENDIAN=y
@@ -3845,11 +3850,6 @@ CONFIG_IRQ_REMAP=y
 # Amlogic SoC drivers
 #
 # end of Amlogic SoC drivers
-
-#
-# Aspeed SoC drivers
-#
-# end of Aspeed SoC drivers
 
 #
 # Broadcom SoC drivers
