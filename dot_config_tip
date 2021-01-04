@@ -4544,7 +4544,6 @@ CONFIG_SYMBOLIC_ERRNAME=y
 # Compile-time checks and compiler options
 #
 # CONFIG_DEBUG_INFO is not set
-# CONFIG_ENABLE_MUST_CHECK is not set
 CONFIG_FRAME_WARN=2048
 CONFIG_STRIP_ASM_SYMS=y
 # CONFIG_READABLE_ASM is not set
