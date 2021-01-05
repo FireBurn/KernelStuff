@@ -451,7 +451,7 @@ CONFIG_HOTPLUG_CPU=y
 # CONFIG_LEGACY_VSYSCALL_XONLY is not set
 CONFIG_LEGACY_VSYSCALL_NONE=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all psmouse.synaptics_intertouch=1 mitigations=off mds=off pti=off spectre_v2=off l1tf=off nospec_store_bypass_disable printk.devkmsg=on"
+CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all psmouse.synaptics_intertouch=1 mitigations=off mds=off pti=off spectre_v2=off l1tf=off nospec_store_bypass_disable printk.devkmsg=on amdgpu.resize_bar=1"
 # CONFIG_CMDLINE_OVERRIDE is not set
 CONFIG_MODIFY_LDT_SYSCALL=y
 CONFIG_HAVE_LIVEPATCH=y
