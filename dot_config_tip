@@ -455,7 +455,7 @@ CONFIG_HOTPLUG_CPU=y
 # CONFIG_LEGACY_VSYSCALL_XONLY is not set
 CONFIG_LEGACY_VSYSCALL_NONE=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all psmouse.synaptics_intertouch=1 mitigations=off mds=off pti=off spectre_v2=off l1tf=off nospec_store_bypass_disable printk.devkmsg=on"
+CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all psmouse.synaptics_intertouch=1 mitigations=off mds=off pti=off spectre_v2=off l1tf=off nospec_store_bypass_disable printk.devkmsg=on i915.enable_guc=3"
 # CONFIG_CMDLINE_OVERRIDE is not set
 CONFIG_MODIFY_LDT_SYSCALL=y
 CONFIG_HAVE_LIVEPATCH=y
@@ -1401,7 +1401,7 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
 # Firmware loader
 #
 CONFIG_FW_LOADER=y
-CONFIG_EXTRA_FIRMWARE="intel-ucode/06-5e-03 i915/skl_dmc_ver1_27.bin i915/skl_guc_33.0.0.bin i915/skl_huc_2.0.0.bin amdgpu/tonga_ce.bin amdgpu/tonga_mc.bin amdgpu/tonga_me.bin amdgpu/tonga_mec2.bin amdgpu/tonga_mec.bin amdgpu/tonga_pfp.bin amdgpu/tonga_rlc.bin amdgpu/tonga_sdma1.bin amdgpu/tonga_sdma.bin amdgpu/tonga_smc.bin amdgpu/tonga_uvd.bin amdgpu/tonga_vce.bin qca/nvm_usb_00000302.bin qca/rampatch_usb_00000302.bin ath10k/QCA6174/hw3.0/board-2.bin ath10k/QCA6174/hw3.0/firmware-6.bin ctefx.bin ctspeq.bin regulatory.db regulatory.db.p7s"
+CONFIG_EXTRA_FIRMWARE="intel-ucode/06-5e-03 i915/skl_dmc_ver1_27.bin i915/skl_guc_49.0.1.bin i915/skl_huc_2.0.0.bin amdgpu/tonga_ce.bin amdgpu/tonga_mc.bin amdgpu/tonga_me.bin amdgpu/tonga_mec2.bin amdgpu/tonga_mec.bin amdgpu/tonga_pfp.bin amdgpu/tonga_rlc.bin amdgpu/tonga_sdma1.bin amdgpu/tonga_sdma.bin amdgpu/tonga_smc.bin amdgpu/tonga_uvd.bin amdgpu/tonga_vce.bin qca/nvm_usb_00000302.bin qca/rampatch_usb_00000302.bin ath10k/QCA6174/hw3.0/board-2.bin ath10k/QCA6174/hw3.0/firmware-6.bin ctefx.bin ctspeq.bin regulatory.db regulatory.db.p7s"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 # CONFIG_FW_LOADER_USER_HELPER is not set
 # CONFIG_FW_LOADER_COMPRESS is not set
