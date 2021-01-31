@@ -3527,6 +3527,10 @@ CONFIG_LEDS_CLASS_MULTICOLOR=y
 # CONFIG_LEDS_TI_LMU_COMMON is not set
 
 #
+# Flash and Torch LED drivers
+#
+
+#
 # LED Triggers
 #
 CONFIG_LEDS_TRIGGERS=y
