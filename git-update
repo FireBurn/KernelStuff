@@ -40,6 +40,8 @@ git push github --all --force
 git push github --tags
 git push gitlab --all --force
 git push gitlab --tags
+git push freedesktop --all --force
+git push freedesktop --tags
 
 updateKernel agd5f agd5f agd5f/drm-next
 updateKernel linux tip   linus/master
