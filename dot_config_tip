@@ -1403,9 +1403,11 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
 # Firmware loader
 #
 CONFIG_FW_LOADER=y
+CONFIG_FW_LOADER_PAGED_BUF=y
 CONFIG_EXTRA_FIRMWARE="intel-ucode/06-5e-03 i915/skl_dmc_ver1_27.bin i915/skl_guc_49.0.1.bin i915/skl_huc_2.0.0.bin amdgpu/tonga_ce.bin amdgpu/tonga_mc.bin amdgpu/tonga_me.bin amdgpu/tonga_mec2.bin amdgpu/tonga_mec.bin amdgpu/tonga_pfp.bin amdgpu/tonga_rlc.bin amdgpu/tonga_sdma1.bin amdgpu/tonga_sdma.bin amdgpu/tonga_smc.bin amdgpu/tonga_uvd.bin amdgpu/tonga_vce.bin qca/nvm_usb_00000302.bin qca/rampatch_usb_00000302.bin ath10k/QCA6174/hw3.0/board-2.bin ath10k/QCA6174/hw3.0/firmware-6.bin ctefx.bin ctspeq.bin regulatory.db regulatory.db.p7s"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
-# CONFIG_FW_LOADER_USER_HELPER is not set
+CONFIG_FW_LOADER_USER_HELPER=y
+# CONFIG_FW_LOADER_USER_HELPER_FALLBACK is not set
 # CONFIG_FW_LOADER_COMPRESS is not set
 CONFIG_FW_CACHE=y
 # end of Firmware loader
@@ -2075,6 +2077,7 @@ CONFIG_POWER_SUPPLY_HWMON=y
 # CONFIG_BATTERY_MAX17042 is not set
 # CONFIG_CHARGER_MAX8903 is not set
 # CONFIG_CHARGER_LP8727 is not set
+# CONFIG_CHARGER_LTC4162L is not set
 # CONFIG_CHARGER_BQ2415X is not set
 # CONFIG_CHARGER_SMB347 is not set
 # CONFIG_BATTERY_GAUGE_LTC2941 is not set
@@ -2101,6 +2104,7 @@ CONFIG_HWMON=y
 # CONFIG_SENSORS_ADT7462 is not set
 # CONFIG_SENSORS_ADT7470 is not set
 # CONFIG_SENSORS_ADT7475 is not set
+# CONFIG_SENSORS_AHT10 is not set
 # CONFIG_SENSORS_AS370 is not set
 # CONFIG_SENSORS_ASC7621 is not set
 # CONFIG_SENSORS_AXI_FAN_CONTROL is not set
@@ -2157,6 +2161,7 @@ CONFIG_SENSORS_CORETEMP=y
 # CONFIG_SENSORS_MAX31790 is not set
 # CONFIG_SENSORS_MCP3021 is not set
 # CONFIG_SENSORS_TC654 is not set
+# CONFIG_SENSORS_TPS23861 is not set
 # CONFIG_SENSORS_MR75203 is not set
 # CONFIG_SENSORS_LM63 is not set
 # CONFIG_SENSORS_LM73 is not set
@@ -3716,7 +3721,6 @@ CONFIG_STAGING=y
 CONFIG_X86_PLATFORM_DEVICES=y
 CONFIG_ACPI_WMI=y
 # CONFIG_WMI_BMOF is not set
-# CONFIG_ALIENWARE_WMI is not set
 # CONFIG_HUAWEI_WMI is not set
 # CONFIG_INTEL_WMI_SBL_FW_UPDATE is not set
 CONFIG_INTEL_WMI_THUNDERBOLT=y
@@ -3732,18 +3736,21 @@ CONFIG_INTEL_WMI_THUNDERBOLT=y
 # CONFIG_ASUS_WIRELESS is not set
 # CONFIG_ASUS_WMI is not set
 # CONFIG_EEEPC_LAPTOP is not set
-# CONFIG_DCDBAS is not set
+CONFIG_X86_PLATFORM_DRIVERS_DELL=y
+CONFIG_ALIENWARE_WMI=y
+CONFIG_DCDBAS=y
+CONFIG_DELL_LAPTOP=y
+CONFIG_DELL_RBU=y
+CONFIG_DELL_RBTN=y
 CONFIG_DELL_SMBIOS=y
 CONFIG_DELL_SMBIOS_WMI=y
-CONFIG_DELL_LAPTOP=y
-# CONFIG_DELL_RBTN is not set
-# CONFIG_DELL_RBU is not set
-# CONFIG_DELL_SMO8800 is not set
+CONFIG_DELL_SMBIOS_SMM=y
+CONFIG_DELL_SMO8800=y
 CONFIG_DELL_WMI=y
-# CONFIG_DELL_WMI_SYSMAN is not set
+CONFIG_DELL_WMI_AIO=y
 CONFIG_DELL_WMI_DESCRIPTOR=y
-# CONFIG_DELL_WMI_AIO is not set
-# CONFIG_DELL_WMI_LED is not set
+CONFIG_DELL_WMI_LED=y
+CONFIG_DELL_WMI_SYSMAN=y
 # CONFIG_AMILO_RFKILL is not set
 # CONFIG_FUJITSU_LAPTOP is not set
 # CONFIG_FUJITSU_TABLET is not set
@@ -3752,9 +3759,7 @@ CONFIG_DELL_WMI_DESCRIPTOR=y
 # CONFIG_HP_WIRELESS is not set
 # CONFIG_HP_WMI is not set
 # CONFIG_IBM_RTL is not set
-# CONFIG_IDEAPAD_LAPTOP is not set
 # CONFIG_SENSORS_HDAPS is not set
-# CONFIG_THINKPAD_ACPI is not set
 # CONFIG_INTEL_ATOMISP2_PM is not set
 # CONFIG_INTEL_HID_EVENT is not set
 # CONFIG_INTEL_MENLOW is not set
@@ -3788,9 +3793,6 @@ CONFIG_DELL_WMI_DESCRIPTOR=y
 
 # CONFIG_INTEL_UNCORE_FREQ_CONTROL is not set
 # CONFIG_INTEL_PMC_CORE is not set
-# CONFIG_INTEL_PMT_CLASS is not set
-# CONFIG_INTEL_PMT_TELEMETRY is not set
-# CONFIG_INTEL_PMT_CRASHLOG is not set
 # CONFIG_INTEL_PUNIT_IPC is not set
 # CONFIG_INTEL_SCU_PCI is not set
 # CONFIG_INTEL_SCU_PLATFORM is not set
@@ -3808,6 +3810,7 @@ CONFIG_COMMON_CLK=y
 # CONFIG_COMMON_CLK_SI544 is not set
 # CONFIG_COMMON_CLK_CDCE706 is not set
 # CONFIG_COMMON_CLK_CS2000_CP is not set
+# CONFIG_XILINX_VCU is not set
 # CONFIG_HWSPINLOCK is not set
 
 #
@@ -3895,7 +3898,6 @@ CONFIG_IRQ_REMAP=y
 #
 # Xilinx SoC drivers
 #
-# CONFIG_XILINX_VCU is not set
 # end of Xilinx SoC drivers
 # end of SOC (System On Chip) specific Drivers
 
