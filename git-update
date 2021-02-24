@@ -1,7 +1,14 @@
 #!/bin/bash
 
 function updateKernel {
-  DIR=$1; IMG=$2; BRANCH=$3
+  DIR=$1; IMG=$2; BRANCH=$3 LLVM=$4
+
+  if [[ ${LLVM} != "0" ]]; then
+    USE_LLVM="LLVM=1 LLVM_IAS=1"
+  else
+    USE_LLVM=""
+  fi
+
   cd /usr/src/${DIR}
   git reset --merge ${BRANCH}
   rc=$?
@@ -16,8 +23,8 @@ function updateKernel {
     git apply ../08-ntfs3.patch
     git apply ../09-ttm.patch
   fi
-  make -j20
-  make modules_install
+  make $USE_LLVM -j20
+  make $USE_LLVM modules_install
   cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
 }
 
@@ -43,9 +50,9 @@ git push gitlab --tags
 git push freedesktop --all --force
 git push freedesktop --tags
 
-updateKernel agd5f agd5f agd5f/drm-next
-updateKernel linux tip   linus/master
-updateKernel drm   drm   airlied/drm-next
+updateKernel agd5f agd5f agd5f/drm-next		0
+updateKernel linux tip   linus/master		1
+updateKernel drm   drm   airlied/drm-next	0
 
 cp /usr/src/agd5f/.config       /usr/src/dot_config_adg5f
 cp /usr/src/drm/.config         /usr/src/dot_config_drm
