@@ -2877,6 +2877,7 @@ CONFIG_DRM_AMD_DC=y
 CONFIG_DRM_AMD_DC_DCN=y
 CONFIG_DRM_AMD_DC_HDCP=y
 # CONFIG_DRM_AMD_DC_SI is not set
+# CONFIG_DRM_AMD_SECURE_DISPLAY is not set
 # end of Display Engine Configuration
 
 CONFIG_HSA_AMD=y
