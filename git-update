@@ -50,7 +50,7 @@ git push gitlab --tags
 git push freedesktop --all --force
 git push freedesktop --tags
 
-updateKernel agd5f agd5f agd5f/drm-next		0
+updateKernel agd5f agd5f agd5f/drm-next		1
 updateKernel linux tip   linus/master		1
 updateKernel drm   drm   airlied/drm-next	1
 
