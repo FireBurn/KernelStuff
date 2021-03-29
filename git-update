@@ -19,9 +19,6 @@ function updateKernel {
     git apply ../03-xattr-user-prefix-r2.patch
     git apply ../04-bfd-r2.patch
     git apply ../05-fsync.patch
-    git apply ../06-thunk.patch
-    git apply ../08-ntfs3.patch
-    git apply ../09-ttm.patch
   fi
   make $USE_LLVM -j20
   make $USE_LLVM modules_install
