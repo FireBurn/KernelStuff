@@ -12,15 +12,14 @@ function updateKernel {
   fi
 
   cd /usr/src/${DIR}
-  git reset --merge ${BRANCH}
+  git rebase ${BRANCH}
   rc=$?
   if [[ $rc != 0 ]]; then
     git reset --hard ${BRANCH}
-    git apply ../01-enable-O3-5.7.patch
-    git apply ../02-enable-additional-cpu-optimizations-5.8.patch
-    git apply ../03-xattr-user-prefix-r2.patch
-    git apply ../04-bfd-r2.patch
-    git apply ../05-futex2.patch
+    git am ../01-enable-O3-5.7.patch
+    git am ../02-enable-additional-cpu-optimizations-5.8.patch
+    git am ../03-xattr-user-prefix-r2.patch
+    git am ../04-ntfs3.patch
   fi
   make $USE_LLVM -j20
   make $USE_LLVM modules_install

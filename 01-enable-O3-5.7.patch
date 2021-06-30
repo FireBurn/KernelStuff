@@ -1,8 +1,17 @@
+From f6114c405fc809cf852c9bd8cf1021f7518fee5e Mon Sep 17 00:00:00 2001
+From: Mike Lothian <mike@fireburn.co.uk>
+Date: Wed, 30 Jun 2021 01:12:31 +0100
+Subject: [PATCH 03/20] Allow O3 opimisations
+
+---
+ init/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
+
 diff --git a/init/Kconfig b/init/Kconfig
-index 9278a603d399..f8978090f83a 100644
+index 1ea12c64e4c9..127df1ae15dd 100644
 --- a/init/Kconfig
 +++ b/init/Kconfig
-@@ -1240,7 +1240,6 @@ config CC_OPTIMIZE_FOR_PERFORMANCE
+@@ -1333,7 +1333,6 @@ config CC_OPTIMIZE_FOR_PERFORMANCE
  
  config CC_OPTIMIZE_FOR_PERFORMANCE_O3
  	bool "Optimize more for performance (-O3)"
@@ -10,3 +19,6 @@ index 9278a603d399..f8978090f83a 100644
  	help
  	  Choosing this option will pass "-O3" to your compiler to optimize
  	  the kernel yet more for performance.
+-- 
+2.32.0
+
