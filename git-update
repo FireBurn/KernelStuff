@@ -15,6 +15,8 @@ function updateKernel {
   git rebase ${BRANCH}
   rc=$?
   if [[ $rc != 0 ]]; then
+    git rebase --abort
+    git am --abort
     git reset --hard ${BRANCH}
     git am ../01-enable-O3-5.7.patch
     git am ../02-enable-additional-cpu-optimizations-5.8.patch
