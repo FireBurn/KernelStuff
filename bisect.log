@@ -1,0 +1,7 @@
+git bisect start
+# bad: [3f39baa6d208790b4da88fb13c9528f3c9709d55] This patch adds support for a restricted user-controlled namespace on tmpfs filesystem used to house PaX flags.  The namespace must be of the form user.pax.* and its value cannot exceed a size of 8 bytes.
+git bisect bad 3f39baa6d208790b4da88fb13c9528f3c9709d55
+# good: [99facff49d5e0c66ca4b048990db66e03cda6d7e] drm/amdgpu/smu7: split PM logging start and sampling
+git bisect good 99facff49d5e0c66ca4b048990db66e03cda6d7e
+# bad: [544dcd74b7093ad4befac99b11d90331aa73348e] drm/amd/pm: Fix a bug in semaphore double-lock
+git bisect bad 544dcd74b7093ad4befac99b11d90331aa73348e

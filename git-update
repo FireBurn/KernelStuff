@@ -22,6 +22,7 @@ function updateKernel {
     git am ../02-enable-additional-cpu-optimizations-5.8.patch
     git am ../03-xattr-user-prefix-r2.patch
 #    git am ../04-ntfs3.patch
+    git am ../05-amdgpu-revert.patch
   fi
   make $USE_LLVM -j20
   make $USE_LLVM modules_install
