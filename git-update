@@ -23,7 +23,7 @@ function updateKernel {
     git am ../03-xattr-user-prefix-r2.patch
 #    git am ../04-ntfs3.patch
   fi
-  make $USE_LLVM -j20
+  make $USE_LLVM -j16
   make $USE_LLVM modules_install
   cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
 }
@@ -147,7 +147,7 @@ cd /usr/portage
 emerge --sync --quiet
 git push gitlab --all --force
 git push github --all --force
-emerge -vDuNt -j1 @world
+emerge -vDuNt -j2 @world
 emerge -vDt -j2 @live-rebuild @preserved-rebuild
 emerge --depclean -a
 eclean-dist --destructive -q
