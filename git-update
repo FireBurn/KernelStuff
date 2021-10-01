@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PATH=/usr/lib/llvm/12/bin:$PATH
+export PATH=/usr/lib/llvm/13/bin:$PATH
 
 function updateKernel {
   DIR=$1; IMG=$2; BRANCH=$3 LLVM=$4
