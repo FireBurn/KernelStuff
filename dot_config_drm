@@ -332,7 +332,7 @@ CONFIG_X86_FEATURE_NAMES=y
 # CONFIG_X86_X2APIC is not set
 # CONFIG_X86_MPPARSE is not set
 # CONFIG_GOLDFISH is not set
-# CONFIG_RETPOLINE is not set
+CONFIG_RETPOLINE=y
 # CONFIG_X86_CPU_RESCTRL is not set
 # CONFIG_X86_EXTENDED_PLATFORM is not set
 # CONFIG_X86_INTEL_LPSS is not set
@@ -484,7 +484,7 @@ CONFIG_HOTPLUG_CPU=y
 # CONFIG_LEGACY_VSYSCALL_XONLY is not set
 CONFIG_LEGACY_VSYSCALL_NONE=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all mitigations=off mds=off pti=off spectre_v2=off l1tf=off nospec_store_bypass_disable printk.devkmsg=on amdgpu.resize_bar=1 amd_pmc.dyndbg='+p' amd_pmc.enable_stb=1"
+CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all printk.devkmsg=on amd_pmc.dyndbg='+p' amd_pmc.enable_stb=1"
 # CONFIG_CMDLINE_OVERRIDE is not set
 CONFIG_MODIFY_LDT_SYSCALL=y
 # CONFIG_STRICT_SIGALTSTACK_SIZE is not set
@@ -1522,7 +1522,7 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
 #
 CONFIG_FW_LOADER=y
 CONFIG_FW_LOADER_PAGED_BUF=y
-CONFIG_EXTRA_FIRMWARE="amdgpu/green_sardine_asd.bin amdgpu/green_sardine_ce.bin amdgpu/green_sardine_dmcub.bin amdgpu/green_sardine_me.bin amdgpu/green_sardine_mec2.bin amdgpu/green_sardine_mec.bin amdgpu/green_sardine_pfp.bin amdgpu/green_sardine_rlc.bin amdgpu/green_sardine_sdma.bin amdgpu/green_sardine_ta.bin amdgpu/green_sardine_vcn.bin amdgpu/navy_flounder_ce.bin amdgpu/navy_flounder_dmcub.bin amdgpu/navy_flounder_me.bin amdgpu/navy_flounder_mec2.bin amdgpu/navy_flounder_mec.bin amdgpu/navy_flounder_pfp.bin amdgpu/navy_flounder_rlc.bin amdgpu/navy_flounder_sdma.bin amdgpu/navy_flounder_smc.bin amdgpu/navy_flounder_sos.bin amdgpu/navy_flounder_ta.bin amdgpu/navy_flounder_vcn.bin mediatek/WIFI_MT7961_patch_mcu_1_2_hdr.bin mediatek/WIFI_RAM_CODE_MT7961_1.bin mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin regulatory.db regulatory.db.p7s"
+CONFIG_EXTRA_FIRMWARE="amd-ucode/microcode_amd_fam19h.bin amdgpu/green_sardine_asd.bin amdgpu/green_sardine_ce.bin amdgpu/green_sardine_dmcub.bin amdgpu/green_sardine_me.bin amdgpu/green_sardine_mec2.bin amdgpu/green_sardine_mec.bin amdgpu/green_sardine_pfp.bin amdgpu/green_sardine_rlc.bin amdgpu/green_sardine_sdma.bin amdgpu/green_sardine_ta.bin amdgpu/green_sardine_vcn.bin amdgpu/navy_flounder_ce.bin amdgpu/navy_flounder_dmcub.bin amdgpu/navy_flounder_me.bin amdgpu/navy_flounder_mec2.bin amdgpu/navy_flounder_mec.bin amdgpu/navy_flounder_pfp.bin amdgpu/navy_flounder_rlc.bin amdgpu/navy_flounder_sdma.bin amdgpu/navy_flounder_smc.bin amdgpu/navy_flounder_sos.bin amdgpu/navy_flounder_ta.bin amdgpu/navy_flounder_vcn.bin mediatek/WIFI_MT7961_patch_mcu_1_2_hdr.bin mediatek/WIFI_RAM_CODE_MT7961_1.bin mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin regulatory.db regulatory.db.p7s"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 CONFIG_FW_LOADER_USER_HELPER=y
 # CONFIG_FW_LOADER_USER_HELPER_FALLBACK is not set
