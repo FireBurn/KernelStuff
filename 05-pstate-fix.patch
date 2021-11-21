@@ -1,0 +1,27 @@
+From 795e9da5cd4d447c3528d83b68f7086b33348f48 Mon Sep 17 00:00:00 2001
+From: Mike Lothian <mike@fireburn.co.uk>
+Date: Sun, 21 Nov 2021 23:04:41 +0000
+Subject: [PATCH] Pstate Fix
+
+---
+ arch/x86/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 95dd1ee01546..bdfcf155f48e 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -1028,8 +1028,8 @@ config SCHED_MC
+ 
+ config SCHED_MC_PRIO
+ 	bool "CPU core priorities scheduler support"
+-	depends on SCHED_MC && CPU_SUP_INTEL
+-	select X86_INTEL_PSTATE
++	depends on SCHED_MC && CPU_SUP_AMD
++	select X86_AMD_PSTATE
+ 	select CPU_FREQ
+ 	default y
+ 	help
+-- 
+2.34.0
+
