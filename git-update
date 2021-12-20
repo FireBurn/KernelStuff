@@ -22,7 +22,6 @@ function updateKernel {
     git am ../02-enable-additional-cpu-optimizations-5.8.patch
     git am ../03-xattr-user-prefix-r2.patch
     git am ../04-amd-pstate.patch
-    git am ../05-pmc-fix.patch
     git am ../06-mt76.patch
   fi
   make $USE_LLVM -j16
