@@ -1,0 +1,17 @@
+Subject: Re: [PATCH] mt76: mt7921e: fix possible probe failure after reboot
+
+Hi
+
+I get a BUG and the kernel resuses to boot with this patch when mt76 is compiled into the kernel
+
+https://bugzilla.kernel.org/show_bug.cgi?id=214557
+
+I don't see this issue when mt76 is compiled as a module
+
+My .config is at https://github.com/FireBurn/KernelStuff/blob/master/dot_config_tip
+
+Let me know if you'd like any more info
+
+Cheers
+
+Mike
