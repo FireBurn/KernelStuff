@@ -1,0 +1,31 @@
+From f786c85baac0ee93730998fa52cbd588c9f39286 Mon Sep 17 00:00:00 2001
+From: Mike Lothian <mike@fireburn.co.uk>
+Date: Tue, 25 Jan 2022 14:52:00 +0000
+Subject: [PATCH] Remove excessive bluetooth warning
+
+---
+ net/bluetooth/hci_event.c | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/net/bluetooth/hci_event.c b/net/bluetooth/hci_event.c
+index fc30f4c03d29..aa57fccd2e47 100644
+--- a/net/bluetooth/hci_event.c
++++ b/net/bluetooth/hci_event.c
+@@ -6818,14 +6818,6 @@ static void hci_event_func(struct hci_dev *hdev, u8 event, struct sk_buff *skb,
+ 		return;
+ 	}
+ 
+-	/* Just warn if the length is over max_len size it still be
+-	 * possible to partially parse the event so leave to callback to
+-	 * decide if that is acceptable.
+-	 */
+-	if (skb->len > ev->max_len)
+-		bt_dev_warn(hdev, "unexpected event 0x%2.2x length: %u > %u",
+-			    event, skb->len, ev->max_len);
+-
+ 	data = hci_ev_skb_pull(hdev, skb, event, ev->min_len);
+ 	if (!data)
+ 		return;
+-- 
+2.35.0
+

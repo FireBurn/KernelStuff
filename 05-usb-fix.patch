@@ -1,0 +1,192 @@
+From patchwork Mon Jan 24 09:02:27 2022
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Patchwork-Submitter: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+X-Patchwork-Id: 12721695
+Return-Path: <linux-usb-owner@kernel.org>
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	aws-us-west-2-korg-lkml-1.web.codeaurora.org
+Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6692DC433EF
+	for <linux-usb@archiver.kernel.org>; Mon, 24 Jan 2022 09:02:23 +0000 (UTC)
+Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
+        id S242579AbiAXJCW (ORCPT <rfc822;linux-usb@archiver.kernel.org>);
+        Mon, 24 Jan 2022 04:02:22 -0500
+Received: from mga11.intel.com ([192.55.52.93]:18482 "EHLO mga11.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S236415AbiAXJCS (ORCPT <rfc822;linux-usb@vger.kernel.org>);
+        Mon, 24 Jan 2022 04:02:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1643014938; x=1674550938;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=xYrOP1OAMgsMLA79KoIvNZiMnjyMiV1Jl9L/a5hB97M=;
+  b=Zb2RW6kHWyMw8+u8Yz5gpq4V3kFK5yplamUkJKr5m0Y+hXsPq4EaYeHd
+   IHH2VDz97yltfvS98hLS2OKe1of3DQ8oZMESyjVhiNakamViLrmH0f3+v
+   uKqTbGsDHBhVojkchKw77b7fA8rRtTN3FRVPXUu5xyxOlmXNwGZWZabm5
+   OemCyL/VUS3O6PNzDB6lTw7kfdwhO0lXJVq98xe3WJpf8hYsr5BpOQtX9
+   TztZUhsY54YX/5Pqk5g1OvUMAuKdzoK6mjUi8V0eeXbNH/DBapArkZ6RP
+   wyYEhzpNOT5oNZ6TCtDgJ04xGFkyiElMm7KS3O7iCbuaHjVHgpy/EOjHs
+   A==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10236"; a="243596449"
+X-IronPort-AV: E=Sophos;i="5.88,311,1635231600";
+   d="scan'208";a="243596449"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Jan 2022 01:02:18 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.88,311,1635231600";
+   d="scan'208";a="673561138"
+Received: from black.fi.intel.com (HELO black.fi.intel.com.) ([10.237.72.28])
+  by fmsmga001.fm.intel.com with ESMTP; 24 Jan 2022 01:02:16 -0800
+From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-usb@vger.kernel.org,
+ =?utf-8?q?Robert_=C5=9Awi=C4=99cki?= <robert@swiecki.net>,
+ Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
+Subject: [PATCH 1/2] usb: typec: Only attempt to link USB ports if there is
+ fwnode
+Date: Mon, 24 Jan 2022 12:02:27 +0300
+Message-Id: <20220124090228.41396-2-heikki.krogerus@linux.intel.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220124090228.41396-1-heikki.krogerus@linux.intel.com>
+References: <20220124090228.41396-1-heikki.krogerus@linux.intel.com>
+MIME-Version: 1.0
+Precedence: bulk
+List-ID: <linux-usb.vger.kernel.org>
+X-Mailing-List: linux-usb@vger.kernel.org
+
+The code that creates the links to the USB ports attached to
+a connector inside the system assumed that the ACPI nodes
+(fwnodes) always exist for the connectors, but it can not do
+that.
+
+There is no guarantee that every USB Type-C connector has
+ACPI device node representing it in the ACPI tables, and
+even if there are the nodes in the ACPI tables, the _STA
+method in those nodes may still return 0 (which means the
+device does not exist from ACPI PoW).
+
+This fixes NULL pointer dereference that happens if the
+nodes are missing.
+
+Reported-and-tested-by: Robert Święcki <robert@swiecki.net>
+Reported-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
+Fixes: 730b49aac426 ("usb: typec: port-mapper: Convert to the component framework")
+Signed-off-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+Acked-by: Marc Zyngier <maz@kernel.org>
+Tested-by: Marc Zyngier <maz@kernel.org>
+---
+ drivers/usb/typec/port-mapper.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/usb/typec/port-mapper.c b/drivers/usb/typec/port-mapper.c
+index 07d307418b470..b6e0c6acc628c 100644
+--- a/drivers/usb/typec/port-mapper.c
++++ b/drivers/usb/typec/port-mapper.c
+@@ -56,6 +56,9 @@ int typec_link_ports(struct typec_port *con)
+ {
+ 	struct each_port_arg arg = { .port = con, .match = NULL };
+ 
++	if (!has_acpi_companion(&con->dev))
++		return 0;
++
+ 	bus_for_each_dev(&acpi_bus_type, NULL, &arg, typec_port_match);
+ 
+ 	/*
+@@ -74,5 +77,6 @@ int typec_link_ports(struct typec_port *con)
+ 
+ void typec_unlink_ports(struct typec_port *con)
+ {
+-	component_master_del(&con->dev, &typec_aggregate_ops);
++	if (has_acpi_companion(&con->dev))
++		component_master_del(&con->dev, &typec_aggregate_ops);
+ }
+
+From patchwork Mon Jan 24 09:02:28 2022
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Patchwork-Submitter: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+X-Patchwork-Id: 12721696
+Return-Path: <linux-usb-owner@kernel.org>
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	aws-us-west-2-korg-lkml-1.web.codeaurora.org
+Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FD89C433F5
+	for <linux-usb@archiver.kernel.org>; Mon, 24 Jan 2022 09:02:24 +0000 (UTC)
+Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
+        id S236480AbiAXJCX (ORCPT <rfc822;linux-usb@archiver.kernel.org>);
+        Mon, 24 Jan 2022 04:02:23 -0500
+Received: from mga11.intel.com ([192.55.52.93]:18482 "EHLO mga11.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S236425AbiAXJCV (ORCPT <rfc822;linux-usb@vger.kernel.org>);
+        Mon, 24 Jan 2022 04:02:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1643014941; x=1674550941;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=3Rovh4/lKcqg1XxFNXgd6wxamVJA43dqc0CU4uCld5I=;
+  b=GR0s8vzTpOUcWzwJErqw+uw1sMl6QZagzqc1rMw69vzdDvUMkPXfg3fv
+   +gdelPFDfkWN6Qi8g6kW19UElda/xuQ+I/WxlPC8kJCXQhl0OCSwTjmWq
+   mqzjfJAuz0ucY+eQE09k/CviVo+COAsgGKPWYZ1/MbQfCiwBNJzObwuKL
+   YkkJwyZtoNh32+E2QvH7ympUl4e+8t0aQ4cd3flTxnehrC/UFTovmVw55
+   xMbK6LqoB6IoH986y1XrGNxUBRsVA4CjlTHgGIyfbe1EXdjfTWH/9TZXA
+   J7+yUB9d6h7EL5H6gA9xiLVShAhejJYa+TRdGOqnorv8M3joFy5tLwrKN
+   Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10236"; a="243596455"
+X-IronPort-AV: E=Sophos;i="5.88,311,1635231600";
+   d="scan'208";a="243596455"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Jan 2022 01:02:19 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.88,311,1635231600";
+   d="scan'208";a="673561141"
+Received: from black.fi.intel.com (HELO black.fi.intel.com.) ([10.237.72.28])
+  by fmsmga001.fm.intel.com with ESMTP; 24 Jan 2022 01:02:18 -0800
+From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-usb@vger.kernel.org,
+        Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>,
+        John Stultz <john.stultz@linaro.org>
+Subject: [PATCH 2/2] usb: typec: Don't try to register component master
+ without components
+Date: Mon, 24 Jan 2022 12:02:28 +0300
+Message-Id: <20220124090228.41396-3-heikki.krogerus@linux.intel.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220124090228.41396-1-heikki.krogerus@linux.intel.com>
+References: <20220124090228.41396-1-heikki.krogerus@linux.intel.com>
+MIME-Version: 1.0
+Precedence: bulk
+List-ID: <linux-usb.vger.kernel.org>
+X-Mailing-List: linux-usb@vger.kernel.org
+
+This fixes NULL pointer dereference that happens if
+component master is registered with empty component match
+list.
+
+Reported-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
+Tested-by: John Stultz <john.stultz@linaro.org>
+Fixes: 730b49aac426 ("usb: typec: port-mapper: Convert to the component framework")
+Signed-off-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+---
+ drivers/usb/typec/port-mapper.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/usb/typec/port-mapper.c b/drivers/usb/typec/port-mapper.c
+index b6e0c6acc628c..a7d507802509f 100644
+--- a/drivers/usb/typec/port-mapper.c
++++ b/drivers/usb/typec/port-mapper.c
+@@ -60,6 +60,8 @@ int typec_link_ports(struct typec_port *con)
+ 		return 0;
+ 
+ 	bus_for_each_dev(&acpi_bus_type, NULL, &arg, typec_port_match);
++	if (!arg.match)
++		return 0;
+ 
+ 	/*
+ 	 * REVISIT: Now each connector can have only a single component master.

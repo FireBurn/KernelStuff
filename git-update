@@ -21,8 +21,9 @@ function updateKernel {
     git am ../01-enable-O3-5.7.patch
     git am ../02-enable-additional-cpu-optimizations-5.8.patch
     git am ../03-xattr-user-prefix-r2.patch
-    git am ../04-amd-pstate.patch
-    git am ../06-mt76.patch
+    git am ../04-mt76.patch
+    git am ../05-usb-fix.patch
+    git am ../06-bluetooth-warn.patch
   fi
   make $USE_LLVM -j16
   make $USE_LLVM modules_install
