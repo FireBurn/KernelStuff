@@ -1,0 +1,25 @@
+From 8f0a3a91f74ba03143c33c74eb336fa775cd3b5d Mon Sep 17 00:00:00 2001
+From: Mike Lothian <mike@fireburn.co.uk>
+Date: Thu, 27 Jan 2022 00:32:21 +0000
+Subject: [PATCH] Increase LOOP_TIMEOUT
+
+---
+ drivers/iommu/amd/init.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/iommu/amd/init.c b/drivers/iommu/amd/init.c
+index dc338acf3338..407be30cdbdb 100644
+--- a/drivers/iommu/amd/init.c
++++ b/drivers/iommu/amd/init.c
+@@ -83,7 +83,7 @@
+ #define ACPI_DEVFLAG_LINT1              0x80
+ #define ACPI_DEVFLAG_ATSDIS             0x10000000
+ 
+-#define LOOP_TIMEOUT	100000
++#define LOOP_TIMEOUT	1000000
+ /*
+  * ACPI table definitions
+  *
+-- 
+2.35.0
+
