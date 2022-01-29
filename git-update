@@ -73,7 +73,7 @@ git push
 
 cd /home/fireburn/Mesa
 sudo -u fireburn git fetch --all --prune
-sudo -u fireburn git pull
+#sudo -u fireburn git pull
 sudo -u fireburn git tag -d R300_DRIVER_0
 sudo -u fireburn git tag -d before_upgrade_03_01_05
 sudo -u fireburn git tag -d blended_fountain
@@ -140,10 +140,10 @@ sudo -u fireburn git tag -d trunk_20040329
 sudo -u fireburn git tag -d unichrome-last-xinerama
 sudo -u fireburn git tag -d vtx-0-2-21112003-freeze
 sudo -u fireburn git tag -d vtx-0-2-24112003
-sudo -u fireburn git push github --all --force
-sudo -u fireburn git push github --tags
-sudo -u fireburn git push gitlab --all --force
-sudo -u fireburn git push gitlab --tags
+#sudo -u fireburn git push github --all --force
+#sudo -u fireburn git push github --tags
+#sudo -u fireburn git push gitlab --all --force
+#sudo -u fireburn git push gitlab --tags
 
 cd /usr/portage
 emerge --sync --quiet
