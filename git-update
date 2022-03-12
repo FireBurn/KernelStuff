@@ -23,6 +23,10 @@ function updateKernel {
     git am ../03-xattr-user-prefix-r2.patch
     git am ../04-mt76.patch
     git am ../06-bluetooth-warn.patch
+    git am ../07-revert.patch
+    git am ../08-warning-1.patch
+    git am ../09-warning-2.patch
+    git am ../10-warning-3.patch
   fi
   make $USE_LLVM -j16
   make $USE_LLVM modules_install
@@ -55,7 +59,7 @@ updateKernel agd5f agd5f agd5f/drm-next		1
 updateKernel linux tip   linus/master		1
 updateKernel drm   drm   airlied/drm-next	1
 
-cp /usr/src/agd5f/.config       /usr/src/dot_config_adg5f
+cp /usr/src/agd5f/.config       /usr/src/dot_config_agd5f
 cp /usr/src/drm/.config         /usr/src/dot_config_drm
 cp /usr/src/linux/.config       /usr/src/dot_config_tip
 
