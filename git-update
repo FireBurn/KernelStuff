@@ -2,6 +2,14 @@
 
 export PATH=/usr/lib/llvm/14/bin:$PATH
 
+function gitAM {
+  git am $1
+  rc=$?
+  if [[ $rc != 0 ]]; then
+    git am --abort
+  fi
+}
+
 function updateKernel {
   DIR=$1; IMG=$2; BRANCH=$3 LLVM=$4
 
@@ -18,15 +26,15 @@ function updateKernel {
     git rebase --abort
     git am --abort
     git reset --hard ${BRANCH}
-    git am ../01-enable-O3-5.7.patch
-    git am ../02-enable-additional-cpu-optimizations-5.8.patch
-    git am ../03-xattr-user-prefix-r2.patch
-    git am ../04-mt76.patch
-    git am ../06-bluetooth-warn.patch
-    git am ../07-revert.patch
-    git am ../08-warning-1.patch
-    git am ../09-warning-2.patch
-    git am ../10-warning-3.patch
+    gitAM ../01-enable-O3-5.7.patch
+    gitAM ../02-enable-additional-cpu-optimizations-5.8.patch
+    gitAM ../03-xattr-user-prefix-r2.patch
+    gitAM ../04-mt76.patch
+    gitAM ../06-bluetooth-warn.patch
+    gitAM ../07-revert.patch
+    gitAM ../08-warning-1.patch
+    gitAM ../09-warning-2.patch
+    gitAM ../10-warning-3.patch
   fi
   make $USE_LLVM -j16
   make $USE_LLVM modules_install
