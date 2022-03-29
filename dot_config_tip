@@ -2138,7 +2138,6 @@ CONFIG_LDISC_AUTOLOAD=y
 # CONFIG_SERIAL_LANTIQ is not set
 # CONFIG_SERIAL_SCCNXP is not set
 # CONFIG_SERIAL_SC16IS7XX is not set
-# CONFIG_SERIAL_BCM63XX is not set
 # CONFIG_SERIAL_ALTERA_JTAGUART is not set
 # CONFIG_SERIAL_ALTERA_UART is not set
 # CONFIG_SERIAL_ARC is not set
@@ -4365,14 +4364,7 @@ CONFIG_STAGING=y
 # CONFIG_VT6656 is not set
 # CONFIG_FB_SM750 is not set
 # CONFIG_STAGING_MEDIA is not set
-
-#
-# Android
-#
-# end of Android
-
 # CONFIG_LTE_GDM724X is not set
-# CONFIG_GS_FPGABOOT is not set
 # CONFIG_UNISYSSPAR is not set
 # CONFIG_FIELDBUS_DEV is not set
 # CONFIG_QLGE is not set
@@ -4642,6 +4634,7 @@ CONFIG_AMDTEE=y
 # CONFIG_INTERCONNECT is not set
 # CONFIG_COUNTER is not set
 # CONFIG_MOST is not set
+# CONFIG_PECI is not set
 # end of Device Drivers
 
 #
