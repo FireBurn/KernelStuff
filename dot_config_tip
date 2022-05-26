@@ -4641,13 +4641,7 @@ CONFIG_RAS=y
 
 # CONFIG_FPGA is not set
 CONFIG_TEE=y
-
-#
-# TEE drivers
-#
 CONFIG_AMDTEE=y
-# end of TEE drivers
-
 # CONFIG_UNISYS_VISORBUS is not set
 # CONFIG_SIOX is not set
 # CONFIG_SLIMBUS is not set
