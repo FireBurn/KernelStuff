@@ -32,9 +32,9 @@ function updateKernel {
     #gitAM ../04-mt76.patch
     #gitAM ../06-bluetooth-warn.patch
     #gitAM ../07-revert.patch
-    gitAM ../08-warning-1.patch
-    gitAM ../09-warning-2.patch
-    gitAM ../10-warning-3.patch
+    #gitAM ../08-warning-1.patch
+    #gitAM ../09-warning-2.patch
+    #gitAM ../10-warning-3.patch
   fi
   make $USE_LLVM -j16
   make $USE_LLVM modules_install
@@ -51,7 +51,7 @@ git pull
 cd /lib/firmware
 git pull
 
-rm -rf /lib/modules/*agd5f* /lib/modules/*drm* /lib/modules/*tip*
+rm -rf /lib/modules/*agd5f* /lib/modules/*drm* /lib/modules/*tip* /lib/modules/*misc*
 
 cd /usr/src/linux
 git fetch --all --prune
@@ -66,10 +66,13 @@ git push freedesktop --tags
 updateKernel agd5f agd5f agd5f/drm-next		1
 updateKernel linux tip   linus/master		1
 updateKernel drm   drm   airlied/drm-next	1
+updateKernel misc  misc  misc/drm-misc-next	1
 
 cp /usr/src/agd5f/.config       /usr/src/dot_config_agd5f
 cp /usr/src/drm/.config         /usr/src/dot_config_drm
 cp /usr/src/linux/.config       /usr/src/dot_config_tip
+cp /usr/src/misc/.config	/usr/src/dot_config_misc
+cp /usr/scc/stable/.config	/usr/src/dot_config_stable
 
 cd /usr/src
 git add .
