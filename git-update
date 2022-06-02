@@ -31,7 +31,7 @@ function updateKernel {
     gitAM ../03-xattr-user-prefix-r2.patch
     #gitAM ../04-mt76.patch
     #gitAM ../06-bluetooth-warn.patch
-    #gitAM ../07-revert.patch
+    gitAM ../07-revert.patch
     #gitAM ../08-warning-1.patch
     #gitAM ../09-warning-2.patch
     #gitAM ../10-warning-3.patch
