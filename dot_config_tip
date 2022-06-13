@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.18.0 Kernel Configuration
+# Linux/x86 5.19.0-rc2 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 14.0.4"
 CONFIG_GCC_VERSION=0
@@ -180,6 +180,7 @@ CONFIG_ARCH_SUPPORTS_NUMA_BALANCING=y
 CONFIG_ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH=y
 CONFIG_CC_HAS_INT128=y
 CONFIG_CC_IMPLICIT_FALLTHROUGH="-Wimplicit-fallthrough"
+CONFIG_GCC12_NO_ARRAY_BOUNDS=y
 CONFIG_ARCH_SUPPORTS_INT128=y
 CONFIG_CGROUPS=y
 CONFIG_PAGE_COUNTER=y
@@ -420,7 +421,7 @@ CONFIG_X86_VSYSCALL_EMULATION=y
 CONFIG_X86_IOPL_IOPERM=y
 CONFIG_MICROCODE=y
 CONFIG_MICROCODE_AMD=y
-# CONFIG_MICROCODE_OLD_INTERFACE is not set
+# CONFIG_MICROCODE_LATE_LOADING is not set
 CONFIG_X86_MSR=y
 CONFIG_X86_CPUID=y
 # CONFIG_X86_5LEVEL is not set
@@ -723,6 +724,7 @@ CONFIG_HAVE_OBJTOOL=y
 CONFIG_HAVE_JUMP_LABEL_HACK=y
 CONFIG_HAVE_NOINSTR_HACK=y
 CONFIG_HAVE_NOINSTR_VALIDATION=y
+CONFIG_HAVE_UACCESS_VALIDATION=y
 CONFIG_HAVE_STACK_VALIDATION=y
 CONFIG_OLD_SIGSUSPEND3=y
 CONFIG_COMPAT_OLD_SIGACTION=y
@@ -1545,12 +1547,14 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
 #
 CONFIG_FW_LOADER=y
 CONFIG_FW_LOADER_PAGED_BUF=y
+CONFIG_FW_LOADER_SYSFS=y
 CONFIG_EXTRA_FIRMWARE="amd-ucode/microcode_amd_fam19h.bin amdgpu/green_sardine_asd.bin amdgpu/green_sardine_ce.bin amdgpu/green_sardine_dmcub.bin amdgpu/green_sardine_me.bin amdgpu/green_sardine_mec2.bin amdgpu/green_sardine_mec.bin amdgpu/green_sardine_pfp.bin amdgpu/green_sardine_rlc.bin amdgpu/green_sardine_sdma.bin amdgpu/green_sardine_ta.bin amdgpu/green_sardine_vcn.bin amdgpu/navy_flounder_ce.bin amdgpu/navy_flounder_dmcub.bin amdgpu/navy_flounder_me.bin amdgpu/navy_flounder_mec2.bin amdgpu/navy_flounder_mec.bin amdgpu/navy_flounder_pfp.bin amdgpu/navy_flounder_rlc.bin amdgpu/navy_flounder_sdma.bin amdgpu/navy_flounder_smc.bin amdgpu/navy_flounder_sos.bin amdgpu/navy_flounder_ta.bin amdgpu/navy_flounder_vcn.bin mediatek/WIFI_MT7961_patch_mcu_1_2_hdr.bin mediatek/WIFI_RAM_CODE_MT7961_1.bin mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin regulatory.db regulatory.db.p7s"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 CONFIG_FW_LOADER_USER_HELPER=y
 # CONFIG_FW_LOADER_USER_HELPER_FALLBACK is not set
 # CONFIG_FW_LOADER_COMPRESS is not set
 CONFIG_FW_CACHE=y
+CONFIG_FW_UPLOAD=y
 # end of Firmware loader
 
 CONFIG_WANT_DEV_COREDUMP=y
@@ -1572,6 +1576,7 @@ CONFIG_DMA_SHARED_BUFFER=y
 # Bus devices
 #
 # CONFIG_MHI_BUS is not set
+# CONFIG_MHI_BUS_EP is not set
 # end of Bus devices
 
 CONFIG_CONNECTOR=y
@@ -1614,13 +1619,13 @@ CONFIG_EFI_GENERIC_STUB_INITRD_CMDLINE_LOADER=y
 # CONFIG_RESET_ATTACK_MITIGATION is not set
 # CONFIG_EFI_RCI2_TABLE is not set
 # CONFIG_EFI_DISABLE_PCI_DMA is not set
+# CONFIG_EFI_CUSTOM_SSDT_OVERLAYS is not set
+# CONFIG_EFI_DISABLE_RUNTIME is not set
+# CONFIG_EFI_COCO_SECRET is not set
 # end of EFI (Extensible Firmware Interface) Support
 
 CONFIG_UEFI_CPER=y
 CONFIG_UEFI_CPER_X86=y
-# CONFIG_EFI_CUSTOM_SSDT_OVERLAYS is not set
-# CONFIG_EFI_DISABLE_RUNTIME is not set
-# CONFIG_EFI_COCO_SECRET is not set
 
 #
 # Tegra firmware driver
@@ -3338,6 +3343,7 @@ CONFIG_DRM_DISPLAY_HDMI_HELPER=y
 # CONFIG_DRM_DP_AUX_CHARDEV is not set
 CONFIG_DRM_DP_CEC=y
 CONFIG_DRM_TTM=y
+CONFIG_DRM_BUDDY=y
 CONFIG_DRM_TTM_HELPER=y
 CONFIG_DRM_SCHED=y
 
@@ -4166,6 +4172,7 @@ CONFIG_UCSI_ACPI=y
 #
 # USB Type-C Multiplexer/DeMultiplexer Switch support
 #
+# CONFIG_TYPEC_MUX_FSA4480 is not set
 # CONFIG_TYPEC_MUX_PI3USB30532 is not set
 # end of USB Type-C Multiplexer/DeMultiplexer Switch support
 
@@ -4179,6 +4186,7 @@ CONFIG_TYPEC_DP_ALTMODE=y
 CONFIG_USB_ROLE_SWITCH=y
 # CONFIG_USB_ROLES_INTEL_XHCI is not set
 # CONFIG_MMC is not set
+# CONFIG_SCSI_UFSHCD is not set
 # CONFIG_MEMSTICK is not set
 CONFIG_NEW_LEDS=y
 CONFIG_LEDS_CLASS=y
@@ -4393,9 +4401,12 @@ CONFIG_STAGING=y
 # CONFIG_FB_SM750 is not set
 # CONFIG_STAGING_MEDIA is not set
 # CONFIG_LTE_GDM724X is not set
-# CONFIG_UNISYSSPAR is not set
 # CONFIG_FIELDBUS_DEV is not set
 # CONFIG_QLGE is not set
+
+#
+# VME Device Drivers
+#
 CONFIG_X86_PLATFORM_DEVICES=y
 CONFIG_ACPI_WMI=y
 CONFIG_WMI_BMOF=y
@@ -4651,13 +4662,13 @@ CONFIG_RAS=y
 # CONFIG_FPGA is not set
 CONFIG_TEE=y
 CONFIG_AMDTEE=y
-# CONFIG_UNISYS_VISORBUS is not set
 # CONFIG_SIOX is not set
 # CONFIG_SLIMBUS is not set
 # CONFIG_INTERCONNECT is not set
 # CONFIG_COUNTER is not set
 # CONFIG_MOST is not set
 # CONFIG_PECI is not set
+# CONFIG_HTE is not set
 # end of Device Drivers
 
 #
