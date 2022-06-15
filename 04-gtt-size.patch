@@ -1,0 +1,117 @@
+Delivered-To: mike@fireburn.co.uk
+Received: by 2002:a05:7300:3ba3:b0:66:d1b8:76a9 with SMTP id d35csp1732913dys;
+        Fri, 10 Jun 2022 07:01:30 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzDDRQDX59VqUdtpc1VXtKoYsYtjvvRiDcEVTPnfMcifMrA0OYoLAAyxlAroI4mJboCKeI/
+X-Received: by 2002:a63:7c4e:0:b0:380:8ae9:c975 with SMTP id l14-20020a637c4e000000b003808ae9c975mr40591932pgn.25.1654869689955;
+        Fri, 10 Jun 2022 07:01:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1654869689; cv=none;
+        d=google.com; s=arc-20160816;
+        b=mZQbIz71Qcvmhb5+GDAT5kOUNbhXYqudzq6AGv5JQyz3TLzDDnHhz/jQOYEtZ0mpsV
+         YWe8aaUhbJJVboB3ojkVO0/ZpPHYKjjFR07O3aLd2xyhW2SiTOnpIHPjdITRLtqyWPdN
+         9F3LNu3scXim6ncofBEM9eyA+3TMjOK76d+lqIMsImHMGIiDfhEI8fpm1u8oWQ262cic
+         utWQ90qFhQRwCAtyZH5Og4ayfM2RoLMtVS2+LJBOawlaTZ8hVWeJHYnfdGpjwEhkw97o
+         tizkyjwdbgNUD7GetLwX0ubE9c9Mcp4hu0LfbbWR2I+iCTl7gnidc4uJKSlIErOCgyPw
+         3FQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=sender:errors-to:cc:list-subscribe:list-help:list-post:list-archive
+         :list-unsubscribe:list-id:precedence:content-transfer-encoding
+         :mime-version:message-id:date:subject:to:from:delivered-to;
+        bh=KfX2/cA1X1ii36Y2Ga/lDHj5we1m3vk1zj6XwRjzZqM=;
+        b=A1tXf83T6xHu9vHItyaTWplLC8kuNcaFpJ2s4LxVASZGOhFDZs9Jpzi1ODB47TPnzM
+         FBOJERoFFhAePhJA0MVZSNCwyShE0r2tUhhv8dsKfMwQcXDb1yE7yJAzKCyikqcm//tN
+         rNoNkHUxqS5VzNNzHMxlYCbbPcUdgQ+acG4+RBPDgkaVEYD5VUIeQ8RoUy5hH6l/eKhf
+         3sAM9866veDmfSrOXXwmfqgXNpqHDUMK6Mbrv2pIFawp+aGLXt61+UJSjK0Oasx5QNjG
+         wC3tvOIxSkxKXeXUh+HGxlzqDT0JQn4Frn5+GphFZGEm29qojjHi0IUiCVhj6O3RHq4a
+         5g7A==
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: best guess record for domain of amd-gfx-bounces@lists.freedesktop.org designates 2610:10:20:722:a800:ff:fe36:1795 as permitted sender) smtp.mailfrom=amd-gfx-bounces@lists.freedesktop.org
+Return-Path: <amd-gfx-bounces@lists.freedesktop.org>
+Received: from gabe.freedesktop.org (gabe.freedesktop.org. [2610:10:20:722:a800:ff:fe36:1795])
+        by mx.google.com with ESMTPS id d14-20020a056a00198e00b0051c2af24938si17327363pfl.190.2022.06.10.07.01.29
+        for <mike@fireburn.co.uk>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Jun 2022 07:01:29 -0700 (PDT)
+Received-SPF: pass (google.com: best guess record for domain of amd-gfx-bounces@lists.freedesktop.org designates 2610:10:20:722:a800:ff:fe36:1795 as permitted sender) client-ip=2610:10:20:722:a800:ff:fe36:1795;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: best guess record for domain of amd-gfx-bounces@lists.freedesktop.org designates 2610:10:20:722:a800:ff:fe36:1795 as permitted sender) smtp.mailfrom=amd-gfx-bounces@lists.freedesktop.org
+Received: from gabe.freedesktop.org (localhost [127.0.0.1])
+	by gabe.freedesktop.org (Postfix) with ESMTP id 90F6D112386;
+	Fri, 10 Jun 2022 14:01:28 +0000 (UTC)
+X-Original-To: amd-gfx@lists.freedesktop.org
+Delivered-To: amd-gfx@lists.freedesktop.org
+X-Greylist: delayed 415 seconds by postgrey-1.36 at gabe;
+ Fri, 10 Jun 2022 14:01:27 UTC
+Received: from ms7.webland.ch (ms7.webland.ch [92.43.217.107])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1EB7A112389;
+ Fri, 10 Jun 2022 14:01:26 +0000 (UTC)
+Received: from kaveri ([85.2.99.24])
+ by ms7.webland.ch (12.3.0 build 2 x64) with ASMTP (SSL) id
+ 01202206101554279829; Fri, 10 Jun 2022 15:54:27 +0200
+Received: from daenzer by kaveri with local (Exim 4.95)
+ (envelope-from <michel@daenzer.net>) id 1nzf5m-002oKZ-Ca;
+ Fri, 10 Jun 2022 15:54:26 +0200
+From: =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>
+To: Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>
+Subject: [PATCH] drm/amdgpu: Fix GTT size reporting in amdgpu_ioctl
+Date: Fri, 10 Jun 2022 15:54:26 +0200
+Message-Id: <20220610135426.670120-1-michel@daenzer.net>
+X-Mailer: git-send-email 2.36.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CTCH: RefID="str=0001.0A782F18.62A34D15.0003,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0";
+ Spam="Unknown"; VOD="Unknown"
+X-BeenThere: amd-gfx@lists.freedesktop.org
+X-Mailman-Version: 2.1.29
+Precedence: list
+List-Id: Discussion list for AMD gfx <amd-gfx.lists.freedesktop.org>
+List-Unsubscribe: <https://lists.freedesktop.org/mailman/options/amd-gfx>,
+ <mailto:amd-gfx-request@lists.freedesktop.org?subject=unsubscribe>
+List-Archive: <https://lists.freedesktop.org/archives/amd-gfx>
+List-Post: <mailto:amd-gfx@lists.freedesktop.org>
+List-Help: <mailto:amd-gfx-request@lists.freedesktop.org?subject=help>
+List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/amd-gfx>,
+ <mailto:amd-gfx-request@lists.freedesktop.org?subject=subscribe>
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org
+Errors-To: amd-gfx-bounces@lists.freedesktop.org
+Sender: "amd-gfx" <amd-gfx-bounces@lists.freedesktop.org>
+
+From: Michel Dänzer <mdaenzer@redhat.com>
+
+The commit below changed the TTM manager size unit from pages to
+bytes, but failed to adjust the corresponding calculations in
+amdgpu_ioctl.
+
+Fixes: dfa714b88eb0 ("drm/amdgpu: remove GTT accounting v2")
+Bug: https://gitlab.freedesktop.org/drm/amd/-/issues/1930
+Bug: https://gitlab.freedesktop.org/mesa/mesa/-/issues/6642
+Signed-off-by: Michel Dänzer <mdaenzer@redhat.com>
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+index 801f6fa692e9..6de63ea6687e 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+@@ -642,7 +642,6 @@ int amdgpu_info_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
+ 			    atomic64_read(&adev->visible_pin_size),
+ 			    vram_gtt.vram_size);
+ 		vram_gtt.gtt_size = ttm_manager_type(&adev->mman.bdev, TTM_PL_TT)->size;
+-		vram_gtt.gtt_size *= PAGE_SIZE;
+ 		vram_gtt.gtt_size -= atomic64_read(&adev->gart_pin_size);
+ 		return copy_to_user(out, &vram_gtt,
+ 				    min((size_t)size, sizeof(vram_gtt))) ? -EFAULT : 0;
+@@ -675,7 +674,6 @@ int amdgpu_info_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
+ 			mem.cpu_accessible_vram.usable_heap_size * 3 / 4;
+ 
+ 		mem.gtt.total_heap_size = gtt_man->size;
+-		mem.gtt.total_heap_size *= PAGE_SIZE;
+ 		mem.gtt.usable_heap_size = mem.gtt.total_heap_size -
+ 			atomic64_read(&adev->gart_pin_size);
+ 		mem.gtt.heap_usage = ttm_resource_manager_usage(gtt_man);
+-- 
+2.36.1
+
