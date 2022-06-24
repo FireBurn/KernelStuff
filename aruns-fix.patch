@@ -1,0 +1,53 @@
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_psp.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_psp.c
+index e9411c28d88b..0dff15eaa207 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_psp.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_psp.c
+@@ -748,6 +748,8 @@ static int psp_tmr_init(struct psp_context *psp)
+ 	}
+ 
+ 	pptr = amdgpu_sriov_vf(psp->adev) ? &tmr_buf : NULL;
++	printk("########tmr_size=%d", tmr_size);
++	printk("########Align tmr=%d", PSP_TMR_SIZE(psp->adev));
+ 	ret = amdgpu_bo_create_kernel(psp->adev, tmr_size, PSP_TMR_SIZE(psp->adev),
+ 				      AMDGPU_GEM_DOMAIN_VRAM,
+ 				      &psp->tmr_bo, &psp->tmr_mc_addr, pptr);
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c
+index 49e4092f447f..771c5a129e89 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c
+@@ -364,6 +364,7 @@ static int amdgpu_vram_mgr_new(struct ttm_resource_manager *man,
+ 	struct drm_buddy *mm = &mgr->mm;
+ 	struct drm_buddy_block *block;
+ 	unsigned long pages_per_block;
++	bool trim = 1;
+ 	int r;
+ 
+ 	lpfn = place->lpfn << PAGE_SHIFT;
+@@ -460,9 +461,13 @@ static int amdgpu_vram_mgr_new(struct ttm_resource_manager *man,
+ 		else
+ 			remaining_size -= size;
+ 	}
++
++	if (vres->base.num_pages == 2560)
++		trim = 0;
++
+ 	mutex_unlock(&mgr->lock);
+ 
+-	if (cur_size != size) {
++	if (cur_size != size && trim) {
+ 		struct drm_buddy_block *block;
+ 		struct list_head *trim_list;
+ 		u64 original_size;
+@@ -496,6 +501,12 @@ static int amdgpu_vram_mgr_new(struct ttm_resource_manager *man,
+ 			list_splice_tail(trim_list, &vres->blocks);
+ 	}
+ 
++	if (vres->base.num_pages == 2560)
++		list_for_each_entry(block, &vres->blocks, link)
++		printk("amdgpu_vram_mgr_block_start(block)=%llu, amdgpu_vram_mgr_block_size(block)=%llu",
++				amdgpu_vram_mgr_block_start(block) >> PAGE_SHIFT,
++				amdgpu_vram_mgr_block_size(block) >> PAGE_SHIFT);
++
+ 	list_for_each_entry(block, &vres->blocks, link)
+ 		vis_usage += amdgpu_vram_mgr_vis_size(adev, block);
+ 
