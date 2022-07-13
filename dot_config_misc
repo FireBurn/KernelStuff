@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.19.0-rc2 Kernel Configuration
+# Linux/x86 5.19.0-rc6 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 14.0.6"
 CONFIG_GCC_VERSION=0
@@ -5133,6 +5133,7 @@ CONFIG_X509_CERTIFICATE_PARSER=y
 CONFIG_PKCS7_MESSAGE_PARSER=y
 # CONFIG_PKCS7_TEST_KEY is not set
 # CONFIG_SIGNED_PE_FILE_VERIFICATION is not set
+# CONFIG_FIPS_SIGNATURE_SELFTEST is not set
 
 #
 # Certificates for signature checking
@@ -5178,6 +5179,7 @@ CONFIG_CRYPTO_LIB_POLY1305_RSIZE=11
 CONFIG_CRYPTO_LIB_SHA256=y
 # end of Crypto library routines
 
+CONFIG_LIB_MEMNEQ=y
 # CONFIG_CRC_CCITT is not set
 CONFIG_CRC16=y
 # CONFIG_CRC_T10DIF is not set
