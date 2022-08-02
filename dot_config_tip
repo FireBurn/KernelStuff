@@ -4579,6 +4579,11 @@ CONFIG_IRQ_REMAP=y
 # end of NXP/Freescale QorIQ SoC drivers
 
 #
+# fujitsu SoC drivers
+#
+# end of fujitsu SoC drivers
+
+#
 # i.MX SoC drivers
 #
 # end of i.MX SoC drivers
