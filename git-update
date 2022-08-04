@@ -11,13 +11,7 @@ function gitAM {
 }
 
 function updateKernel {
-  DIR=$1; IMG=$2; BRANCH=$3 LLVM=$4
-
-  if [[ ${LLVM} != "0" ]]; then
-    USE_LLVM="LLVM=1 LLVM_IAS=1"
-  else
-    USE_LLVM=""
-  fi
+  DIR=$1; IMG=$2; BRANCH=$3
 
   cd /usr/src/${DIR}
   git rebase ${BRANCH}
@@ -29,12 +23,9 @@ function updateKernel {
     gitAM ../01-enable-O3-5.7.patch
     gitAM ../02-enable-additional-cpu-optimizations-5.8.patch
     gitAM ../03-xattr-user-prefix-r2.patch
-    gitAM ../04-gtt-size.patch
-    gitAM ../05-ttm-bulk-move.patch
-    gitAM ../06-aruns.patch
   fi
-  make $USE_LLVM -j16
-  make $USE_LLVM modules_install
+  make LLVM=1 -j16
+  make LLVM=1 modules_install
   cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
 }
 
