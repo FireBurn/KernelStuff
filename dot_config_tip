@@ -4222,7 +4222,6 @@ CONFIG_LEDS_CLASS_MULTICOLOR=y
 # CONFIG_LEDS_LP3944 is not set
 # CONFIG_LEDS_LP3952 is not set
 # CONFIG_LEDS_LP50XX is not set
-# CONFIG_LEDS_CLEVO_MAIL is not set
 # CONFIG_LEDS_PCA955X is not set
 # CONFIG_LEDS_PCA963X is not set
 # CONFIG_LEDS_BD2802 is not set
@@ -4231,6 +4230,7 @@ CONFIG_LEDS_CLASS_MULTICOLOR=y
 # CONFIG_LEDS_TCA6507 is not set
 # CONFIG_LEDS_TLC591XX is not set
 # CONFIG_LEDS_LM355x is not set
+# CONFIG_LEDS_IS31FL319X is not set
 
 #
 # LED driver for blink(1) USB RGB LED is under Special HID drivers (HID_THINGM)
