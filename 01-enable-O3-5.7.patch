@@ -1,24 +1,25 @@
-From f6114c405fc809cf852c9bd8cf1021f7518fee5e Mon Sep 17 00:00:00 2001
+From d79185d14876cfadc487eb4da437f404aa811424 Mon Sep 17 00:00:00 2001
 From: Mike Lothian <mike@fireburn.co.uk>
-Date: Wed, 30 Jun 2021 01:12:31 +0100
-Subject: [PATCH 03/20] Allow O3 opimisations
+Date: Sat, 27 Aug 2022 19:41:19 +0100
+Subject: [PATCH] Use O3
 
 ---
- init/Kconfig | 1 -
- 1 file changed, 1 deletion(-)
+ arch/x86/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/init/Kconfig b/init/Kconfig
-index 1ea12c64e4c9..127df1ae15dd 100644
---- a/init/Kconfig
-+++ b/init/Kconfig
-@@ -1333,7 +1333,6 @@ config CC_OPTIMIZE_FOR_PERFORMANCE
+diff --git a/arch/x86/Makefile b/arch/x86/Makefile
+index be3c6c429a67..0617e006fa29 100644
+--- a/arch/x86/Makefile
++++ b/arch/x86/Makefile
+@@ -67,7 +67,7 @@ export BITS
+ #
+ #    https://gcc.gnu.org/bugzilla/show_bug.cgi?id=53383
+ #
+-KBUILD_CFLAGS += -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx
++KBUILD_CFLAGS += -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -mno-avx2 -O3 -fno-tree-vectorize -mpopcnt
  
- config CC_OPTIMIZE_FOR_PERFORMANCE_O3
- 	bool "Optimize more for performance (-O3)"
--	depends on ARC
- 	help
- 	  Choosing this option will pass "-O3" to your compiler to optimize
- 	  the kernel yet more for performance.
+ ifeq ($(CONFIG_X86_KERNEL_IBT),y)
+ #
 -- 
-2.32.0
+2.37.2
 
