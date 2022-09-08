@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PATH=/usr/lib/llvm/14/bin:$PATH
+export PATH=/usr/lib/llvm/15/bin:$PATH
 
 function gitAM {
   git am $1
