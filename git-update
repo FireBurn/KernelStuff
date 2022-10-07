@@ -21,6 +21,7 @@ function updateKernel {
     git am --abort
     git reset --hard ${BRANCH}
     gitAM ../01-enable-O3-5.7.patch
+    gitAM ../01-enable-O3-6.1.patch
     gitAM ../02-enable-additional-cpu-optimizations-5.8.patch
     gitAM ../03-xattr-user-prefix-r2.patch
   fi
