@@ -1757,7 +1757,6 @@ CONFIG_EEPROM_EE1004=y
 # CONFIG_MISC_ALCOR_PCI is not set
 # CONFIG_MISC_RTSX_PCI is not set
 # CONFIG_MISC_RTSX_USB is not set
-# CONFIG_HABANA_AI is not set
 # CONFIG_UACCE is not set
 # CONFIG_PVPANIC is not set
 # CONFIG_GP_PCI1XXXX is not set
