@@ -4682,6 +4682,8 @@ CONFIG_IRQ_REMAP=y
 #
 # end of Enable LiteX SoC Builder specific drivers
 
+# CONFIG_WPCM450_SOC is not set
+
 #
 # Qualcomm SoC drivers
 #
