@@ -3450,8 +3450,7 @@ CONFIG_DRM_AMD_ACP=y
 # Display Engine Configuration
 #
 CONFIG_DRM_AMD_DC=y
-CONFIG_DRM_AMD_DC_DCN=y
-CONFIG_DRM_AMD_DC_HDCP=y
+CONFIG_DRM_AMD_DC_FP=y
 CONFIG_DRM_AMD_SECURE_DISPLAY=y
 # end of Display Engine Configuration
 
