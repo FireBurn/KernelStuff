@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.3.0-rc1 Kernel Configuration
+# Linux/x86 6.3.0-rc2 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 15.0.7"
 CONFIG_GCC_VERSION=0
@@ -1898,6 +1898,7 @@ CONFIG_ETHERNET=y
 # CONFIG_NET_VENDOR_MICROSEMI is not set
 # CONFIG_NET_VENDOR_MICROSOFT is not set
 # CONFIG_NET_VENDOR_MYRI is not set
+# CONFIG_FEALNX is not set
 # CONFIG_NET_VENDOR_NI is not set
 # CONFIG_NET_VENDOR_NATSEMI is not set
 # CONFIG_NET_VENDOR_NETERION is not set
@@ -4493,7 +4494,6 @@ CONFIG_STAGING=y
 # CONFIG_RTL8192U is not set
 # CONFIG_RTLLIB is not set
 # CONFIG_R8712U is not set
-# CONFIG_R8188EU is not set
 # CONFIG_RTS5208 is not set
 # CONFIG_VT6655 is not set
 # CONFIG_VT6656 is not set
