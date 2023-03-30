@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.3.0-rc1 Kernel Configuration
+# Linux/x86 6.3.0-rc4 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 16.0.0"
 CONFIG_GCC_VERSION=0
@@ -851,7 +851,6 @@ CONFIG_EFI_PARTITION=y
 # CONFIG_CMDLINE_PARTITION is not set
 # end of Partition Types
 
-CONFIG_BLOCK_COMPAT=y
 CONFIG_BLK_MQ_PCI=y
 CONFIG_BLK_PM=y
 
@@ -1895,6 +1894,7 @@ CONFIG_ETHERNET=y
 # CONFIG_NET_VENDOR_MICROSEMI is not set
 # CONFIG_NET_VENDOR_MICROSOFT is not set
 # CONFIG_NET_VENDOR_MYRI is not set
+# CONFIG_FEALNX is not set
 # CONFIG_NET_VENDOR_NI is not set
 # CONFIG_NET_VENDOR_NATSEMI is not set
 # CONFIG_NET_VENDOR_NETERION is not set
@@ -3454,8 +3454,7 @@ CONFIG_DRM_AMD_ACP=y
 # Display Engine Configuration
 #
 CONFIG_DRM_AMD_DC=y
-CONFIG_DRM_AMD_DC_DCN=y
-CONFIG_DRM_AMD_DC_HDCP=y
+CONFIG_DRM_AMD_DC_FP=y
 CONFIG_DRM_AMD_SECURE_DISPLAY=y
 # end of Display Engine Configuration
 
@@ -4491,7 +4490,6 @@ CONFIG_STAGING=y
 # CONFIG_RTL8192U is not set
 # CONFIG_RTLLIB is not set
 # CONFIG_R8712U is not set
-# CONFIG_R8188EU is not set
 # CONFIG_RTS5208 is not set
 # CONFIG_VT6655 is not set
 # CONFIG_VT6656 is not set
