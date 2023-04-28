@@ -23,6 +23,7 @@ function updateKernel {
     gitAM ../01-enable-O3-6.1.patch
     gitAM ../02-enable-additional-cpu-optimizations-5.8.patch
     gitAM ../03-xattr-user-prefix-r3.patch
+    gitAM ../04-dynamic-swiotlb.patch
   fi
   make LLVM=1 -j16
   make LLVM=1 modules_install

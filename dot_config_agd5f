@@ -473,7 +473,7 @@ CONFIG_HOTPLUG_CPU=y
 # CONFIG_LEGACY_VSYSCALL_XONLY is not set
 CONFIG_LEGACY_VSYSCALL_NONE=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all printk.devkmsg=on amd_pstate=passive mitigations=off delayacct"
+CONFIG_CMDLINE="root=/dev/nvme0n1p2 rootfstype=ext4 libahci.ignore_sss=1 init=/usr/lib/systemd/systemd systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all printk.devkmsg=on amd_pstate=passive mitigations=off delayacct swiotlb=dynamic"
 # CONFIG_CMDLINE_OVERRIDE is not set
 CONFIG_MODIFY_LDT_SYSCALL=y
 # CONFIG_STRICT_SIGALTSTACK_SIZE is not set
