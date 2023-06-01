@@ -3447,6 +3447,7 @@ CONFIG_DRM_AMDGPU=y
 # CONFIG_DRM_AMDGPU_SI is not set
 # CONFIG_DRM_AMDGPU_CIK is not set
 CONFIG_DRM_AMDGPU_USERPTR=y
+# CONFIG_DRM_AMDGPU_WERROR is not set
 
 #
 # ACP (Audio CoProcessor) Configuration
