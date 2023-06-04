@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.4.0-rc4 Kernel Configuration
+# Linux/x86 6.4.0-rc5 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 16.0.4"
 CONFIG_GCC_VERSION=0
@@ -5483,7 +5483,6 @@ CONFIG_HAVE_KCSAN_COMPILER=y
 # CONFIG_DEBUG_PAGEALLOC is not set
 # CONFIG_SLUB_DEBUG is not set
 # CONFIG_PAGE_OWNER is not set
-# CONFIG_PAGE_TABLE_CHECK is not set
 # CONFIG_PAGE_POISONING is not set
 # CONFIG_DEBUG_PAGE_REF is not set
 # CONFIG_DEBUG_RODATA_TEST is not set
