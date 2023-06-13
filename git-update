@@ -151,7 +151,7 @@ emerge --sync --quiet
 git fetch --unshallow
 git push gitlab --all --force
 git push github --all --force
-emerge -vDuNt -j5 @world --exclude chromium
+emerge -vDuNt -j5 @world
 emerge -vDt -j5 @live-rebuild @preserved-rebuild
 emerge --depclean -a
 eclean-dist --destructive -q
