@@ -2842,6 +2842,7 @@ CONFIG_LPC_SCH=y
 # CONFIG_MFD_88PM805 is not set
 # CONFIG_MFD_88PM860X is not set
 # CONFIG_MFD_MAX14577 is not set
+# CONFIG_MFD_MAX77541 is not set
 # CONFIG_MFD_MAX77693 is not set
 # CONFIG_MFD_MAX77843 is not set
 # CONFIG_MFD_MAX8907 is not set
@@ -4292,6 +4293,7 @@ CONFIG_UCSI_ACPI=y
 # CONFIG_TYPEC_MUX_FSA4480 is not set
 # CONFIG_TYPEC_MUX_GPIO_SBU is not set
 # CONFIG_TYPEC_MUX_PI3USB30532 is not set
+# CONFIG_TYPEC_MUX_NB7VPQ904M is not set
 # end of USB Type-C Multiplexer/DeMultiplexer Switch support
 
 #
@@ -4316,6 +4318,7 @@ CONFIG_LEDS_CLASS_MULTICOLOR=y
 # LED drivers
 #
 # CONFIG_LEDS_APU is not set
+# CONFIG_LEDS_AW200XX is not set
 # CONFIG_LEDS_LM3530 is not set
 # CONFIG_LEDS_LM3532 is not set
 # CONFIG_LEDS_LM3642 is not set
@@ -4343,7 +4346,6 @@ CONFIG_LEDS_CLASS_MULTICOLOR=y
 # CONFIG_LEDS_MLXREG is not set
 # CONFIG_LEDS_USER is not set
 # CONFIG_LEDS_NIC78BX is not set
-# CONFIG_LEDS_TI_LMU_COMMON is not set
 
 #
 # Flash and Torch LED drivers
