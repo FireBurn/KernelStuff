@@ -1416,7 +1416,6 @@ CONFIG_BT_MSFTEXT=y
 CONFIG_BT_AOSPEXT=y
 # CONFIG_BT_DEBUGFS is not set
 # CONFIG_BT_SELFTEST is not set
-# CONFIG_BT_FEATURE_DEBUG is not set
 
 #
 # Bluetooth device drivers
@@ -1587,6 +1586,7 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
 # Firmware loader
 #
 CONFIG_FW_LOADER=y
+CONFIG_FW_LOADER_DEBUG=y
 CONFIG_FW_LOADER_PAGED_BUF=y
 CONFIG_FW_LOADER_SYSFS=y
 CONFIG_EXTRA_FIRMWARE="amd-ucode/microcode_amd_fam19h.bin amdgpu/green_sardine_asd.bin amdgpu/green_sardine_ce.bin amdgpu/green_sardine_dmcub.bin amdgpu/green_sardine_me.bin amdgpu/green_sardine_mec2.bin amdgpu/green_sardine_mec.bin amdgpu/green_sardine_pfp.bin amdgpu/green_sardine_rlc.bin amdgpu/green_sardine_sdma.bin amdgpu/green_sardine_ta.bin amdgpu/green_sardine_vcn.bin amdgpu/navy_flounder_ce.bin amdgpu/navy_flounder_dmcub.bin amdgpu/navy_flounder_me.bin amdgpu/navy_flounder_mec2.bin amdgpu/navy_flounder_mec.bin amdgpu/navy_flounder_pfp.bin amdgpu/navy_flounder_rlc.bin amdgpu/navy_flounder_sdma.bin amdgpu/navy_flounder_smc.bin amdgpu/navy_flounder_sos.bin amdgpu/navy_flounder_ta.bin amdgpu/navy_flounder_vcn.bin mediatek/WIFI_MT7961_patch_mcu_1_2_hdr.bin mediatek/WIFI_RAM_CODE_MT7961_1.bin mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin regulatory.db regulatory.db.p7s"
@@ -5446,8 +5446,8 @@ CONFIG_CONSOLE_LOGLEVEL_DEFAULT=7
 CONFIG_CONSOLE_LOGLEVEL_QUIET=4
 CONFIG_MESSAGE_LOGLEVEL_DEFAULT=4
 # CONFIG_BOOT_PRINTK_DELAY is not set
-# CONFIG_DYNAMIC_DEBUG is not set
-# CONFIG_DYNAMIC_DEBUG_CORE is not set
+CONFIG_DYNAMIC_DEBUG=y
+CONFIG_DYNAMIC_DEBUG_CORE=y
 CONFIG_SYMBOLIC_ERRNAME=y
 CONFIG_DEBUG_BUGVERBOSE=y
 # end of printk and dmesg options
