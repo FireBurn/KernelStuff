@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.5.0-rc2 Kernel Configuration
+# Linux/x86 6.5.0-rc7 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 16.0.6"
 CONFIG_GCC_VERSION=0
@@ -4833,7 +4833,6 @@ CONFIG_DNOTIFY=y
 CONFIG_INOTIFY_USER=y
 CONFIG_FANOTIFY=y
 # CONFIG_QUOTA is not set
-# CONFIG_AUTOFS4_FS is not set
 CONFIG_AUTOFS_FS=y
 CONFIG_FUSE_FS=y
 # CONFIG_CUSE is not set
