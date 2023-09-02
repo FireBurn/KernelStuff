@@ -1790,7 +1790,6 @@ CONFIG_EEPROM_EE1004=y
 # CONFIG_MISC_RTSX_USB is not set
 # CONFIG_UACCE is not set
 # CONFIG_PVPANIC is not set
-# CONFIG_GP_PCI1XXXX is not set
 # end of Misc devices
 
 #
@@ -2306,6 +2305,7 @@ CONFIG_I2C_BOARDINFO=y
 # CONFIG_I2C_COMPAT is not set
 CONFIG_I2C_CHARDEV=y
 # CONFIG_I2C_MUX is not set
+# CONFIG_I2C_ATR is not set
 CONFIG_I2C_HELPER_AUTO=y
 CONFIG_I2C_ALGOBIT=y
 
@@ -3040,69 +3040,7 @@ CONFIG_VIDEOBUF2_VMALLOC=y
 # Media ancillary drivers
 #
 CONFIG_MEDIA_ATTACH=y
-
-#
-# Camera sensor devices
-#
-# CONFIG_VIDEO_AR0521 is not set
-# CONFIG_VIDEO_HI556 is not set
-# CONFIG_VIDEO_HI846 is not set
-# CONFIG_VIDEO_HI847 is not set
-# CONFIG_VIDEO_IMX208 is not set
-# CONFIG_VIDEO_IMX214 is not set
-# CONFIG_VIDEO_IMX219 is not set
-# CONFIG_VIDEO_IMX258 is not set
-# CONFIG_VIDEO_IMX274 is not set
-# CONFIG_VIDEO_IMX290 is not set
-# CONFIG_VIDEO_IMX296 is not set
-# CONFIG_VIDEO_IMX319 is not set
-# CONFIG_VIDEO_IMX355 is not set
-# CONFIG_VIDEO_MT9M001 is not set
-# CONFIG_VIDEO_MT9M111 is not set
-# CONFIG_VIDEO_MT9P031 is not set
-# CONFIG_VIDEO_MT9T112 is not set
-# CONFIG_VIDEO_MT9V011 is not set
-# CONFIG_VIDEO_MT9V032 is not set
-# CONFIG_VIDEO_MT9V111 is not set
-# CONFIG_VIDEO_OG01A1B is not set
-# CONFIG_VIDEO_OV01A10 is not set
-# CONFIG_VIDEO_OV02A10 is not set
-# CONFIG_VIDEO_OV08D10 is not set
-# CONFIG_VIDEO_OV08X40 is not set
-# CONFIG_VIDEO_OV13858 is not set
-# CONFIG_VIDEO_OV13B10 is not set
-# CONFIG_VIDEO_OV2640 is not set
-# CONFIG_VIDEO_OV2659 is not set
-# CONFIG_VIDEO_OV2680 is not set
-# CONFIG_VIDEO_OV2685 is not set
-# CONFIG_VIDEO_OV2740 is not set
-# CONFIG_VIDEO_OV4689 is not set
-# CONFIG_VIDEO_OV5647 is not set
-# CONFIG_VIDEO_OV5648 is not set
-# CONFIG_VIDEO_OV5670 is not set
-# CONFIG_VIDEO_OV5675 is not set
-# CONFIG_VIDEO_OV5693 is not set
-# CONFIG_VIDEO_OV5695 is not set
-# CONFIG_VIDEO_OV6650 is not set
-# CONFIG_VIDEO_OV7251 is not set
-# CONFIG_VIDEO_OV7640 is not set
-# CONFIG_VIDEO_OV7670 is not set
-# CONFIG_VIDEO_OV772X is not set
-# CONFIG_VIDEO_OV7740 is not set
-# CONFIG_VIDEO_OV8856 is not set
-# CONFIG_VIDEO_OV8858 is not set
-# CONFIG_VIDEO_OV8865 is not set
-# CONFIG_VIDEO_OV9640 is not set
-# CONFIG_VIDEO_OV9650 is not set
-# CONFIG_VIDEO_OV9734 is not set
-# CONFIG_VIDEO_RDACM20 is not set
-# CONFIG_VIDEO_RDACM21 is not set
-# CONFIG_VIDEO_RJ54N1 is not set
-# CONFIG_VIDEO_S5K5BAF is not set
-# CONFIG_VIDEO_S5K6A3 is not set
-# CONFIG_VIDEO_CCS is not set
-# CONFIG_VIDEO_ET8EK8 is not set
-# end of Camera sensor devices
+# CONFIG_VIDEO_CAMERA_SENSOR is not set
 
 #
 # Lens drivers
@@ -3110,6 +3048,7 @@ CONFIG_MEDIA_ATTACH=y
 # CONFIG_VIDEO_AD5820 is not set
 # CONFIG_VIDEO_AK7375 is not set
 # CONFIG_VIDEO_DW9714 is not set
+# CONFIG_VIDEO_DW9719 is not set
 # CONFIG_VIDEO_DW9768 is not set
 # CONFIG_VIDEO_DW9807_VCM is not set
 # end of Lens drivers
@@ -3222,6 +3161,11 @@ CONFIG_MEDIA_ATTACH=y
 # CONFIG_VIDEO_ST_MIPID02 is not set
 # CONFIG_VIDEO_THS7303 is not set
 # end of Miscellaneous helper chips
+
+#
+# Video serializers and deserializers
+#
+# end of Video serializers and deserializers
 
 CONFIG_MEDIA_TUNER=y
 
@@ -4059,6 +4003,7 @@ CONFIG_HID_ASUS=y
 # CONFIG_HID_GFRM is not set
 # CONFIG_HID_GLORIOUS is not set
 # CONFIG_HID_HOLTEK is not set
+# CONFIG_HID_GOOGLE_STADIA_FF is not set
 # CONFIG_HID_VIVALDI is not set
 # CONFIG_HID_GT683R is not set
 # CONFIG_HID_KEYTOUCH is not set
@@ -4638,7 +4583,6 @@ CONFIG_ASUS_NB_WMI=y
 # CONFIG_INTEL_SCU_PLATFORM is not set
 # CONFIG_SIEMENS_SIMATIC_IPC is not set
 # CONFIG_WINMATE_FM07_KEYS is not set
-# CONFIG_P2SB is not set
 CONFIG_HAVE_CLK=y
 CONFIG_HAVE_CLK_PREPARE=y
 CONFIG_COMMON_CLK=y
@@ -4778,6 +4722,8 @@ CONFIG_GENERIC_PHY=y
 
 # CONFIG_PHY_PXA_28NM_HSIC is not set
 # CONFIG_PHY_PXA_28NM_USB2 is not set
+# CONFIG_PHY_RTK_RTD_USB2PHY is not set
+# CONFIG_PHY_RTK_RTD_USB3PHY is not set
 # CONFIG_PHY_INTEL_LGM_EMMC is not set
 # end of PHY Subsystem
 
