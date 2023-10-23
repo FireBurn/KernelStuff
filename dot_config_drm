@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.6.0-rc2 Kernel Configuration
+# Linux/x86 6.6.0-rc7 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 17.0.3"
 CONFIG_GCC_VERSION=0
@@ -4726,8 +4726,6 @@ CONFIG_GENERIC_PHY=y
 
 # CONFIG_PHY_PXA_28NM_HSIC is not set
 # CONFIG_PHY_PXA_28NM_USB2 is not set
-# CONFIG_PHY_RTK_RTD_USB2PHY is not set
-# CONFIG_PHY_RTK_RTD_USB3PHY is not set
 # CONFIG_PHY_INTEL_LGM_EMMC is not set
 # end of PHY Subsystem
 
