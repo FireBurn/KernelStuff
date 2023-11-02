@@ -1694,6 +1694,11 @@ CONFIG_UEFI_CPER=y
 CONFIG_UEFI_CPER_X86=y
 
 #
+# Qualcomm firmware drivers
+#
+# end of Qualcomm firmware drivers
+
+#
 # Tegra firmware driver
 #
 # end of Tegra firmware driver
@@ -5375,7 +5380,6 @@ CONFIG_ZSTD_DECOMPRESS=y
 CONFIG_XZ_DEC=y
 CONFIG_XZ_DEC_X86=y
 # CONFIG_XZ_DEC_POWERPC is not set
-# CONFIG_XZ_DEC_IA64 is not set
 # CONFIG_XZ_DEC_ARM is not set
 # CONFIG_XZ_DEC_ARMTHUMB is not set
 # CONFIG_XZ_DEC_SPARC is not set
