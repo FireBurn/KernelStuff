@@ -1735,7 +1735,7 @@ CONFIG_BLK_DEV_NVME=y
 CONFIG_NVME_HWMON=y
 # CONFIG_NVME_FC is not set
 # CONFIG_NVME_TCP is not set
-# CONFIG_NVME_AUTH is not set
+# CONFIG_NVME_HOST_AUTH is not set
 # CONFIG_NVME_TARGET is not set
 # end of NVME Support
 
@@ -3550,6 +3550,7 @@ CONFIG_FB_SYS_IMAGEBLIT=y
 # CONFIG_FB_FOREIGN_ENDIAN is not set
 CONFIG_FB_SYS_FOPS=y
 CONFIG_FB_DEFERRED_IO=y
+CONFIG_FB_IOMEM_FOPS=y
 CONFIG_FB_IOMEM_HELPERS=y
 CONFIG_FB_SYSMEM_HELPERS=y
 CONFIG_FB_SYSMEM_HELPERS_DEFERRED=y
@@ -4703,6 +4704,31 @@ CONFIG_IRQ_REMAP=y
 #
 # end of Xilinx SoC drivers
 # end of SOC (System On Chip) specific Drivers
+
+#
+# PM Domains
+#
+
+#
+# Amlogic PM Domains
+#
+# end of Amlogic PM Domains
+
+#
+# Broadcom PM Domains
+#
+# end of Broadcom PM Domains
+
+#
+# i.MX PM Domains
+#
+# end of i.MX PM Domains
+
+#
+# Qualcomm PM Domains
+#
+# end of Qualcomm PM Domains
+# end of PM Domains
 
 # CONFIG_PM_DEVFREQ is not set
 # CONFIG_EXTCON is not set
