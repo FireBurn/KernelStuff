@@ -20,7 +20,7 @@ function updateKernel {
     git rebase --abort
     git am --abort
     git reset --hard ${BRANCH}
-    gitAM ../02-enable-additional-cpu-optimizations-5.8.patch
+    gitAM ../02-enable-additional-cpu-optimizations-6.8.patch
   fi
   make LLVM=1 -j16
   make LLVM=1 modules_install
