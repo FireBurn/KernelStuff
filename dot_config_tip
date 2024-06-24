@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.10.0-rc4 Kernel Configuration
+# Linux/x86 6.10.0-rc5 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 18.1.7"
 CONFIG_GCC_VERSION=0
@@ -3506,7 +3506,6 @@ CONFIG_HSA_AMD_SVM=y
 # CONFIG_DRM_XE is not set
 # CONFIG_DRM_VGEM is not set
 # CONFIG_DRM_VKMS is not set
-# CONFIG_DRM_VMWGFX is not set
 # CONFIG_DRM_GMA500 is not set
 # CONFIG_DRM_UDL is not set
 # CONFIG_DRM_AST is not set
