@@ -4834,6 +4834,7 @@ CONFIG_IRQ_REMAP=y
 #
 # IRQ chip support
 #
+# CONFIG_LAN966X_OIC is not set
 # end of IRQ chip support
 
 # CONFIG_IPACK_BUS is not set
