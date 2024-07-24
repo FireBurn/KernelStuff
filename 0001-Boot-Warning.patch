@@ -1,0 +1,141 @@
+From 7e53230ce7ae328b26e037fff24f37c019c3df72 Mon Sep 17 00:00:00 2001
+From: Borislav Petkov <bp@alien8.de>
+Date: Mon, 22 Jul 2024 17:23:30 +0200
+Subject: [PATCH 1/2] Boot Warning
+
+On Mon, Jul 22, 2024 at 01:45:35PM +0100, Mike Lothian wrote:
+> Hi
+>
+> I'm seeing the following boot warning:
+>
+> ------------[ cut here ]------------
+> WARNING: CPU: 0 PID: 0 at arch/x86/lib/cmdline.c:211
+> cmdline_find_option_bool+0x741/0x760
+> Modules linked in:
+> CPU: 0 UID: 0 PID: 0 Comm: swapper Not tainted 6.10.0-tip+ #4105
+> RIP: 0010:cmdline_find_option_bool+0x741/0x760
+> Code: 85 07 f9 ff ff eb 20 41 80 f8 21 72 1c 45 31 c9 41 80 f8 21 41
+> 0f 93 c1 45 01 c9 81 f9 00 08 00 00 0f 85 e5 f8 ff ff 31 c0 c3 <0f> 0b
+> 48 85 ff 0f 85 ce f8 ff ff b8 ff ff ff ff c3 cc cc cc cc cc
+> RSP: 0000:ffffffff83803f18 EFLAGS: 00010046 ORIG_RAX: 0000000000000000
+> RAX: 000000000a50000c RBX: 0000000068747541 RCX: ffffffff833f2bec
+> RDX: 0000000000000000 RSI: ffffffff832def4e RDI: ffffffff83b98820
+> RBP: 0000000000a50f00 R08: 00cf9a000000ffff R09: 0000000000000030
+> R10: 000000006c617470 R11: 0000000000100000 R12: 0000000000000000
+> R13: 0000000000000000 R14: 00000000b53e4000 R15: 00000000b53e4000
+> FS:  0000000000000000(0000) GS:ffffffff83acd000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: ffff8880b61c6810 CR3: 0000000004b57000 CR4: 00000000000000b0
+> Call Trace:
+> <TASK>
+> ? __warn+0xcb/0x1c0
+> ? cmdline_find_option_bool+0x741/0x760
+> ? report_bug+0x173/0x220
+> ? early_fixup_exception+0x4a/0xa0
+> ? early_idt_handler_common+0x2f/0x40
+> ? cmdline_find_option_bool+0x741/0x760
+> ? check_loader_disabled_bsp+0x46/0xa0
+> ? load_ucode_bsp+0x6b/0x80
+> ? x86_64_start_kernel+0x4b/0x70
+> ? common_startup_64+0x12c/0x137
+> </TASK>
+> ---[ end trace 0000000000000000 ]---
+>
+> I use an efi stub kernel
+> https://github.com/FireBurn/KernelStuff/blob/master/dot_config_tip
+>
+> I wasn't quite sure where to report this in the bugzilla, I'll happily
+> raise one if you let me know which section it should be in
+
+Yeah, you can usually CC x86@ and lkml and that is fine too - bugzilla is not
+absolutely required. Did that now.
+
+Anyway, yeah, this is nasty. Our handling of the merging of the builtin and
+boot cmdline options would need some serious reshuffling to fix this: the
+ucode loader needs to parse cmdline but the final cmdline is built a lot
+later.
+
+The only easy thing I could think of right now is, well, to check both cmdline
+strings before the merging happens.
+
+Something like the completely untested below:
+---
+ arch/x86/include/asm/cmdline.h |  4 ++++
+ arch/x86/kernel/setup.c        |  2 +-
+ arch/x86/lib/cmdline.c         | 27 ++++++++++++++++++++-------
+ 3 files changed, 25 insertions(+), 8 deletions(-)
+
+diff --git a/arch/x86/include/asm/cmdline.h b/arch/x86/include/asm/cmdline.h
+index 6faaf27e8899..abcb270e2a07 100644
+--- a/arch/x86/include/asm/cmdline.h
++++ b/arch/x86/include/asm/cmdline.h
+@@ -2,6 +2,10 @@
+ #ifndef _ASM_X86_CMDLINE_H
+ #define _ASM_X86_CMDLINE_H
+ 
++#include <asm/setup.h>
++
++extern char __initdata builtin_cmdline[COMMAND_LINE_SIZE];
++
+ int cmdline_find_option_bool(const char *cmdline_ptr, const char *option);
+ int cmdline_find_option(const char *cmdline_ptr, const char *option,
+ 			char *buffer, int bufsize);
+diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
+index 5d34cad9b7b1..6129dc2ba784 100644
+--- a/arch/x86/kernel/setup.c
++++ b/arch/x86/kernel/setup.c
+@@ -164,7 +164,7 @@ unsigned long saved_video_mode;
+ 
+ static char __initdata command_line[COMMAND_LINE_SIZE];
+ #ifdef CONFIG_CMDLINE_BOOL
+-static char __initdata builtin_cmdline[COMMAND_LINE_SIZE] = CONFIG_CMDLINE;
++char builtin_cmdline[COMMAND_LINE_SIZE] = CONFIG_CMDLINE;
+ bool builtin_cmdline_added __ro_after_init;
+ #endif
+ 
+diff --git a/arch/x86/lib/cmdline.c b/arch/x86/lib/cmdline.c
+index 384da1fdd5c6..75e7e2cc4569 100644
+--- a/arch/x86/lib/cmdline.c
++++ b/arch/x86/lib/cmdline.c
+@@ -207,18 +207,31 @@ __cmdline_find_option(const char *cmdline, int max_cmdline_size,
+ 
+ int cmdline_find_option_bool(const char *cmdline, const char *option)
+ {
+-	if (IS_ENABLED(CONFIG_CMDLINE_BOOL))
+-		WARN_ON_ONCE(!builtin_cmdline_added);
++	int ret;
+ 
+-	return __cmdline_find_option_bool(cmdline, COMMAND_LINE_SIZE, option);
++	ret = __cmdline_find_option_bool(cmdline, COMMAND_LINE_SIZE, option);
++	if (ret > 0)
++		return ret;
++
++#ifdef CONFIG_CMDLINE_BOOL
++	if (!builtin_cmdline_added)
++		ret = __cmdline_find_option_bool(builtin_cmdline, COMMAND_LINE_SIZE, option);
++#endif
++	return ret;
+ }
+ 
+ int cmdline_find_option(const char *cmdline, const char *option, char *buffer,
+ 			int bufsize)
+ {
+-	if (IS_ENABLED(CONFIG_CMDLINE_BOOL))
+-		WARN_ON_ONCE(!builtin_cmdline_added);
++	int ret;
++
++	ret = __cmdline_find_option(cmdline, COMMAND_LINE_SIZE, option, buffer, bufsize);
++	if (ret > 0)
++		return ret;
+ 
+-	return __cmdline_find_option(cmdline, COMMAND_LINE_SIZE, option,
+-				     buffer, bufsize);
++#ifdef CONFIG_CMDLINE_BOOL
++	if (!builtin_cmdline_added)
++		ret = __cmdline_find_option(builtin_cmdline, COMMAND_LINE_SIZE, option, buffer, bufsize);
++#endif
++	return ret;
+ }
+-- 
+2.45.2
+

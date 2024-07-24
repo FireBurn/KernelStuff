@@ -1,0 +1,94 @@
+From 53e8d6549a20dbbc90b06fc08d46ac617cc8ddda Mon Sep 17 00:00:00 2001
+From: Sean Wang <sean.wang@mediatek.com>
+Date: Thu, 18 Jul 2024 16:46:33 -0700
+Subject: [PATCH 2/2] wifi: mt76: mt7921: fix null pointer access in
+ mt792x_mac_link_bss_remove
+
+Fix null pointer access in mt792x_mac_link_bss_remove.
+
+To prevent null pointer access, we should assign the vif to bss_conf in
+mt7921_add_interface. This ensures that subsequent operations on the BSS
+can properly reference the correct vif.
+
+[  T843] Call Trace:
+[  T843]  <TASK>
+[  T843]  ? __die+0x1e/0x60
+[  T843]  ? page_fault_oops+0x157/0x450
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? search_bpf_extables+0x5a/0x80
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? exc_page_fault+0x2bb/0x670
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? lock_timer_base+0x71/0x90
+[  T843]  ? asm_exc_page_fault+0x26/0x30
+[  T843]  ? mt792x_mac_link_bss_remove+0x24/0x110 [mt792x_lib]
+[  T843]  ? mt792x_remove_interface+0x6e/0x90 [mt792x_lib]
+[  T843]  ? ieee80211_do_stop+0x507/0x7e0 [mac80211]
+[  T843]  ? ieee80211_stop+0x53/0x190 [mac80211]
+[  T843]  ? __dev_close_many+0xa5/0x120
+[  T843]  ? __dev_change_flags+0x18c/0x220
+[  T843]  ? dev_change_flags+0x21/0x60
+[  T843]  ? do_setlink+0xdf9/0x11d0
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? security_sock_rcv_skb+0x33/0x50
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? __nla_validate_parse+0x61/0xd10
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? genl_done+0x53/0x80
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? netlink_dump+0x357/0x410
+[  T843]  ? __rtnl_newlink+0x5d6/0x980
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? genl_family_rcv_msg_dumpit+0xdf/0xf0
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? __kmalloc_cache_noprof+0x44/0x210
+[  T843]  ? rtnl_newlink+0x42/0x60
+[  T843]  ? rtnetlink_rcv_msg+0x152/0x3f0
+[  T843]  ? mptcp_pm_nl_dump_addr+0x180/0x180
+[  T843]  ? rtnl_calcit.isra.0+0x130/0x130
+[  T843]  ? netlink_rcv_skb+0x56/0x100
+[  T843]  ? netlink_unicast+0x199/0x290
+[  T843]  ? netlink_sendmsg+0x21d/0x490
+[  T843]  ? __sock_sendmsg+0x78/0x80
+[  T843]  ? ____sys_sendmsg+0x23f/0x2e0
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? copy_msghdr_from_user+0x68/0xa0
+[  T843]  ? ___sys_sendmsg+0x81/0xd0
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? crng_fast_key_erasure+0xbc/0xf0
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? get_random_bytes_user+0x126/0x140
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? __fdget+0xb1/0xe0
+[  T843]  ? __sys_sendmsg+0x56/0xa0
+[  T843]  ? srso_alias_return_thunk+0x5/0xfbef5
+[  T843]  ? do_syscall_64+0x5f/0x170
+[  T843]  ? entry_SYSCALL_64_after_hwframe+0x55/0x5d
+[  T843]  </TASK>
+
+Fixes: 1541d63c5fe2 ("wifi: mt76: mt7925: add mt7925_mac_link_bss_remove to remove per-link BSS")
+Reported-by: Bert Karwatzki <spasswolf@web.de>
+Closes: https://lore.kernel.org/linux-wireless/2fee61f8c903d02a900ca3188c3742c7effd102e.camel@web.de/#b
+Signed-off-by: Sean Wang <sean.wang@mediatek.com>
+---
+ drivers/net/wireless/mediatek/mt76/mt7921/main.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/net/wireless/mediatek/mt76/mt7921/main.c b/drivers/net/wireless/mediatek/mt76/mt7921/main.c
+index 2e6268cb06c0..1bab93d049df 100644
+--- a/drivers/net/wireless/mediatek/mt76/mt7921/main.c
++++ b/drivers/net/wireless/mediatek/mt76/mt7921/main.c
+@@ -303,6 +303,7 @@ mt7921_add_interface(struct ieee80211_hw *hw, struct ieee80211_vif *vif)
+ 
+ 	mvif->bss_conf.mt76.omac_idx = mvif->bss_conf.mt76.idx;
+ 	mvif->phy = phy;
++	mvif->bss_conf.vif = mvif;
+ 	mvif->bss_conf.mt76.band_idx = 0;
+ 	mvif->bss_conf.mt76.wmm_idx = mvif->bss_conf.mt76.idx % MT76_CONNAC_MAX_WMM_SETS;
+ 
+-- 
+2.45.2
+
