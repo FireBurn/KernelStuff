@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.11.0-rc2 Kernel Configuration
+# Linux/x86 6.11.0-rc5 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 18.1.8"
 CONFIG_GCC_VERSION=0
@@ -4636,7 +4636,6 @@ CONFIG_ASUS_NB_WMI=y
 # CONFIG_WIRELESS_HOTKEY is not set
 # CONFIG_IBM_RTL is not set
 # CONFIG_IDEAPAD_LAPTOP is not set
-# CONFIG_LENOVO_YMC is not set
 # CONFIG_SENSORS_HDAPS is not set
 # CONFIG_THINKPAD_ACPI is not set
 # CONFIG_THINKPAD_LMI is not set
@@ -4960,6 +4959,7 @@ CONFIG_FUSE_FS=y
 #
 CONFIG_NETFS_SUPPORT=y
 # CONFIG_NETFS_STATS is not set
+# CONFIG_NETFS_DEBUG is not set
 CONFIG_FSCACHE=y
 # CONFIG_FSCACHE_STATS is not set
 CONFIG_CACHEFILES=y
