@@ -21,7 +21,6 @@ function updateKernel {
     git am --abort
     git reset --hard ${BRANCH}
     gitAM ../01-enable-additional-cpu-optimizations-6.8.patch
-    gitAM ../02-wifi-fix.patch
   fi
   make LLVM=1 -j16
   make LLVM=1 modules_install
