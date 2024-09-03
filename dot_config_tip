@@ -435,8 +435,7 @@ CONFIG_X86_ESPFIX64=y
 CONFIG_X86_VSYSCALL_EMULATION=y
 CONFIG_X86_IOPL_IOPERM=y
 CONFIG_MICROCODE=y
-CONFIG_MICROCODE_LATE_LOADING=y
-# CONFIG_MICROCODE_LATE_FORCE_MINREV is not set
+# CONFIG_MICROCODE_LATE_LOADING is not set
 CONFIG_X86_MSR=y
 CONFIG_X86_CPUID=y
 # CONFIG_X86_5LEVEL is not set
@@ -1646,7 +1645,7 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
 CONFIG_FW_LOADER=y
 CONFIG_FW_LOADER_PAGED_BUF=y
 CONFIG_FW_LOADER_SYSFS=y
-CONFIG_EXTRA_FIRMWARE="amd-ucode/microcode_amd_fam19h.bin amdgpu/green_sardine_asd.bin amdgpu/green_sardine_ce.bin amdgpu/green_sardine_dmcub.bin amdgpu/green_sardine_me.bin amdgpu/green_sardine_mec2.bin amdgpu/green_sardine_mec.bin amdgpu/green_sardine_pfp.bin amdgpu/green_sardine_rlc.bin amdgpu/green_sardine_sdma.bin amdgpu/green_sardine_ta.bin amdgpu/green_sardine_vcn.bin amdgpu/navy_flounder_ce.bin amdgpu/navy_flounder_dmcub.bin amdgpu/navy_flounder_me.bin amdgpu/navy_flounder_mec2.bin amdgpu/navy_flounder_mec.bin amdgpu/navy_flounder_pfp.bin amdgpu/navy_flounder_rlc.bin amdgpu/navy_flounder_sdma.bin amdgpu/navy_flounder_smc.bin amdgpu/navy_flounder_sos.bin amdgpu/navy_flounder_ta.bin amdgpu/navy_flounder_vcn.bin mediatek/WIFI_MT7961_patch_mcu_1_2_hdr.bin mediatek/WIFI_RAM_CODE_MT7961_1.bin mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin regulatory.db regulatory.db.p7s"
+CONFIG_EXTRA_FIRMWARE="amdgpu/green_sardine_asd.bin amdgpu/green_sardine_ce.bin amdgpu/green_sardine_dmcub.bin amdgpu/green_sardine_me.bin amdgpu/green_sardine_mec2.bin amdgpu/green_sardine_mec.bin amdgpu/green_sardine_pfp.bin amdgpu/green_sardine_rlc.bin amdgpu/green_sardine_sdma.bin amdgpu/green_sardine_ta.bin amdgpu/green_sardine_vcn.bin amdgpu/navy_flounder_ce.bin amdgpu/navy_flounder_dmcub.bin amdgpu/navy_flounder_me.bin amdgpu/navy_flounder_mec2.bin amdgpu/navy_flounder_mec.bin amdgpu/navy_flounder_pfp.bin amdgpu/navy_flounder_rlc.bin amdgpu/navy_flounder_sdma.bin amdgpu/navy_flounder_smc.bin amdgpu/navy_flounder_sos.bin amdgpu/navy_flounder_ta.bin amdgpu/navy_flounder_vcn.bin mediatek/WIFI_MT7961_patch_mcu_1_2_hdr.bin mediatek/WIFI_RAM_CODE_MT7961_1.bin mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin regulatory.db regulatory.db.p7s"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 CONFIG_FW_LOADER_USER_HELPER=y
 # CONFIG_FW_LOADER_USER_HELPER_FALLBACK is not set
