@@ -148,6 +148,6 @@ emerge --sync --quiet
 git push gitlab --all --force
 git push github --all --force
 emerge -vDuNt -j5 @world
-emerge -vDt -j5 @live-rebuild @preserved-rebuild
+emerge -vDt -j5 @live-rebuild @preserved-rebuild --exclude yuzu
 emerge --depclean -a
 eclean-dist --destructive -q
