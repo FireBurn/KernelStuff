@@ -1494,6 +1494,7 @@ CONFIG_BLK_DEV_NVME=y
 # CONFIG_PCI_ENDPOINT_TEST is not set
 # CONFIG_XILINX_SDFEC is not set
 CONFIG_NTSYNC=y
+# CONFIG_MCHP_LAN966X_PCI is not set
 # CONFIG_C2PORT is not set
 
 #
@@ -2086,11 +2087,15 @@ CONFIG_GPIO_CDEV_V1=y
 #
 # Memory mapped GPIO drivers
 #
+# CONFIG_GPIO_ALTERA is not set
 # CONFIG_GPIO_AMDPT is not set
 # CONFIG_GPIO_DWAPB is not set
 # CONFIG_GPIO_GENERIC_PLATFORM is not set
 # CONFIG_GPIO_GRANITERAPIDS is not set
+# CONFIG_GPIO_GRGPIO is not set
 # CONFIG_GPIO_MB86S7X is not set
+# CONFIG_GPIO_POLARFIRE_SOC is not set
+# CONFIG_GPIO_XILINX is not set
 # CONFIG_GPIO_AMD_FCH is not set
 # end of Memory mapped GPIO drivers
 
@@ -2138,6 +2143,7 @@ CONFIG_GPIO_CDEV_V1=y
 #
 # USB GPIO expanders
 #
+# CONFIG_GPIO_MPSSE is not set
 # end of USB GPIO expanders
 
 #
@@ -2424,6 +2430,7 @@ CONFIG_MFD_CORE=y
 # CONFIG_MFD_BCM590XX is not set
 # CONFIG_MFD_BD9571MWV is not set
 # CONFIG_MFD_AXP20X_I2C is not set
+# CONFIG_MFD_CGBC is not set
 # CONFIG_MFD_CS42L43_I2C is not set
 # CONFIG_MFD_MADERA is not set
 # CONFIG_PMIC_DA903X is not set
@@ -3438,6 +3445,7 @@ CONFIG_HID_ASUS=y
 # CONFIG_HID_GT683R is not set
 # CONFIG_HID_KEYTOUCH is not set
 # CONFIG_HID_KYE is not set
+# CONFIG_HID_KYSONA is not set
 # CONFIG_HID_UCLOGIC is not set
 # CONFIG_HID_WALTOP is not set
 # CONFIG_HID_VIEWSONIC is not set
@@ -3959,8 +3967,16 @@ CONFIG_WMI_BMOF=y
 # CONFIG_YOGABOOK is not set
 # CONFIG_ACERHDF is not set
 # CONFIG_ACER_WIRELESS is not set
+
+#
+# AMD HSMP Driver
+#
+# CONFIG_AMD_HSMP_ACPI is not set
+# CONFIG_AMD_HSMP_PLAT is not set
+# end of AMD HSMP Driver
+
 # CONFIG_AMD_PMC is not set
-# CONFIG_AMD_HSMP is not set
+# CONFIG_AMD_3D_VCACHE is not set
 # CONFIG_AMD_WBRF is not set
 # CONFIG_ADV_SWBUTTON is not set
 # CONFIG_APPLE_GMUX is not set
