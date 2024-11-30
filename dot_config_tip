@@ -1511,13 +1511,6 @@ CONFIG_NTSYNC=y
 # end of EEPROM support
 
 # CONFIG_CB710_CORE is not set
-
-#
-# Texas Instruments shared transport line discipline
-#
-# CONFIG_TI_ST is not set
-# end of Texas Instruments shared transport line discipline
-
 # CONFIG_SENSORS_LIS3_I2C is not set
 # CONFIG_ALTERA_STAPL is not set
 # CONFIG_INTEL_MEI is not set
@@ -3736,6 +3729,7 @@ CONFIG_TYPEC=y
 # CONFIG_TYPEC_MUX_IT5205 is not set
 # CONFIG_TYPEC_MUX_NB7VPQ904M is not set
 # CONFIG_TYPEC_MUX_PTN36502 is not set
+# CONFIG_TYPEC_MUX_TUSB1046 is not set
 # CONFIG_TYPEC_MUX_WCD939X_USBSS is not set
 # end of USB Type-C Multiplexer/DeMultiplexer Switch support
 
