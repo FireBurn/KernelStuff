@@ -1,0 +1,69 @@
+#!/bin/bash
+
+export PATH=/usr/lib/llvm/19/bin:$PATH
+
+function gitAM {
+  git am $1
+  rc=$?
+  if [[ $rc != 0 ]]; then
+    git am --abort
+  fi
+}
+
+function updateKernel {
+  DIR=$1; IMG=$2; BRANCH=$3
+
+  cd /usr/src/${DIR}
+  git rebase ${BRANCH}
+  rc=$?
+  if [[ $rc != 0 ]]; then
+      git rebase --abort
+      git am --abort
+      git reset --hard ${BRANCH}
+      gitAM ../01-enable-additional-cpu-optimizations-6.8.patch
+  fi
+  make LLVM=1 -j16
+  make LLVM=1 modules_install -j16
+  cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
+}
+
+rm -f /etc/portage/make.conf\~
+
+cp /usr/bin/git-update /usr/src
+
+cd /usr/src/
+git pull
+
+cd /lib/firmware
+git pull
+
+rm -rf /lib/modules/*agd5f* /lib/modules/*drm* /lib/modules/*tip*
+
+cd /usr/src/linux
+git fetch --all --prune
+
+updateKernel linux tip   linus/master		1
+updateKernel drm   drm   airlied/drm-next	1
+updateKernel agd5f agd5f agd5f/drm-next		1
+
+cp /usr/src/agd5f/.config       /usr/src/dot_config_agd5f
+cp /usr/src/drm/.config         /usr/src/dot_config_drm
+cp /usr/src/linux/.config       /usr/src/dot_config_tip
+cp /usr/src/stable/.config      /usr/src/dot_config_stable
+
+cd /usr/src
+git add .
+git commit -m "Git Update `date +%F-%T`"
+git push
+
+cd /etc/portage
+git pull
+git add .
+git commit -m "Git Update `date +%F-%T`"
+git push
+
+emerge --sync --quiet
+emerge -vDuNt --keep-going -j2 --complete-graph y @world
+emerge -vDt --keep-going -j5 --complete-graph y @live-rebuild @preserved-rebuild --exclude yuzu
+emerge --depclean -a
+eclean-dist --destructive -q
