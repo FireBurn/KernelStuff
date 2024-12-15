@@ -284,7 +284,7 @@ CONFIG_PERF_EVENTS=y
 # CONFIG_PROFILING is not set
 CONFIG_RUST=y
 CONFIG_RUSTC_VERSION_TEXT="rustc 1.83.0-nightly (90b35a623 2024-11-26) (gentoo)"
-CONFIG_BINDGEN_VERSION_TEXT="bindgen 0.70.1"
+CONFIG_BINDGEN_VERSION_TEXT="bindgen 0.71.1"
 
 #
 # Kexec and crash features
