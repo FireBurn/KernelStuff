@@ -1439,6 +1439,8 @@ CONFIG_APPLE_PROPERTIES=y
 # CONFIG_EFI_COCO_SECRET is not set
 # end of EFI (Extensible Firmware Interface) Support
 
+# CONFIG_IMX_SCMI_MISC_DRV is not set
+
 #
 # Qualcomm firmware drivers
 #
