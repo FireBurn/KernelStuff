@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.13.0-rc3 Kernel Configuration
+# Linux/x86 6.13.0-rc6 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 19.1.6"
 CONFIG_GCC_VERSION=0
@@ -194,6 +194,7 @@ CONFIG_CFS_BANDWIDTH=y
 CONFIG_SCHED_MM_CID=y
 CONFIG_CGROUP_PIDS=y
 CONFIG_CGROUP_RDMA=y
+CONFIG_CGROUP_DMEM=y
 CONFIG_CGROUP_FREEZER=y
 CONFIG_CGROUP_HUGETLB=y
 CONFIG_CPUSETS=y
@@ -1425,6 +1426,8 @@ CONFIG_EFI_RUNTIME_WRAPPERS=y
 # CONFIG_EFI_COCO_SECRET is not set
 # end of EFI (Extensible Firmware Interface) Support
 
+# CONFIG_IMX_SCMI_MISC_DRV is not set
+
 #
 # Qualcomm firmware drivers
 #
@@ -2516,6 +2519,7 @@ CONFIG_MFD_CORE=y
 # CONFIG_REGULATOR is not set
 # CONFIG_RC_CORE is not set
 CONFIG_CEC_CORE=y
+CONFIG_CEC_NOTIFIER=y
 
 #
 # CEC support
