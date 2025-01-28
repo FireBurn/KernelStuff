@@ -1513,7 +1513,6 @@ CONFIG_BLK_DEV_NVME=y
 # CONFIG_PCI_ENDPOINT_TEST is not set
 # CONFIG_XILINX_SDFEC is not set
 CONFIG_NTSYNC=y
-# CONFIG_MCHP_LAN966X_PCI is not set
 # CONFIG_C2PORT is not set
 
 #
@@ -3660,11 +3659,7 @@ CONFIG_USB_XHCI_PCI=y
 # CONFIG_USB_TMC is not set
 
 #
-# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may
-#
-
-#
-# also be needed; see USB_STORAGE Help for more info
+# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may also be needed; see USB_STORAGE Help for more info
 #
 CONFIG_USB_STORAGE=y
 # CONFIG_USB_STORAGE_DEBUG is not set
@@ -3768,6 +3763,7 @@ CONFIG_TYPEC=y
 #
 CONFIG_TYPEC_DP_ALTMODE=y
 # CONFIG_TYPEC_NVIDIA_ALTMODE is not set
+# CONFIG_TYPEC_TBT_ALTMODE is not set
 # end of USB Type-C Alternate Mode drivers
 
 # CONFIG_USB_ROLE_SWITCH is not set
