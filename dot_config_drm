@@ -2870,13 +2870,6 @@ CONFIG_DRM_SUBALLOC_HELPER=y
 CONFIG_DRM_SCHED=y
 
 #
-# I2C encoder or helper chips
-#
-# CONFIG_DRM_I2C_NXP_TDA998X is not set
-# CONFIG_DRM_I2C_NXP_TDA9950 is not set
-# end of I2C encoder or helper chips
-
-#
 # ARM devices
 #
 # end of ARM devices
@@ -2928,6 +2921,7 @@ CONFIG_DRM_PANEL_BRIDGE=y
 #
 # Display Interface Bridges
 #
+# CONFIG_DRM_I2C_NXP_TDA998X is not set
 # CONFIG_DRM_ANALOGIX_ANX78XX is not set
 # end of Display Interface Bridges
 
@@ -2942,6 +2936,7 @@ CONFIG_DRM_PANEL_BRIDGE=y
 # CONFIG_DRM_SSD130X is not set
 CONFIG_DRM_PANEL_BACKLIGHT_QUIRKS=y
 # CONFIG_DRM_WERROR is not set
+# CONFIG_DRM_HEADER_TEST is not set
 CONFIG_DRM_PANEL_ORIENTATION_QUIRKS=y
 
 #
