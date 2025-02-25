@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.14.0-rc2 Kernel Configuration
+# Linux/x86 6.14.0-rc4 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 19.1.7"
 CONFIG_GCC_VERSION=0
@@ -1434,8 +1434,6 @@ CONFIG_EFI_RUNTIME_WRAPPERS=y
 # CONFIG_EFI_DISABLE_RUNTIME is not set
 # CONFIG_EFI_COCO_SECRET is not set
 # end of EFI (Extensible Firmware Interface) Support
-
-# CONFIG_IMX_SCMI_MISC_DRV is not set
 
 #
 # Qualcomm firmware drivers
@@ -3567,14 +3565,6 @@ CONFIG_HID_STEAM=y
 #
 # end of HID-BPF support
 
-#
-# USB HID support
-#
-CONFIG_USB_HID=y
-CONFIG_HID_PID=y
-CONFIG_USB_HIDDEV=y
-# end of USB HID support
-
 CONFIG_I2C_HID=y
 CONFIG_I2C_HID_ACPI=y
 # CONFIG_I2C_HID_OF is not set
@@ -3597,6 +3587,14 @@ CONFIG_I2C_HID_CORE=y
 #
 # CONFIG_INTEL_THC_HID is not set
 # end of Intel THC HID Support
+
+#
+# USB HID support
+#
+CONFIG_USB_HID=y
+CONFIG_HID_PID=y
+CONFIG_USB_HIDDEV=y
+# end of USB HID support
 
 CONFIG_USB_OHCI_LITTLE_ENDIAN=y
 CONFIG_USB_SUPPORT=y
@@ -3998,7 +3996,6 @@ CONFIG_SYNC_FILE=y
 # CONFIG_STAGING is not set
 # CONFIG_GOLDFISH is not set
 # CONFIG_CHROME_PLATFORMS is not set
-# CONFIG_CZNIC_PLATFORMS is not set
 # CONFIG_MELLANOX_PLATFORM is not set
 # CONFIG_SURFACE_PLATFORMS is not set
 CONFIG_X86_PLATFORM_DEVICES=y
