@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.14.0 Kernel Configuration
+# Linux/x86 6.15.0-rc2 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 20.1.2"
 CONFIG_GCC_VERSION=0
@@ -4808,11 +4808,8 @@ CONFIG_CRYPTO_LIB_SHA1=y
 CONFIG_CRYPTO_LIB_SHA256=y
 # end of Crypto library routines
 
-# CONFIG_CRC_CCITT is not set
 CONFIG_CRC16=y
-# CONFIG_CRC_T10DIF is not set
 CONFIG_ARCH_HAS_CRC_T10DIF=y
-# CONFIG_CRC_ITU_T is not set
 CONFIG_CRC32=y
 CONFIG_ARCH_HAS_CRC32=y
 CONFIG_CRC32_ARCH=y
