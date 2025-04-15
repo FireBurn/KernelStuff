@@ -2879,6 +2879,7 @@ CONFIG_DRM_AMDGPU=y
 CONFIG_DRM_AMDGPU_USERPTR=y
 # CONFIG_DRM_AMD_ISP is not set
 # CONFIG_DRM_AMDGPU_WERROR is not set
+# CONFIG_DRM_AMDGPU_NAVI3X_USERQ is not set
 
 #
 # ACP (Audio CoProcessor) Configuration
