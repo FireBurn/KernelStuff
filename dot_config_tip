@@ -1333,7 +1333,7 @@ CONFIG_HOTPLUG_PCI_ACPI=y
 # CONFIG_PCI_SW_SWITCHTEC is not set
 # end of PCI switch controller drivers
 
-# CONFIG_PCI_PWRCTL_SLOT is not set
+# CONFIG_PCI_PWRCTRL_SLOT is not set
 # CONFIG_CXL_BUS is not set
 # CONFIG_PCCARD is not set
 # CONFIG_RAPIDIO is not set
