@@ -277,7 +277,7 @@ CONFIG_PERF_EVENTS=y
 # CONFIG_PROFILING is not set
 CONFIG_RUST=y
 CONFIG_RUSTC_VERSION_TEXT="rustc 1.87.0 (17067e9ac 2025-05-09) (gentoo)"
-CONFIG_BINDGEN_VERSION_TEXT="bindgen 0.71.1"
+CONFIG_BINDGEN_VERSION_TEXT="bindgen 0.72.0"
 
 #
 # Kexec and crash features
@@ -3001,7 +3001,6 @@ CONFIG_FB_EFI=y
 # CONFIG_FB_SM712 is not set
 CONFIG_FB_CORE=y
 CONFIG_FB_NOTIFY=y
-# CONFIG_FIRMWARE_EDID is not set
 # CONFIG_FB_DEVICE is not set
 CONFIG_FB_CFB_FILLRECT=y
 CONFIG_FB_CFB_COPYAREA=y
@@ -3042,6 +3041,7 @@ CONFIG_BACKLIGHT_CLASS_DEVICE=y
 # end of Backlight & LCD device support
 
 CONFIG_HDMI=y
+# CONFIG_FIRMWARE_EDID is not set
 
 #
 # Console display driver support
