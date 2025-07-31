@@ -2463,6 +2463,7 @@ CONFIG_MFD_CORE=y
 # CONFIG_MFD_BD9571MWV is not set
 # CONFIG_MFD_AXP20X_I2C is not set
 # CONFIG_MFD_CGBC is not set
+# CONFIG_MFD_CS40L50_I2C is not set
 # CONFIG_MFD_CS42L43_I2C is not set
 # CONFIG_MFD_MADERA is not set
 # CONFIG_PMIC_DA903X is not set
@@ -2540,7 +2541,6 @@ CONFIG_MFD_CORE=y
 # CONFIG_MFD_WM8350_I2C is not set
 # CONFIG_MFD_WM8994 is not set
 # CONFIG_MFD_ATC260X_I2C is not set
-# CONFIG_MFD_CS40L50_I2C is not set
 # CONFIG_MFD_UPBOARD_FPGA is not set
 # end of Multifunction device drivers
 
@@ -2654,16 +2654,7 @@ CONFIG_MEDIA_ATTACH=y
 # CONFIG_VIDEO_THP7312 is not set
 # end of Camera ISPs
 
-#
-# Lens drivers
-#
-# CONFIG_VIDEO_AD5820 is not set
-# CONFIG_VIDEO_AK7375 is not set
-# CONFIG_VIDEO_DW9714 is not set
-# CONFIG_VIDEO_DW9719 is not set
-# CONFIG_VIDEO_DW9768 is not set
-# CONFIG_VIDEO_DW9807_VCM is not set
-# end of Lens drivers
+# CONFIG_VIDEO_CAMERA_LENS is not set
 
 #
 # Flash devices
@@ -2779,6 +2770,7 @@ CONFIG_MEDIA_ATTACH=y
 #
 # Video serializers and deserializers
 #
+# CONFIG_VIDEO_MAX96717 is not set
 # end of Video serializers and deserializers
 
 CONFIG_MEDIA_TUNER=y
