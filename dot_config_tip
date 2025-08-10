@@ -1452,6 +1452,7 @@ CONFIG_APPLE_PROPERTIES=y
 # CONFIG_EFI_CUSTOM_SSDT_OVERLAYS is not set
 # CONFIG_EFI_DISABLE_RUNTIME is not set
 # CONFIG_EFI_COCO_SECRET is not set
+# CONFIG_OVMF_DEBUG_LOG is not set
 CONFIG_EFI_SBAT_FILE=""
 # end of EFI (Extensible Firmware Interface) Support
 
