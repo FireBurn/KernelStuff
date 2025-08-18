@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.17.0-rc1 Kernel Configuration
+# Linux/x86 6.17.0-rc2 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 20.1.8"
 CONFIG_GCC_VERSION=0
@@ -3323,12 +3323,6 @@ CONFIG_SND_AMD_ACP_CONFIG=y
 # end of Freescale
 
 #
-# Generic drivers
-#
-# CONFIG_SND_SIMPLE_CARD is not set
-# end of Generic drivers
-
-#
 # Google
 #
 # CONFIG_SND_SOC_CHV3_I2S is not set
@@ -3599,6 +3593,12 @@ CONFIG_SND_SOC_I2C_AND_SPI=y
 # CONFIG_SND_SOC_LPASS_RX_MACRO is not set
 # CONFIG_SND_SOC_LPASS_TX_MACRO is not set
 # end of CODEC drivers
+
+#
+# Generic drivers
+#
+# CONFIG_SND_SIMPLE_CARD is not set
+# end of Generic drivers
 
 # CONFIG_SND_X86 is not set
 # CONFIG_SND_VIRTIO is not set
