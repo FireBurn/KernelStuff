@@ -1489,6 +1489,7 @@ CONFIG_PNP=y
 CONFIG_PNPACPI=y
 CONFIG_BLK_DEV=y
 # CONFIG_BLK_DEV_NULL_BLK is not set
+# CONFIG_BLK_DEV_RUST_NULL is not set
 # CONFIG_BLK_DEV_FD is not set
 CONFIG_CDROM=y
 # CONFIG_BLK_DEV_PCIESSD_MTIP32XX is not set
@@ -1498,7 +1499,6 @@ CONFIG_CDROM=y
 # CONFIG_BLK_DEV_NBD is not set
 # CONFIG_BLK_DEV_RAM is not set
 # CONFIG_ATA_OVER_ETH is not set
-# CONFIG_BLK_DEV_RUST_NULL is not set
 # CONFIG_BLK_DEV_RBD is not set
 # CONFIG_BLK_DEV_UBLK is not set
 
@@ -4741,6 +4741,7 @@ CONFIG_CC_HAS_ZERO_CALL_USED_REGS=y
 # Hardening of kernel data structures
 #
 # CONFIG_LIST_HARDENED is not set
+# CONFIG_RUST_BITMAP_HARDENED is not set
 # CONFIG_BUG_ON_DATA_CORRUPTION is not set
 # end of Hardening of kernel data structures
 
