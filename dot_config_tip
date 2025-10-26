@@ -1566,7 +1566,6 @@ CONFIG_NTSYNC=y
 # CONFIG_PVPANIC is not set
 # CONFIG_GP_PCI1XXXX is not set
 # CONFIG_KEBA_CP500 is not set
-# CONFIG_AMD_SBRMI_I2C is not set
 # end of Misc devices
 
 #
