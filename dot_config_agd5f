@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.18.0-rc1 Kernel Configuration
+# Linux/x86 6.18.0-rc2 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 21.1.4"
 CONFIG_GCC_VERSION=0
@@ -3004,11 +3004,9 @@ CONFIG_FB_EFI=y
 # CONFIG_FB_NVIDIA is not set
 # CONFIG_FB_RIVA is not set
 # CONFIG_FB_I740 is not set
-# CONFIG_FB_MATROX is not set
 # CONFIG_FB_RADEON is not set
 # CONFIG_FB_ATY128 is not set
 # CONFIG_FB_ATY is not set
-# CONFIG_FB_S3 is not set
 # CONFIG_FB_SAVAGE is not set
 # CONFIG_FB_SIS is not set
 # CONFIG_FB_VIA is not set
@@ -3016,9 +3014,7 @@ CONFIG_FB_EFI=y
 # CONFIG_FB_KYRO is not set
 # CONFIG_FB_3DFX is not set
 # CONFIG_FB_VOODOO1 is not set
-# CONFIG_FB_VT8623 is not set
 # CONFIG_FB_TRIDENT is not set
-# CONFIG_FB_ARK is not set
 # CONFIG_FB_PM3 is not set
 # CONFIG_FB_CARMINE is not set
 # CONFIG_FB_SMSCUFX is not set
@@ -3045,7 +3041,6 @@ CONFIG_FB_IOMEM_FOPS=y
 CONFIG_FB_IOMEM_HELPERS=y
 CONFIG_FB_SYSMEM_HELPERS=y
 CONFIG_FB_SYSMEM_HELPERS_DEFERRED=y
-# CONFIG_FB_MODE_HELPERS is not set
 # CONFIG_FB_TILEBLITTING is not set
 # end of Frame buffer Devices
 
@@ -3093,6 +3088,7 @@ CONFIG_FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER=y
 
 CONFIG_DRM_ACCEL=y
 CONFIG_DRM_ACCEL_AMDXDNA=y
+# CONFIG_DRM_ACCEL_ARM_ETHOSU is not set
 # CONFIG_DRM_ACCEL_HABANALABS is not set
 # CONFIG_DRM_ACCEL_IVPU is not set
 CONFIG_SOUND=y
