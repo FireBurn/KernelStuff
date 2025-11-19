@@ -61,6 +61,8 @@ git add .
 git commit -m "Git Update `date +%F-%T`"
 git push
 
+cd /usr/portage
+git pull
 emerge --sync --quiet
 emerge -vDuNt --keep-going -j2 --complete-graph y @world
 emerge -vDt --keep-going -j5 --complete-graph y @live-rebuild @preserved-rebuild --exclude yuzu
