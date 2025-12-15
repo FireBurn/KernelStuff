@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.18.0 Kernel Configuration
+# Linux/x86 6.19.0-rc1 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 21.1.7"
 CONFIG_GCC_VERSION=0
@@ -1529,6 +1529,7 @@ CONFIG_BLK_DEV_NVME=y
 # CONFIG_DUMMY_IRQ is not set
 # CONFIG_IBM_ASM is not set
 # CONFIG_PHANTOM is not set
+# CONFIG_RPMB is not set
 # CONFIG_TI_FPC202 is not set
 # CONFIG_TIFM_CORE is not set
 # CONFIG_ICS932S401 is not set
@@ -4075,6 +4076,7 @@ CONFIG_RTC_INTF_DEV=y
 # CONFIG_RTC_DRV_DS1672 is not set
 # CONFIG_RTC_DRV_MAX6900 is not set
 # CONFIG_RTC_DRV_MAX31335 is not set
+# CONFIG_RTC_DRV_NVIDIA_VRS10 is not set
 # CONFIG_RTC_DRV_RS5C372 is not set
 # CONFIG_RTC_DRV_ISL1208 is not set
 # CONFIG_RTC_DRV_ISL12022 is not set
