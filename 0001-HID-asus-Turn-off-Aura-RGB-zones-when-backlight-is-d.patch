@@ -1,0 +1,42 @@
+From 0e3c7a67125b491f2048c0ba6cb3c6f12a36c052 Mon Sep 17 00:00:00 2001
+From: Mike Lothian <mike@fireburn.co.uk>
+Date: Sat, 20 Dec 2025 12:38:03 +0000
+Subject: [PATCH] HID: asus: Turn off Aura RGB zones when backlight is disabled
+
+On certain ASUS ROG laptops (e.g. GL502, GL702, Strix models), the standard HID brightness control report (0xBA) only affects the main keyboard zone, leaving other RGB zones (lightbars, logos) illuminated even when brightness is set to 0 (e.g. on lid close).
+
+This behavior is undesirable when the lid is closed or the user explicitly requests the lights off. These extra zones are controlled via the Aura interface (Report 0x5D).
+
+This patch updates asus_kbd_backlight_work to send an Aura "Mode Off" packet (0x5D 0xB3 00 00 00 00 00 00) whenever the brightness is set to 0. This ensures all lighting zones are synchronized with the "Off" state.
+
+Note: This patch does not attempt to restore the previous color state when brightness is increased, as the driver does not maintain RGB state. Restoration is left to userspace tools or hardware defaults.
+
+Signed-off-by: Mike Lothian <mike@fireburn.co.uk>
+---
+ drivers/hid/hid-asus.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/drivers/hid/hid-asus.c b/drivers/hid/hid-asus.c
+index 472bca54642b..92c45f1d9ab0 100644
+--- a/drivers/hid/hid-asus.c
++++ b/drivers/hid/hid-asus.c
+@@ -510,6 +510,16 @@ static void asus_kbd_backlight_work(struct work_struct *work)
+ 	ret = asus_kbd_set_report(led->hdev, buf, sizeof(buf));
+ 	if (ret < 0)
+ 		hid_err(led->hdev, "Asus failed to set keyboard backlight: %d\n", ret);
++
++	/*
++	 * On some ROG keyboards, the standard brightness report (0xBA) only controls
++	 * the main keyboard zone. The "extra" zones (lightbar, logo) need to be
++	 * explicitly turned off via the Aura interface (0x5D) when brightness is 0.
++	 */
++	if (led->brightness == 0) {
++		u8 aura_off[] = { FEATURE_KBD_LED_REPORT_ID1, 0xb3, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
++		asus_kbd_set_report(led->hdev, aura_off, sizeof(aura_off));
++	}
+ }
+ 
+ /* WMI-based keyboard backlight LED control (via asus-wmi driver) takes
+-- 
+2.52.0
+
