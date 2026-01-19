@@ -34,7 +34,7 @@ cd /usr/src/
 git pull
 
 cd /lib/firmware
-git pull
+git pull --rebase
 
 rm -rf /lib/modules/*agd5f* /lib/modules/*drm* /lib/modules/*tip* /lib/modules/*misc*
 
