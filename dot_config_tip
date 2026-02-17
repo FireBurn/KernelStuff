@@ -3973,6 +3973,7 @@ CONFIG_LEDS_CLASS_MULTICOLOR=y
 # LED drivers
 #
 # CONFIG_LEDS_APU is not set
+# CONFIG_LEDS_OSRAM_AMS_AS3668 is not set
 # CONFIG_LEDS_AW200XX is not set
 # CONFIG_LEDS_LM3530 is not set
 # CONFIG_LEDS_LM3532 is not set
@@ -4011,6 +4012,7 @@ CONFIG_LEDS_CLASS_MULTICOLOR=y
 # RGB LED drivers
 #
 # CONFIG_LEDS_KTD202X is not set
+# CONFIG_LEDS_LP5812 is not set
 
 #
 # LED Triggers
