@@ -1,0 +1,32 @@
+From ac6e4b8006afed433043732abf63da2f9029ebcf Mon Sep 17 00:00:00 2001
+From: Mike Lothian <mike@fireburn.co.uk>
+Date: Wed, 18 Feb 2026 13:39:33 +0000
+Subject: [PATCH] drm/amdgpu: increase queue timeout to 3 seconds
+
+This fixes a timeout whilst running GravityMark v1.89 Fullscreen VK RT
+
+Fixes: 1bea57ea7544 ("drm/amdgpu: reduce queue timeout to 2 seconds v2")
+Signed-off-by: Mike Lothian <mike@fireburn.co.uk>
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+index d9789e0b52015..1eb2d5cc0b051 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+@@ -4201,9 +4201,9 @@ static int amdgpu_device_get_job_timeout_settings(struct amdgpu_device *adev)
+ 	long timeout;
+ 	int ret = 0;
+ 
+-	/* By default timeout for all queues is 2 sec */
++	/* By default timeout for all queues is 3 sec */
+ 	adev->gfx_timeout = adev->compute_timeout = adev->sdma_timeout =
+-		adev->video_timeout = msecs_to_jiffies(2000);
++		adev->video_timeout = msecs_to_jiffies(3000);
+ 
+ 	if (!strnlen(input, AMDGPU_MAX_TIMEOUT_PARAM_LENGTH))
+ 		return 0;
+-- 
+2.53.0
+
