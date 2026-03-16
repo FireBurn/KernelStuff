@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 7.0.0-rc3 Kernel Configuration
+# Linux/x86 7.0.0-rc4 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="clang version 22.1.1"
 CONFIG_GCC_VERSION=0
@@ -2067,6 +2067,7 @@ CONFIG_I2C_DESIGNWARE_PLATFORM=y
 # end of I2C support
 
 # CONFIG_I3C is not set
+CONFIG_I3C_OR_I2C=y
 # CONFIG_SPI is not set
 # CONFIG_SPMI is not set
 # CONFIG_HSI is not set
