@@ -1215,7 +1215,6 @@ CONFIG_NET_FLOW_LIMIT=y
 # end of Network testing
 # end of Networking options
 
-# CONFIG_HAMRADIO is not set
 # CONFIG_CAN is not set
 CONFIG_BT=y
 CONFIG_BT_BREDR=y
@@ -1285,7 +1284,6 @@ CONFIG_RFKILL_LEDS=y
 CONFIG_RFKILL_INPUT=y
 # CONFIG_RFKILL_GPIO is not set
 # CONFIG_NET_9P is not set
-# CONFIG_CAIF is not set
 # CONFIG_CEPH_LIB is not set
 # CONFIG_NFC is not set
 # CONFIG_PSAMPLE is not set
@@ -1720,7 +1718,6 @@ CONFIG_ETHERNET=y
 # CONFIG_NET_VENDOR_NVIDIA is not set
 # CONFIG_NET_VENDOR_OKI is not set
 # CONFIG_ETHOC is not set
-# CONFIG_NET_VENDOR_PACKET_ENGINES is not set
 # CONFIG_NET_VENDOR_PENSANDO is not set
 # CONFIG_NET_VENDOR_QLOGIC is not set
 # CONFIG_NET_VENDOR_BROCADE is not set
@@ -1890,7 +1887,6 @@ CONFIG_MT7921E=y
 # CONFIG_USB4_NET is not set
 # CONFIG_NETDEVSIM is not set
 # CONFIG_NET_FAILOVER is not set
-# CONFIG_ISDN is not set
 
 #
 # Input device support
