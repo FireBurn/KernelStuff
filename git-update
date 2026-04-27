@@ -36,7 +36,7 @@ git pull
 cd /lib/firmware
 git pull --rebase
 
-rm -rf /lib/modules/*agd5f* /lib/modules/*drm* /lib/modules/*tip* /lib/modules/*misc*
+#rm -rf /lib/modules/*agd5f* /lib/modules/*drm* /lib/modules/*tip* /lib/modules/*misc*
 
 cd /usr/src/linux
 git fetch --all --prune
