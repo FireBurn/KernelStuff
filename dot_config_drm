@@ -1395,7 +1395,7 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
 # Firmware loader
 #
 CONFIG_FW_LOADER=y
-CONFIG_RUST_FW_LOADER_ABSTRACTIONS=y
+# CONFIG_RUST_FW_LOADER_ABSTRACTIONS is not set
 CONFIG_EXTRA_FIRMWARE="amdgpu/green_sardine_asd.bin amdgpu/green_sardine_ce.bin amdgpu/green_sardine_dmcub.bin amdgpu/green_sardine_me.bin amdgpu/green_sardine_mec2.bin amdgpu/green_sardine_mec.bin amdgpu/green_sardine_pfp.bin amdgpu/green_sardine_rlc.bin amdgpu/green_sardine_sdma.bin amdgpu/green_sardine_ta.bin amdgpu/green_sardine_vcn.bin amdgpu/navy_flounder_ce.bin amdgpu/navy_flounder_dmcub.bin amdgpu/navy_flounder_me.bin amdgpu/navy_flounder_mec2.bin amdgpu/navy_flounder_mec.bin amdgpu/navy_flounder_pfp.bin amdgpu/navy_flounder_rlc.bin amdgpu/navy_flounder_sdma.bin amdgpu/navy_flounder_smc.bin amdgpu/navy_flounder_sos.bin amdgpu/navy_flounder_ta.bin amdgpu/navy_flounder_vcn.bin mediatek/WIFI_MT7961_patch_mcu_1_2_hdr.bin mediatek/WIFI_RAM_CODE_MT7961_1.bin mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin regulatory.db regulatory.db.p7s"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 # CONFIG_FW_LOADER_USER_HELPER is not set
@@ -2892,9 +2892,7 @@ CONFIG_DRM_PANIC_FOREGROUND_COLOR=0xffffff
 CONFIG_DRM_PANIC_BACKGROUND_COLOR=0x000000
 CONFIG_DRM_PANIC_DEBUG=y
 CONFIG_DRM_PANIC_SCREEN="qr_code"
-CONFIG_DRM_PANIC_SCREEN_QR_CODE=y
-CONFIG_DRM_PANIC_SCREEN_QR_CODE_URL="https://kdj0c.github.io/panic_report"
-CONFIG_DRM_PANIC_SCREEN_QR_VERSION=40
+# CONFIG_DRM_PANIC_SCREEN_QR_CODE is not set
 # CONFIG_DRM_RAS is not set
 # CONFIG_DRM_DEBUG_DP_MST_TOPOLOGY_REFS is not set
 # CONFIG_DRM_DEBUG_MODESET_LOCK is not set
@@ -3835,7 +3833,7 @@ CONFIG_USB_OTG=y
 # CONFIG_USB_LEDS_TRIGGER_USBPORT is not set
 CONFIG_USB_AUTOSUSPEND_DELAY=2
 CONFIG_USB_DEFAULT_AUTHORIZATION_MODE=1
-# CONFIG_USB_MON is not set
+CONFIG_USB_MON=m
 
 #
 # USB Host Controller Drivers
@@ -5390,7 +5388,7 @@ CONFIG_ARCH_USE_MEMTEST=y
 # CONFIG_RUST_DEBUG_ASSERTIONS is not set
 CONFIG_RUST_OVERFLOW_CHECKS=y
 # CONFIG_RUST_BUILD_ASSERT_ALLOW is not set
-CONFIG_RUST_INLINE_HELPERS=y
+# CONFIG_RUST_INLINE_HELPERS is not set
 # end of Rust hacking
 # end of Kernel hacking
 
