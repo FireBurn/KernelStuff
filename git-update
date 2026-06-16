@@ -50,7 +50,7 @@ git push freedesktop --tags
 
 updateKernel agd5f agd5f agd5f/drm-next		1
 updateKernel linux tip   linus/master		1
-updateKernel drm   drm   airlied/drm-next	1
+#updateKernel drm   drm   airlied/drm-next	1
 
 cp /usr/src/agd5f/.config       /usr/src/dot_config_agd5f
 cp /usr/src/drm/.config         /usr/src/dot_config_drm
