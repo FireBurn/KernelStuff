@@ -1748,6 +1748,7 @@ CONFIG_R8169=y
 # CONFIG_NET_VENDOR_WANGXUN is not set
 # CONFIG_NET_VENDOR_WIZNET is not set
 # CONFIG_NET_VENDOR_XILINX is not set
+# CONFIG_NET_VENDOR_ZTE is not set
 # CONFIG_FDDI is not set
 CONFIG_PHYLIB=y
 CONFIG_SWPHY=y
@@ -1765,6 +1766,7 @@ CONFIG_FIXED_PHY=y
 # CONFIG_AMD_PHY is not set
 # CONFIG_ADIN_PHY is not set
 # CONFIG_ADIN1100_PHY is not set
+# CONFIG_ADIN1140_PHY is not set
 # CONFIG_AQUANTIA_PHY is not set
 # CONFIG_AX88796B_PHY is not set
 # CONFIG_BROADCOM_PHY is not set
@@ -1816,6 +1818,10 @@ CONFIG_REALTEK_PHY_HWMON=y
 # CONFIG_DP83TG720_PHY is not set
 # CONFIG_VITESSE_PHY is not set
 # CONFIG_XILINX_GMII2RGMII is not set
+
+#
+# MDIO controller drivers
+#
 CONFIG_FWNODE_MDIO=y
 CONFIG_ACPI_MDIO=y
 # CONFIG_MDIO_BITBANG is not set
@@ -1827,6 +1833,8 @@ CONFIG_ACPI_MDIO=y
 #
 # MDIO Multiplexers
 #
+# end of MDIO Multiplexers
+# end of MDIO controller drivers
 
 #
 # PCS device drivers
@@ -1866,6 +1874,8 @@ CONFIG_MT7921E=y
 # CONFIG_MT7925E is not set
 # CONFIG_MT7925U is not set
 # CONFIG_WLAN_VENDOR_MICROCHIP is not set
+# CONFIG_WLAN_VENDOR_MORSEMICRO is not set
+# CONFIG_WLAN_VENDOR_NXP is not set
 # CONFIG_WLAN_VENDOR_PURELIFI is not set
 # CONFIG_WLAN_VENDOR_RALINK is not set
 # CONFIG_WLAN_VENDOR_REALTEK is not set
@@ -2103,7 +2113,6 @@ CONFIG_PTP_1588_CLOCK_OPTIONAL=y
 #
 # DPLL device support
 #
-# CONFIG_ZL3073X_I2C is not set
 # end of DPLL device support
 
 CONFIG_PINCTRL=y
