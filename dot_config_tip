@@ -4376,6 +4376,12 @@ CONFIG_COMMON_CLK=y
 # CONFIG_COMMON_CLK_SI544 is not set
 # CONFIG_COMMON_CLK_CDCE706 is not set
 # CONFIG_COMMON_CLK_CS2000_CP is not set
+
+#
+# Cixtech Audio Subsystem Clock Driver
+#
+# end of Cixtech Audio Subsystem Clock Driver
+
 # CONFIG_XILINX_VCU is not set
 # CONFIG_HWSPINLOCK is not set
 
