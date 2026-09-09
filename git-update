@@ -14,11 +14,14 @@ function updateKernel {
   DIR=$1; IMG=$2; BRANCH=$3
 
   cd /usr/src/${DIR}
-  git rebase ${BRANCH}
+  # --empty=drop so local fixes that have landed upstream are dropped
+  # rather than stopping the rebase on an empty commit
+  git rebase --empty=drop ${BRANCH}
   rc=$?
   if [[ $rc != 0 ]]; then
-      git rebase --abort
-      git am --abort
+      git rebase --abort 2>/dev/null
+      git cherry-pick --abort 2>/dev/null
+      git am --abort 2>/dev/null
       git reset --hard ${BRANCH}
   fi
   make LLVM=1 -j16
