@@ -139,15 +139,15 @@ sudo -u fireburn git tag -d vtx-0-2-21112003-freeze
 sudo -u fireburn git tag -d vtx-0-2-24112003
 sudo -u fireburn git push github --all --force
 sudo -u fireburn git push github --tags
-#sudo -u fireburn git push gitlab --all --force
-#sudo -u fireburn git push gitlab --tags
+sudo -u fireburn git push gitlab --all --force
+sudo -u fireburn git push gitlab --tags
 
 cd /usr/portage
 git pull
 emerge --sync --quiet
 git push gitlab --all --force
 git push github --all --force
-emerge -vDuNt -j5 @world
-emerge -vDt -j5 @live-rebuild @preserved-rebuild --exclude yuzu --exclude citron --exclude wine-proton
+emerge -vDuNt @world
+emerge -vDt @live-rebuild @preserved-rebuild --exclude yuzu --exclude citron --exclude wine-proton
 emerge --depclean -a
 eclean-dist --destructive -q
