@@ -1,153 +1,162 @@
 #!/bin/bash
+# Update the kernel trees, firmware, portage config and the system.
+# The same file runs on quark and axion; what differs is set under the case.
 
 export PATH=/usr/lib/llvm/23/bin:$PATH
 
-function gitAM {
-  git am $1
-  rc=$?
-  if [[ $rc != 0 ]]; then
-    git am --abort
-  fi
+[[ $EUID == 0 ]] || { echo "git-update: run as root" >&2; exit 1; }
+
+STAMP=$(date +%F-%T)
+JOBS=$(nproc)
+failed=()
+
+fail() { failed+=("$1"); echo "!!! $1" >&2; }
+
+# name:image:branch of each tree under /usr/src, in build order
+KERNELS=(linux:tip:linus/master drm:drm:airlied/drm-next agd5f:agd5f:agd5f/drm-next)
+PUSH_REMOTES=()
+EMERGE_EXCLUDE=(--exclude yuzu)
+WORLD_OPTS=(--keep-going --complete-graph y)
+PUSH_PORTAGE=0
+MESA=
+
+case ${HOSTNAME%%.*} in
+axion)
+	KERNELS=(agd5f:agd5f:agd5f/drm-next linux:tip:linus/master)
+	PUSH_REMOTES=(github gitlab freedesktop)
+	EMERGE_EXCLUDE=(--exclude yuzu --exclude citron --exclude wine-proton)
+	WORLD_OPTS=()
+	PUSH_PORTAGE=1
+	MESA=/home/fireburn/Mesa
+	;;
+esac
+
+MESA_OLD_TAGS=(
+	R300_DRIVER_0 before_upgrade_03_01_05 blended_fountain
+	embedded-1-20030120 embedded-1-20030224 embedded-1-20030305
+	embedded-1-20030324 embedded-1-20030417 embedded-1-20030502
+	gliding_penguin jump_and_click kw-mesa-1 mesa-6_5-20060712
+	mesa_20050504 mesa_20050526 mesa_20050610 mesa_20050715 mesa_20060201
+	mesa_20060325 mesa_3_1 mesa_3_1_beta_3 mesa_3_2 mesa_3_2_1
+	mesa_3_2_beta_1 mesa_3_3 mesa_3_4 mesa_3_4_1 mesa_3_4_2 mesa_3_5
+	mesa_4_0 mesa_4_0_1 mesa_4_0_2 mesa_4_0_3 mesa_4_0_4 mesa_4_1
+	mesa_5_0 mesa_5_0_1 mesa_6_3 mesa_6_3_1 mesa_6_3_1_1 mesa_6_3_2
+	mesa_6_4 mesa_6_4_1 mesa_6_4_2 mesa_6_5 mesa_6_5_1 mesa_6_5_2
+	mesa_texman_20060210 noisy_cube red_tinted_cube rotating_gears
+	shimmering_gears start texman_0_1_20060325 texman_0_1_20060330
+	texman_0_1_20060621 texman_0_1_20060705 texman_0_1_pre_ttm
+	texmem_0_2_20060912 texmem_0_3_20060923 texmem_0_3_20060929
+	the_perfect_frag trunk_20040329 unichrome-last-xinerama
+	vtx-0-2-21112003-freeze vtx-0-2-24112003
+)
+
+# Commit whatever changed in a repo that is updated by hand, then push it.
+syncRepo() {
+	local dir=$1
+	git -C "$dir" rev-parse --git-dir >/dev/null 2>&1 || { fail "$dir is not a git repo"; return; }
+	cd "$dir" || return
+	git pull --rebase --autostash || fail "$dir: pull"
+	git add .
+	git diff --cached --quiet || git commit -q -m "Git Update $STAMP"
+	git push || fail "$dir: push"
 }
 
-function updateKernel {
-  DIR=$1; IMG=$2; BRANCH=$3
+updateKernel() {
+	local dir=${1%%:*} img rest=${1#*:} branch rel d
+	img=${rest%%:*}; branch=${rest#*:}
 
-  cd /usr/src/${DIR}
-  git rebase ${BRANCH}
-  rc=$?
-  if [[ $rc != 0 ]]; then
-    git rebase --abort
-    git am --abort
-    git reset --hard ${BRANCH}
-  fi
-  make LLVM=1 -j16
-  make LLVM=1 modules_install
-  cp arch/x86/boot/bzImage /boot/bzImage-${IMG}.efi
+	cd /usr/src/$dir || { fail "$dir: no tree"; return; }
+	# --empty=drop so local fixes that have landed upstream are dropped
+	# rather than stopping the rebase on an empty commit
+	if ! git rebase --empty=drop "$branch"; then
+		git rebase --abort 2>/dev/null
+		git cherry-pick --abort 2>/dev/null
+		git am --abort 2>/dev/null
+		# the reset discards local commits, so keep them reachable
+		git branch -f "backup/git-update-$img" HEAD
+		git reset --hard "$branch"
+		echo "$dir: rebase failed, old head kept as backup/git-update-$img" >&2
+	fi
+
+	make LLVM=1 -j"$JOBS" || { fail "$dir: build failed, /boot not touched"; return; }
+	make LLVM=1 -j"$JOBS" modules_install || { fail "$dir: modules_install"; return; }
+	rel=$(make -s LLVM=1 kernelrelease)
+	install -m 755 arch/x86/boot/bzImage /boot/bzImage-$img.efi.new &&
+		mv -f /boot/bzImage-$img.efi.new /boot/bzImage-$img.efi ||
+		{ fail "$dir: install to /boot"; return; }
+
+	# only now that a new kernel is in place, drop the old module sets
+	for d in /lib/modules/*-"$img"+; do
+		[[ -d $d ]] || continue
+		[[ ${d##*/} == "$rel" || ${d##*/} == $(uname -r) ]] && continue
+		rm -rf "$d"
+	done
 }
 
-rm -f /etc/portage/make.conf\~
+pushAll() {
+	local r
+	for r in "$@"; do
+		git remote | grep -qx "$r" || continue
+		git push "$r" --all --force || fail "$PWD: push $r"
+		git push "$r" --tags || fail "$PWD: push tags $r"
+	done
+}
 
-cp /usr/bin/git-update /usr/src
+rm -f /etc/portage/make.conf~
 
-cd /usr/src/
-git pull
+cp /usr/bin/git-update /usr/src/
 
-cd /lib/firmware
-git pull --rebase
+cd /usr/src && git pull --rebase --autostash || fail "/usr/src: pull"
 
-#rm -rf /lib/modules/*agd5f* /lib/modules/*drm* /lib/modules/*tip* /lib/modules/*misc*
+if git -C /lib/firmware rev-parse --git-dir >/dev/null 2>&1; then
+	git -C /lib/firmware pull --rebase || fail "/lib/firmware: pull"
+else
+	fail "/lib/firmware is not a git repo"
+fi
 
-cd /usr/src/linux
-git fetch --all --prune
+cd /usr/src/linux && git fetch --all --prune || fail "fetch"
+((${#PUSH_REMOTES[@]})) && pushAll "${PUSH_REMOTES[@]}"
 
-git push github --all --force
-git push github --tags
-git push gitlab --all --force
-git push gitlab --tags
-git push freedesktop --all --force
-git push freedesktop --tags
+for k in "${KERNELS[@]}"; do
+	updateKernel "$k"
+done
 
-updateKernel agd5f agd5f agd5f/drm-next		1
-updateKernel linux tip   linus/master		1
-#updateKernel drm   drm   airlied/drm-next	1
+for d in linux drm agd5f stable; do
+	n=$d
+	[[ $d == linux ]] && n=tip
+	[[ -f /usr/src/$d/.config ]] && cp /usr/src/$d/.config /usr/src/dot_config_$n
+done
 
-cp /usr/src/agd5f/.config       /usr/src/dot_config_agd5f
-cp /usr/src/drm/.config         /usr/src/dot_config_drm
-cp /usr/src/linux/.config       /usr/src/dot_config_tip
-cp /usr/src/stable/.config	/usr/src/dot_config_stable
+syncRepo /usr/src
+syncRepo /etc/portage
 
-cd /usr/src
-git add .
-git commit -m "Git Update `date +%F-%T`"
-git push
-
-cd /etc/portage
-git pull
-git add .
-git commit -m "Git Update `date +%F-%T`"
-git push
-
-cd /home/fireburn/Mesa
-sudo -u fireburn git fetch --all --prune
-sudo -u fireburn git pull
-sudo -u fireburn git tag -d R300_DRIVER_0
-sudo -u fireburn git tag -d before_upgrade_03_01_05
-sudo -u fireburn git tag -d blended_fountain
-sudo -u fireburn git tag -d embedded-1-20030120
-sudo -u fireburn git tag -d embedded-1-20030224
-sudo -u fireburn git tag -d embedded-1-20030305
-sudo -u fireburn git tag -d embedded-1-20030324
-sudo -u fireburn git tag -d embedded-1-20030417
-sudo -u fireburn git tag -d embedded-1-20030502
-sudo -u fireburn git tag -d gliding_penguin
-sudo -u fireburn git tag -d jump_and_click
-sudo -u fireburn git tag -d kw-mesa-1
-sudo -u fireburn git tag -d mesa-6_5-20060712
-sudo -u fireburn git tag -d mesa_20050504
-sudo -u fireburn git tag -d mesa_20050526
-sudo -u fireburn git tag -d mesa_20050610
-sudo -u fireburn git tag -d mesa_20050715
-sudo -u fireburn git tag -d mesa_20060201
-sudo -u fireburn git tag -d mesa_20060325
-sudo -u fireburn git tag -d mesa_3_1
-sudo -u fireburn git tag -d mesa_3_1_beta_3
-sudo -u fireburn git tag -d mesa_3_2
-sudo -u fireburn git tag -d mesa_3_2_1
-sudo -u fireburn git tag -d mesa_3_2_beta_1
-sudo -u fireburn git tag -d mesa_3_3
-sudo -u fireburn git tag -d mesa_3_4
-sudo -u fireburn git tag -d mesa_3_4_1
-sudo -u fireburn git tag -d mesa_3_4_2
-sudo -u fireburn git tag -d mesa_3_5
-sudo -u fireburn git tag -d mesa_4_0
-sudo -u fireburn git tag -d mesa_4_0_1
-sudo -u fireburn git tag -d mesa_4_0_2
-sudo -u fireburn git tag -d mesa_4_0_3
-sudo -u fireburn git tag -d mesa_4_0_4
-sudo -u fireburn git tag -d mesa_4_1
-sudo -u fireburn git tag -d mesa_5_0
-sudo -u fireburn git tag -d mesa_5_0_1
-sudo -u fireburn git tag -d mesa_6_3
-sudo -u fireburn git tag -d mesa_6_3_1
-sudo -u fireburn git tag -d mesa_6_3_1_1
-sudo -u fireburn git tag -d mesa_6_3_2
-sudo -u fireburn git tag -d mesa_6_4
-sudo -u fireburn git tag -d mesa_6_4_1
-sudo -u fireburn git tag -d mesa_6_4_2
-sudo -u fireburn git tag -d mesa_6_5
-sudo -u fireburn git tag -d mesa_6_5_1
-sudo -u fireburn git tag -d mesa_6_5_2
-sudo -u fireburn git tag -d mesa_texman_20060210
-sudo -u fireburn git tag -d noisy_cube
-sudo -u fireburn git tag -d red_tinted_cube
-sudo -u fireburn git tag -d rotating_gears
-sudo -u fireburn git tag -d shimmering_gears
-sudo -u fireburn git tag -d start
-sudo -u fireburn git tag -d texman_0_1_20060325
-sudo -u fireburn git tag -d texman_0_1_20060330
-sudo -u fireburn git tag -d texman_0_1_20060621
-sudo -u fireburn git tag -d texman_0_1_20060705
-sudo -u fireburn git tag -d texman_0_1_pre_ttm
-sudo -u fireburn git tag -d texmem_0_2_20060912
-sudo -u fireburn git tag -d texmem_0_3_20060923
-sudo -u fireburn git tag -d texmem_0_3_20060929
-sudo -u fireburn git tag -d the_perfect_frag
-sudo -u fireburn git tag -d trunk_20040329
-sudo -u fireburn git tag -d unichrome-last-xinerama
-sudo -u fireburn git tag -d vtx-0-2-21112003-freeze
-sudo -u fireburn git tag -d vtx-0-2-24112003
-sudo -u fireburn git push github --all --force
-sudo -u fireburn git push github --tags
-sudo -u fireburn git push gitlab --all --force
-sudo -u fireburn git push gitlab --tags
+if [[ -d $MESA ]]; then
+	cd "$MESA" || exit 1
+	sudo -u fireburn git fetch --all --prune
+	sudo -u fireburn git pull
+	sudo -u fireburn git tag -d "${MESA_OLD_TAGS[@]}" >/dev/null 2>&1
+	sudo -u fireburn git push github --all --force
+	sudo -u fireburn git push github --tags
+	sudo -u fireburn git push gitlab --all --force
+	sudo -u fireburn git push gitlab --tags
+fi
 
 cd /usr/portage
-git pull
-emerge --sync --quiet
-git push gitlab --all --force
-git push github --all --force
-emerge -vDuNt @world
-emerge -vDt @live-rebuild @preserved-rebuild --exclude yuzu --exclude citron --exclude wine-proton
+git pull --rebase --autostash || fail "/usr/portage: pull"
+emerge --sync --quiet || fail "emerge --sync"
+if ((PUSH_PORTAGE)); then
+	git push gitlab --all --force
+	git push github --all --force
+fi
+
+emerge -vDuNt "${WORLD_OPTS[@]}" @world || fail "world update"
+emerge -vDt "${WORLD_OPTS[@]}" @live-rebuild @preserved-rebuild "${EMERGE_EXCLUDE[@]}" ||
+	fail "live-rebuild"
 emerge --depclean -a
 eclean-dist --destructive -q
+
+if ((${#failed[@]})); then
+	printf '\n%s\n' "git-update finished with problems:"
+	printf '  %s\n' "${failed[@]}"
+	exit 1
+fi
