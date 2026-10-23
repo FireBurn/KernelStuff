@@ -1504,9 +1504,6 @@ CONFIG_EFI_SBAT_FILE=""
 #
 # Qualcomm firmware drivers
 #
-# CONFIG_QCOM_PAS is not set
-# CONFIG_QCOM_PAS_TEE is not set
-# CONFIG_QCOM_SCM is not set
 # end of Qualcomm firmware drivers
 
 #
@@ -3757,7 +3754,6 @@ CONFIG_HID_ASUS=y
 # CONFIG_HID_MSI is not set
 # CONFIG_HID_KEYTOUCH is not set
 # CONFIG_HID_KYE is not set
-# CONFIG_HID_KYSONA is not set
 # CONFIG_HID_UCLOGIC is not set
 # CONFIG_HID_WALTOP is not set
 # CONFIG_HID_VIEWSONIC is not set
@@ -3787,6 +3783,7 @@ CONFIG_HID_ASUS=y
 CONFIG_HID_MULTITOUCH=y
 CONFIG_HID_NINTENDO=y
 CONFIG_NINTENDO_FF=y
+CONFIG_NINTENDO_SWITCH2_USB=y
 # CONFIG_HID_NTI is not set
 # CONFIG_HID_NTRIG is not set
 # CONFIG_HID_NVIDIA_SHIELD is not set
@@ -3827,6 +3824,7 @@ CONFIG_HID_STEAM=y
 # CONFIG_HID_UDRAW_PS3 is not set
 # CONFIG_HID_U2FZERO is not set
 # CONFIG_HID_UNIVERSAL_PIDFF is not set
+# CONFIG_HID_PULSAR is not set
 # CONFIG_HID_WACOM is not set
 # CONFIG_HID_WIIMOTE is not set
 # CONFIG_HID_WINWING is not set
@@ -4506,6 +4504,17 @@ CONFIG_IOMMU_PT_X86_64=y
 # end of Enable LiteX SoC Builder specific drivers
 
 # CONFIG_WPCM450_SOC is not set
+
+#
+# ST SoC drivers
+#
+# end of ST SoC drivers
+
+#
+# StarFive SoC (System On Chip) specific Drivers
+#
+# end of StarFive SoC (System On Chip) specific Drivers
+
 # CONFIG_SOC_TI is not set
 
 #
