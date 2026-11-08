@@ -16,11 +16,16 @@ fail() { failed+=("$1"); echo "!!! $1" >&2; }
 KERNELS=(linux:tip:linus/master drm:drm:airlied/drm-next agd5f:agd5f:agd5f/drm-next)
 PUSH_REMOTES=()
 EMERGE_EXCLUDE=(--exclude yuzu)
+# llvm-runtimes/libc is only ever rebuilt by hand from the local branch (quark).
+LIBC_EXCLUDE=()
 WORLD_OPTS=(--keep-going --complete-graph y)
 PUSH_PORTAGE=0
 MESA=
 
 case ${HOSTNAME%%.*} in
+quark)
+	LIBC_EXCLUDE=(--exclude llvm-runtimes/libc)
+	;;
 axion)
 	KERNELS=(agd5f:agd5f:agd5f/drm-next linux:tip:linus/master)
 	PUSH_REMOTES=(github gitlab freedesktop)
@@ -149,8 +154,8 @@ if ((PUSH_PORTAGE)); then
 	git push github --all --force
 fi
 
-emerge -vDuNt "${WORLD_OPTS[@]}" @world || fail "world update"
-emerge -vDt "${WORLD_OPTS[@]}" @live-rebuild @preserved-rebuild "${EMERGE_EXCLUDE[@]}" ||
+emerge -vDuNt "${WORLD_OPTS[@]}" "${LIBC_EXCLUDE[@]}" @world || fail "world update"
+emerge -vDt "${WORLD_OPTS[@]}" @live-rebuild @preserved-rebuild "${EMERGE_EXCLUDE[@]}" "${LIBC_EXCLUDE[@]}" ||
 	fail "live-rebuild"
 emerge --depclean -a
 eclean-dist --destructive -q
