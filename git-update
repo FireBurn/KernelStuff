@@ -141,8 +141,8 @@ if [[ -d $MESA ]]; then
 	sudo -u fireburn git push gitlab --tags
 fi
 
-cd /usr/portage
-git pull --rebase --autostash || fail "/usr/portage: pull"
+cd /var/db/repos/gentoo
+git pull --rebase --autostash || fail "/var/db/repos/gentoo: pull"
 emerge --sync --quiet || fail "emerge --sync"
 if ((PUSH_PORTAGE)); then
 	git push gitlab --all --force
